@@ -1,12 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+
+// Application Views
+import {
+  Home,
+  Animales,
+  ListaAnimales,
+  DetallesAnimal
+} from "./views";
+
+import Navigation from "./Navigation.js";
+
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Navigation />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/animales" element={<Animales />}>
+          <Route path="" element={<ListaAnimales />} />
+          <Route path=":idAnimal" element={<DetallesAnimal />} />
+        </Route>
+      </Routes>
+
+      {/* <Footer /> */}
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
