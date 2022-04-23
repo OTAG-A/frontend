@@ -43,10 +43,19 @@ function Navigation() {
                   Sobre nosotros
                 </NavLink>
               </li>
+              {currentUser && currentUser.isAdmin &&
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/admin">Panel administración</NavLink>
+                </li>
+              }
               <li className="nav-item">
-                {currentUser !== null ?
+                {/* Si está loggeado, mostrar la foto de perfil. Sino, mostrar el botón de login. */}
+                {currentUser ?
                   <NavLink className="nav-link" to="/perfil">
-                    <img src={currentUser.image || User.placeholderImage()} className="rounded-circle" style={{ width: 50, height: 50 }} />
+                    {currentUser.image ?
+                      <img src={currentUser.image} className="rounded-circle" style={{ width: 40, height: 40 }} />
+                      : <div className="rounded-circle" style={{ width: 40, height: 40, backgroundColor: "lightgray" }}></div>
+                    }
                   </NavLink>
                   : <NavLink className="nav-link" to="/login">Log In</NavLink>
                 }
