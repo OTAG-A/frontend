@@ -10,18 +10,13 @@ const user = User.from({
   email: "test@test.com",
   creationDate: Date.now(),
   messagesNum: 500,
-  image: "http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg",
+  image:
+    "http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg",
   isAdmin: true,
 });
 
 function UserProvider({ children }) {
-  return (
-    <UserContext.Provider
-      value={user}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
 
 export default UserProvider;

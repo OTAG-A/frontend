@@ -6,7 +6,6 @@ import { User } from "./models";
 
 // Navigation bar of the application
 function Navigation() {
-
   let currentUser = useContext(UserContext);
 
   return (
@@ -43,22 +42,39 @@ function Navigation() {
                   Sobre nosotros
                 </NavLink>
               </li>
-              {currentUser && currentUser.isAdmin &&
+              {currentUser && currentUser.isAdmin && (
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/admin">Panel administración</NavLink>
+                  <NavLink className="nav-link" to="/admin">
+                    Panel administración
+                  </NavLink>
                 </li>
-              }
+              )}
               <li className="nav-item">
                 {/* Si está loggeado, mostrar la foto de perfil. Sino, mostrar el botón de login. */}
-                {currentUser ?
+                {currentUser ? (
                   <NavLink className="nav-link" to="/perfil">
-                    {currentUser.image ?
-                      <img src={currentUser.image} className="rounded-circle" style={{ width: 40, height: 40 }} />
-                      : <div className="rounded-circle" style={{ width: 40, height: 40, backgroundColor: "lightgray" }}></div>
-                    }
+                    {currentUser.image ? (
+                      <img
+                        src={currentUser.image}
+                        className="rounded-circle"
+                        style={{ width: 40, height: 40 }}
+                      />
+                    ) : (
+                      <div
+                        className="rounded-circle"
+                        style={{
+                          width: 40,
+                          height: 40,
+                          backgroundColor: "lightgray",
+                        }}
+                      ></div>
+                    )}
                   </NavLink>
-                  : <NavLink className="nav-link" to="/login">Log In</NavLink>
-                }
+                ) : (
+                  <NavLink className="nav-link" to="/login">
+                    Log In
+                  </NavLink>
+                )}
               </li>
             </ul>
           </div>
