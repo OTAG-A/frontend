@@ -4,12 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 // Application Views
-import {
-  Home,
-  Animales,
-  ListaAnimales,
-  DetallesAnimal
-} from "./views";
+import { Home, Animales, ListaAnimales, DetallesAnimal } from "./views";
 
 import Navigation from "./Navigation.js";
 
