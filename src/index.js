@@ -6,25 +6,30 @@ import reportWebVitals from "./reportWebVitals";
 // Application Views
 import { Home, Animales, ListaAnimales, DetallesAnimal } from "./views";
 
+// Application environment
+import { UserProvider } from "./environment";
+
 import Navigation from "./Navigation.js";
 
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Navigation />
+    <UserProvider>
+      <Router>
+        <Navigation />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/animales" element={<Animales />}>
-          <Route path="" element={<ListaAnimales />} />
-          <Route path=":idAnimal" element={<DetallesAnimal />} />
-        </Route>
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/animales" element={<Animales />}>
+            <Route path="" element={<ListaAnimales />} />
+            <Route path=":idAnimal" element={<DetallesAnimal />} />
+          </Route>
+        </Routes>
 
-      {/* <Footer /> */}
-    </Router>
+        {/* <Footer /> */}
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
