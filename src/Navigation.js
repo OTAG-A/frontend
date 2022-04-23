@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./environment";
 
-import { User } from "./models";
-
 // Navigation bar of the application
 function Navigation() {
   let currentUser = useContext(UserContext);
@@ -58,6 +56,7 @@ function Navigation() {
                         src={currentUser.image}
                         className="rounded-circle"
                         style={{ width: 40, height: 40 }}
+                        alt="Profile"
                       />
                     ) : (
                       <div
