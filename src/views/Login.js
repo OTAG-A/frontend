@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 // import "bootstrap-icons/font/bootstrap-icons.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [state, setState] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -23,11 +25,6 @@ function Login() {
 
   const goPWD = () => {
     //TODO: popup olvido contraseña
-  };
-
-  const goSignUp = () => {
-    //TODO: no funciona
-    return <Navigate to="/registro" />;
   };
 
   return (
@@ -70,7 +67,10 @@ function Login() {
               </button>
             </div>
             <div className="justify-content-center mt-4 d-grid gap-2 col-6 mx-auto">
-              <button className="btn btn-secondary" onClick={goSignUp}>
+              <button
+                className="btn btn-secondary"
+                onClick={() => navigate("/registro")}
+              >
                 Registrarse
               </button>
             </div>
