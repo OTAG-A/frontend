@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 // Application Views
-import { Home, Animales, ListaAnimales, DetallesAnimal } from "./views";
+import { Home, Animales, ListaAnimales, DetallesAnimal, Login, Registro } from "./views";
 
 import Navigation from "./Navigation.js";
 
@@ -21,6 +21,8 @@ ReactDOM.render(
           <Route path="" element={<ListaAnimales />} />
           <Route path=":idAnimal" element={<DetallesAnimal />} />
         </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
       </Routes>
 
       {/* <Footer /> */}
