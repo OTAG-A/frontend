@@ -6,7 +6,11 @@ import { User } from "../models";
 export var UserContext = React.createContext();
 
 function UserProvider({ children }) {
-  return <UserContext.Provider value={User.preview()}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={User.preview()}>
+      {children}
+    </UserContext.Provider>
+  );
 }
 
 export default UserProvider;
