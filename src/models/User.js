@@ -1,9 +1,9 @@
 class User {
-  name;
-  email;
-  creationDate;
+  name = "";
+  email = "";
+  creationDate = Date();
   messagesNum = 0;
-  image;
+  image = "";
   isAdmin = false;
 
   static from(json) {
