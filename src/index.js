@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 // Application Views
-import { Home, Animales, ListaAnimales, DetallesAnimal } from "./views";
+import { Home, Animals, AnimalList, AnimalDetails } from "./views";
 
 // Application environment
 import { UserProvider } from "./environment";
@@ -21,9 +21,9 @@ ReactDOM.render(
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/animales" element={<Animales />}>
-            <Route path="" element={<ListaAnimales />} />
-            <Route path=":idAnimal" element={<DetallesAnimal />} />
+          <Route path="/animales" element={<Animals />}>
+            <Route path="" element={<AnimalList />} />
+            <Route path=":idAnimal" element={<AnimalDetails />} />
           </Route>
         </Routes>
 

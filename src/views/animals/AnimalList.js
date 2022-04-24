@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import React from "react";
 
-function DetallesAnimal() {
-  let { idAnimal } = useParams();
-
-  useEffect(() => {
-    // TODO: Obtener detalles de animal de la API dado su ID
-  }, [idAnimal]);
-
+function AnimalList() {
   return (
     <div className="home">
       <header className="mt-5 p-5">
         <h1 className="font-weight-light text-center fw-bold">
-          Animal {idAnimal}
+          Lista animales
         </h1>
       </header>
       <div className="container">
@@ -29,4 +22,4 @@ function DetallesAnimal() {
   );
 }
 
-export default DetallesAnimal;
+export default AnimalList;
