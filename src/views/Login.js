@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import { Navigate } from "react-router-dom";
+// import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Login() {
   const [state, setState] = useState({

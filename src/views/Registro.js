@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css";
+// import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Registro() {
   const [state, setState] = useState({
