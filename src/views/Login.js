@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -18,9 +17,23 @@ function Login() {
     }));
   };
 
-  const sendServer = async (e) => {
+  const loginEmail = async (e) => {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
+  };
+
+  const loginGoogle = async (e) => {
+    e.preventDefault();
+    console.log(
+      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+    );
+  };
+
+  const loginTwitter = async (e) => {
+    e.preventDefault();
+    console.log(
+      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+    );
   };
 
   const goPWD = () => {
@@ -35,14 +48,18 @@ function Login() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-8 col-sm-8 col-md-6 col-lg-4">
-            <div className="text-center mb-0 ">
-              <i class="bi bi-person-circle style-icons-auth"></i>
+            <div className="text-center mb-3 ">
+              <img
+                src="assets/person-circle.svg"
+                class="img-fluid"
+                alt="Icon Twitter"
+              ></img>
             </div>
             <div className="mb-3">
               <input
                 type="email"
                 id="email"
-                className="form-control form-control-lg"
+                className="form-control "
                 placeholder="Email"
                 onChange={handleChange}
               />
@@ -51,7 +68,7 @@ function Login() {
               <input
                 type="password"
                 id="password"
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Contraseña"
                 onChange={handleChange}
               />
@@ -61,12 +78,12 @@ function Login() {
                 ¿Has olvidado la contraseña?
               </a>
             </p>
-            <div className="justify-content-center mt-4 d-grid gap-2 col-6 mx-auto ">
-              <button className="btn btn-primary" onClick={sendServer}>
+            <div className="justify-content-center mt-4">
+              <button className="btn btn-primary" onClick={loginEmail}>
                 Iniciar Sesión
               </button>
             </div>
-            <div className="justify-content-center mt-4 d-grid gap-2 col-6 mx-auto">
+            <div className="justify-content-center mt-4">
               <button
                 className="btn btn-secondary"
                 onClick={() => navigate("/registro")}
@@ -76,18 +93,22 @@ function Login() {
             </div>
             <div class="row justify-content-center mt-4">
               <div className="text-center mb-0 col-4 ">
-                <div className="container">
-                  {/* TODO: imagen no se ve*/}
+                <div button class="btn btn-default" onClick={loginGoogle}>
                   <img
-                    src="../assets/logo-google.png"
+                    src="assets/logo-google.svg"
                     class="img-fluid"
                     alt="Logo Google"
-                    sizes="50px"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <i class="bi bi-twitter style-icon-twitter"></i>
+                <div button class="btn btn-default" onClick={loginTwitter}>
+                  <img
+                    src="assets/twitter.svg"
+                    class="img-fluid"
+                    alt="Icon Twitter"
+                  ></img>
+                </div>
               </div>
             </div>
           </div>

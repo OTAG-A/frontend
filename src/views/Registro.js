@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Registro() {
   const [state, setState] = useState({
@@ -17,7 +16,7 @@ function Registro() {
     }));
   };
 
-  const sendServer = async (e) => {
+  const signupEmail = async (e) => {
     //TODO:contraseña = confirmar contraseña
     e.preventDefault();
     console.log(
@@ -32,6 +31,20 @@ function Registro() {
     );
   };
 
+  const signupGoogle = async (e) => {
+    e.preventDefault();
+    console.log(
+      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+    );
+  };
+
+  const signupTwitter = async (e) => {
+    e.preventDefault();
+    console.log(
+      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+    );
+  };
+
   return (
     <div className="login">
       <header className="mt-0 px-5 pb-0 pt-3">
@@ -40,14 +53,18 @@ function Registro() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-8 col-sm-8 col-md-6 col-lg-4">
-            <div className="text-center mb-0 ">
-              <i class="bi bi-person-circle style-icons-auth"></i>
+            <div className="text-center mb-3 ">
+              <img
+                src="assets/person-circle.svg"
+                class="img-fluid"
+                alt="Icon Twitter"
+              ></img>
             </div>
             <div className="mb-3">
               <input
                 type="name"
                 id="name"
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Nombre"
                 onChange={handleChange}
               />
@@ -56,7 +73,7 @@ function Registro() {
               <input
                 type="email"
                 id="email"
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Email"
                 onChange={handleChange}
               />
@@ -65,7 +82,7 @@ function Registro() {
               <input
                 type="password"
                 id="password"
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Contraseña"
                 onChange={handleChange}
               />
@@ -74,30 +91,34 @@ function Registro() {
               <input
                 type="password"
                 id="confirmpassword"
-                className="form-control form-control-lg"
+                className="form-control"
                 placeholder="Confirmar contraseña"
                 onChange={handleChange}
               />
             </div>
-            <div className="justify-content-center mt-4 d-grid gap-2 col-6 mx-auto ">
-              <button className="btn btn-primary" onClick={sendServer}>
+            <div className="justify-content-center mt-4">
+              <button className="btn btn-primary" onClick={signupEmail}>
                 Registrarse
               </button>
             </div>
-            <div class="row justify-content-center mt-3">
+            <div class="row justify-content-center mt-4">
               <div className="text-center mb-0 col-4 ">
-                <div className="container">
-                  {/* TODO: imagen no se ve*/}
+                <div button class="btn btn-default" onClick={signupGoogle}>
                   <img
-                    src="../assets/logo-google.png"
+                    src="assets/logo-google.svg"
                     class="img-fluid"
                     alt="Logo Google"
-                    sizes="50px"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <i class="bi bi-twitter style-icon-twitter"></i>
+                <div button class="btn btn-default" onClick={signupTwitter}>
+                  <img
+                    src="assets/twitter.svg"
+                    class="img-fluid"
+                    alt="Icon Twitter"
+                  ></img>
+                </div>
               </div>
             </div>
           </div>

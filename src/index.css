@@ -15,3 +15,33 @@ code {
 .navbar-light .navbar-nav .nav-link.active {
   color: orange !important;
 }
+
+
+/*Formularios y botones*/
+.form-control {
+  background: white;
+  border-radius: 10px;
+  width: 350px;
+  height: 40px;
+  border-color: orange;
+}
+
+.btn-primary {
+  color: white !important;
+  background-color: orange !important;
+  border-color: orange !important;
+}
+
+.btn-secondary {
+  color: orange !important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.btn-primary,
+.btn-secondary { 
+  font-size: 20px;
+  width: 350px;
+  border-radius: 10px;
+  height: 40px;
+}
