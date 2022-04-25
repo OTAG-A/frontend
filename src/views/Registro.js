@@ -69,8 +69,8 @@ function Registro() {
       </header>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-8 col-sm-8 col-md-6 col-lg-4">
-            <div className="text-center mb-3 ">
+          <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
+            <div className="text-center my-3 ">
               <img
                 src="assets/person-circle.svg"
                 class="img-fluid"
@@ -114,7 +114,7 @@ function Registro() {
               />
             </div>
             <div className="justify-content-center mt-4">
-              <button className="btn btn-primary" onClick={signupEmail}>
+              <button className="btn btn-primary m-auto" onClick={signupEmail}>
                 Registrarse
               </button>
             </div>

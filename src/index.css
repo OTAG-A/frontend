@@ -18,6 +18,9 @@ code {
 
 /*Formularios y botones*/
 .form-control {
+  /* Centrarlo */
+  margin: auto;
+
   background: white;
   border-radius: 10px;
   width: 350px;
