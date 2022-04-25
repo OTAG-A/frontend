@@ -15,3 +15,7 @@ code {
 .navbar-light .navbar-nav .nav-link.active {
   color: orange !important;
 }
+
+.nav-item {
+  margin: auto;
+}
