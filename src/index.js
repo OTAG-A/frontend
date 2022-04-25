@@ -32,8 +32,8 @@ ReactDOM.render(
             <Route path="" element={<ListaAnimales />} />
             <Route path=":idAnimal" element={<DetallesAnimal />} />
           </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Registro />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
         </Routes>
 
         {/* <Footer /> */}
