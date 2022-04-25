@@ -13,27 +13,32 @@ import {
   Registro,
 } from "./views";
 
+// Application environment
+import { UserProvider } from "./environment";
+
 import Navigation from "./Navigation.js";
 
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Navigation />
+    <UserProvider>
+      <Router>
+        <Navigation />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/animales" element={<Animales />}>
-          <Route path="" element={<ListaAnimales />} />
-          <Route path=":idAnimal" element={<DetallesAnimal />} />
-        </Route>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/animales" element={<Animales />}>
+            <Route path="" element={<ListaAnimales />} />
+            <Route path=":idAnimal" element={<DetallesAnimal />} />
+          </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-      </Routes>
+        </Routes>
 
-      {/* <Footer /> */}
-    </Router>
+        {/* <Footer /> */}
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
