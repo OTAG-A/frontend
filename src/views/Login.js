@@ -17,11 +17,13 @@ function Login() {
     }));
   };
 
+  //TODO:funcionalidad
   const loginEmail = async (e) => {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
   };
 
+  //TODO:funcionalidad
   const loginGoogle = async (e) => {
     e.preventDefault();
     console.log(
@@ -29,6 +31,7 @@ function Login() {
     );
   };
 
+  //TODO:funcionalidad
   const loginTwitter = async (e) => {
     e.preventDefault();
     console.log(
@@ -36,8 +39,9 @@ function Login() {
     );
   };
 
+  //TODO: popup olvido contraseña
   const goPWD = () => {
-    //TODO: popup olvido contraseña
+    console.log("PopUp recordar contraseña");
   };
 
   return (

@@ -16,6 +16,7 @@ function Registro() {
     }));
   };
 
+  //TODO:funcionalidad
   const signupEmail = async (e) => {
     //TODO:contraseña = confirmar contraseña
     e.preventDefault();
@@ -31,17 +32,33 @@ function Registro() {
     );
   };
 
+  //TODO:funcionalidad
   const signupGoogle = async (e) => {
     e.preventDefault();
     console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+      "Nombre:" +
+        state.name +
+        " Cuenta-google:" +
+        state.email +
+        " Contraseña:" +
+        state.password +
+        " Confirmar-contraseña:" +
+        state.password
     );
   };
 
+  //TODO:funcionalidad
   const signupTwitter = async (e) => {
     e.preventDefault();
     console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
+      "Nombre:" +
+        state.name +
+        " Cuenta-twitter:" +
+        state.email +
+        " Contraseña:" +
+        state.password +
+        " Confirmar-contraseña:" +
+        state.password
     );
   };
 
