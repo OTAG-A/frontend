@@ -44,7 +44,7 @@ function AnimalList() {
         <input
           type={"text"}
           placeholder="Buscar animal"
-          style={{ width: "100%" }}
+          className="w-100 p-2"
         />
       </header>
       <div className="container">
@@ -61,6 +61,25 @@ function AnimalList() {
             ))}
           </div>
         ))}
+
+        <div className="row">
+          <ul className="pagination justify-content-end">
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item"><a className="page-link" href="#">1</a></li>
+            <li className="page-item"><a className="page-link" href="#">2</a></li>
+            <li className="page-item"><a className="page-link" href="#">3</a></li>
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
   );
