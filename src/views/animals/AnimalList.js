@@ -65,21 +65,22 @@ function AnimalList() {
         <div className="row">
           <ul className="pagination justify-content-end">
             <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
+              <button className="page-link" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-              </a>
+              </button>
             </li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
+            {[...Array(3)].map((_, i) => (
+              <li className="page-item" key={i}>
+                <button className="page-link">{i + 1}</button>
+              </li>
+            ))}
             <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
+              <button className="page-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
-              </a>
+              </button>
             </li>
           </ul>
         </div>
-
       </div>
     </div>
   );
