@@ -3,12 +3,11 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
-// Application Views
 import {
   Home,
-  Animales,
-  ListaAnimales,
-  DetallesAnimal,
+  Animals,
+  AnimalList,
+  AnimalDetails,
   Login,
   Registro,
 } from "./views";
@@ -28,9 +27,9 @@ ReactDOM.render(
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/animales" element={<Animales />}>
-            <Route path="" element={<ListaAnimales />} />
-            <Route path=":idAnimal" element={<DetallesAnimal />} />
+          <Route path="/animales" element={<Animals />}>
+            <Route path="" element={<AnimalList />} />
+            <Route path=":idAnimal" element={<AnimalDetails />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />

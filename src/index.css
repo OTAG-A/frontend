@@ -51,3 +51,7 @@ code {
 .nav-item {
   margin: auto;
 }
+
+.navbar-nav {
+  white-space: nowrap;
+}
