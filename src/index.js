@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 import {
-  Home, Animals, AnimalList, AnimalDetails,
+  Home,
+  Animals,
+  AnimalList,
+  AnimalDetails,
   Login,
   Registro,
 } from "./views";
-
 
 // Application environment
 import { UserProvider } from "./environment";
