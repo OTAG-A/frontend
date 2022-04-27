@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import UserComponent from './UserComponent';
+import UserComponent from "./UserComponent";
 
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.

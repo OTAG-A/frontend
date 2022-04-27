@@ -8,7 +8,9 @@ function ThreadsList() {
 
   return (
     <div>
-      {posts.map((post, i) => <PostComponent post={post} compact={true} key={i} />)}
+      {posts.map((post, i) => (
+        <PostComponent post={post} compact={true} key={i} />
+      ))}
     </div>
   );
 }
