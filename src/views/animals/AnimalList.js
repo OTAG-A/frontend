@@ -12,28 +12,7 @@ function splitInGroups(arr, n) {
 }
 
 function AnimalList() {
-  const animals = [
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-    Animal.preview(),
-  ];
+  const animals = [...Array(10)].map(() => Animal.preview());
 
   let table = splitInGroups(animals, 3);
   console.log(table);
