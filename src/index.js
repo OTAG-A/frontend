@@ -10,6 +10,8 @@ import {
   AnimalDetails,
   Login,
   Registro,
+  Forums,
+  ThreadsList,
 } from "./views";
 
 // Application environment
@@ -33,6 +35,10 @@ ReactDOM.render(
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+          <Route path="/foro" element={<Forums />}>
+            <Route path="" element={<ThreadsList />} />
+            <Route path=":idAnimal" element={<ThreadsList />} />
+          </Route>
         </Routes>
 
         {/* <Footer /> */}
