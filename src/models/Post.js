@@ -24,6 +24,10 @@ class Post {
       creationDate: Date.now(),
     });
   }
+
+  get_url() {
+    return "/foros/" + this.category + "/" + this.id;
+  }
 }
 
 export default Post;

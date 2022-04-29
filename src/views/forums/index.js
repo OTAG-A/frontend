@@ -1,2 +1,3 @@
 export { default as Forums } from "./Forums";
-export { default as ThreadsList } from "./ThreadsList";
+export { default as GeneralCategory } from "./GeneralCategory";
+export { default as ConcreteCategory } from "./ConcreteCategory";

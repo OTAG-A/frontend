@@ -11,7 +11,8 @@ import {
   Login,
   Registro,
   Forums,
-  ThreadsList,
+  GeneralCategory,
+  ConcreteCategory,
 } from "./views";
 
 // Application environment
@@ -36,8 +37,8 @@ ReactDOM.render(
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/foro" element={<Forums />}>
-            <Route path="" element={<ThreadsList />} />
-            <Route path=":idAnimal" element={<ThreadsList />} />
+            <Route path="" element={<GeneralCategory />} />
+            <Route path=":category" element={<ConcreteCategory />} />
           </Route>
         </Routes>
 
