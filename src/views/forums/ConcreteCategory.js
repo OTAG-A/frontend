@@ -6,9 +6,7 @@ function ConcreteCategory() {
   // TODO: replace with real data
   const posts = [...Array(10)].map(() => Post.preview());
 
-  return (
-    <PostList posts={posts} />
-  );
+  return <PostList posts={posts} />;
 }
 
 export default ConcreteCategory;

@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 import Breadcrumb from "./components/Breadcrumb";
 

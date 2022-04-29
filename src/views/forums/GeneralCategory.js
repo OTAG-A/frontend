@@ -12,29 +12,39 @@ function GeneralCategory() {
 
   return (
     <div className="row">
-
       <div className="col-md-9">
         <PostList posts={posts} />
       </div>
 
       <div className="col-md-3">
-
         <div className="categories card p-3 mb-5">
           <h2>Categorias</h2>
-          <input type={"text"} id="category" className="mb-3" placeholder="Filtrar categorias" />
+          <input
+            type={"text"}
+            id="category"
+            className="mb-3"
+            placeholder="Filtrar categorias"
+          />
           <ul>
-            {categories.map((category, i) => <li key={i}><a href={"/foro/" + category}>{category}</a></li>)}
+            {categories.map((category, i) => (
+              <li key={i}>
+                <a href={"/foro/" + category}>{category}</a>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="most-popular card p-3">
           <h2>Más populares</h2>
           <ul>
-            {popular_posts.map((post, i) => <li key={i}><a href={post.get_url()}>{post.title}</a></li>)}
+            {popular_posts.map((post, i) => (
+              <li key={i}>
+                <a href={post.get_url()}>{post.title}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-
     </div>
   );
 }

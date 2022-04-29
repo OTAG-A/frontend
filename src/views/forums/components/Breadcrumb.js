@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function total_path(pathSlices, idx) {
@@ -20,7 +20,7 @@ function capitalize(str) {
 
 const Breadcrumb = () => {
   const route = useLocation().pathname.split("/").slice(1);
-  console.log(route)
+  console.log(route);
 
   return (
     <nav>
@@ -30,7 +30,7 @@ const Breadcrumb = () => {
         </li>
 
         {route.map((pathSlice, i) => {
-          const isActive = i == (route.length - 1);
+          const isActive = i === route.length - 1;
 
           return isActive ? (
             <li key={i} className="breadcrumb-item active">
