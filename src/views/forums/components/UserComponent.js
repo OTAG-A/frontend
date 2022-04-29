@@ -7,7 +7,7 @@ function UserComponent({ user }) {
 
   return (
     <div
-      className="col-3 user text-center d-flex flex-column"
+      className="col-sm-2 user text-center d-flex flex-column"
       onClick={() => navigate("/usuario/" + user.id)}
     >
       <div className="">

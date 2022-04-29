@@ -25,7 +25,7 @@ function PostComponent({ post, compact = true }) {
 
       <div className="row">
         <UserComponent user={post.user} />
-        <p className="col-8 ml-5">
+        <p className="col-sm-10 ml-5">
           {compact ? truncate(post.body, 300) : post.body}
         </p>
       </div>
