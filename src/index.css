@@ -12,8 +12,14 @@ code {
     monospace;
 }
 
-.navbar-light .navbar-nav .nav-link.active {
-  color: orange !important;
+.navbar-light .navbar-nav .nav-link.active,
+a {
+  color: orange;
+}
+
+.navbar-light .navbar-nav .nav-link.active:hover,
+a:hover {
+  color: darkorange;
 }
 
 /*Formularios y botones*/
@@ -54,4 +60,15 @@ code {
 
 .navbar-nav {
   white-space: nowrap;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.clickable {
+  cursor: pointer;
 }

@@ -6,11 +6,11 @@ function UserComponent({ user }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="col-sm-2 user text-center d-flex flex-column"
-      onClick={() => navigate("/usuario/" + user.id)}
-    >
-      <div className="">
+    <div className="col-sm-2 user text-center">
+      <div
+        className="col align-items-center d-flex flex-column clickable"
+        onClick={() => navigate("/usuario/" + user.id)}
+      >
         <img
           src={user.image}
           className="rounded-circle"
@@ -20,8 +20,6 @@ function UserComponent({ user }) {
           width={60}
           alt={user.name}
         />
-      </div>
-      <div className="">
         <b>{user.name}</b>
       </div>
     </div>

@@ -13,6 +13,7 @@ import {
   Forums,
   GeneralCategory,
   ConcreteCategory,
+  Thread,
 } from "./views";
 
 // Application environment
@@ -38,7 +39,10 @@ ReactDOM.render(
           <Route path="/registro" element={<Registro />} />
           <Route path="/foro" element={<Forums />}>
             <Route path="" element={<GeneralCategory />} />
-            <Route path=":category" element={<ConcreteCategory />} />
+            <Route path=":category">
+              <Route path="" element={<ConcreteCategory />} />
+              <Route path=":idThread" element={<Thread />} />
+            </Route>
           </Route>
         </Routes>
 

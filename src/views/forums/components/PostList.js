@@ -1,11 +1,11 @@
 import React from "react";
 import PostComponent from "./PostComponent";
 
-function PostList({ posts }) {
+function PostList({ posts, thread = false }) {
   return (
     <div>
       {posts.map((post, i) => (
-        <PostComponent post={post} compact={true} key={i} />
+        <PostComponent post={post} compact={!thread} key={i} />
       ))}
     </div>
   );

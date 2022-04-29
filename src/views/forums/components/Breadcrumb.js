@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 function total_path(pathSlices, idx) {
   let path = "/";
   for (let i = 0; i <= idx; i++) {
-    path += pathSlices[i];
+    path += pathSlices[i] + "/";
   }
   return path;
 }
@@ -19,7 +19,9 @@ function capitalize(str) {
 }
 
 const Breadcrumb = () => {
-  const route = useLocation().pathname.split("/").slice(1);
+  const route = useLocation()
+    .pathname.split("/")
+    .filter((pathSlice) => pathSlice !== "");
   console.log(route);
 
   return (
