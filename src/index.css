@@ -55,3 +55,8 @@ code {
 .navbar-nav {
   white-space: nowrap;
 }
+
+.btn-outline-warning:hover {
+  background-color: orange !important;
+  border-color: orange !important;
+}

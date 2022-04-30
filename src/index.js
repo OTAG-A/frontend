@@ -10,6 +10,7 @@ import {
   AnimalDetails,
   Login,
   Registro,
+  Profile,
 } from "./views";
 
 // Application environment
@@ -33,6 +34,8 @@ ReactDOM.render(
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+          <Route path="/perfil" element={<Profile />} />
+          <Route path="/perfil/:userId" element={<Profile />} />
         </Routes>
 
         {/* <Footer /> */}
