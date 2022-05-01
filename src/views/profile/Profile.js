@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import format from "date-fns/format";
 
@@ -12,7 +13,7 @@ function Profile() {
   let currentUser = useContext(UserContext);
   let { userId } = useParams();
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug(currentUser);
 
     // If no id or id is the same as the current user one
@@ -26,7 +27,7 @@ function Profile() {
 
     // TODO: api request to get user data
     setUser(User.preview());
-  }, []);
+  });
 
   if (!user) {
     return <></>;
