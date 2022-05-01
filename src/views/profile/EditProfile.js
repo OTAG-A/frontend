@@ -43,13 +43,30 @@ function EditProfile() {
           <div className="col-md-5 text-center m-auto p-5">
             <Row>
               <Col xs md="6" className="mx-auto">
-                <input ref={inputRef} className="d-none" type="file" accept="image/*" capture="camera" onChange={handleChange} />
-                <img className="mb-3 img img-responsive rounded-circle clickable w-100" style={{ height: "15vw", objectFit: "cover" }} onClick={handleUpload} src={img} alt="" />
+                <input
+                  ref={inputRef}
+                  className="d-none"
+                  type="file"
+                  accept="image/*"
+                  capture="camera"
+                  onChange={handleChange}
+                />
+                <img
+                  className="mb-3 img img-responsive rounded-circle clickable w-100"
+                  style={{ height: "15vw", objectFit: "cover" }}
+                  onClick={handleUpload}
+                  src={img}
+                  alt=""
+                />
               </Col>
             </Row>
             <Row>
               <Col>
-                <input type={"text"} className="mb-4" defaultValue={user.name} />
+                <input
+                  type={"text"}
+                  className="mb-4"
+                  defaultValue={user.name}
+                />
               </Col>
             </Row>
             <textarea

@@ -61,8 +61,7 @@ class Animal {
       fechaNac: Date.now(),
       tamagno: "chiquito",
       nombre: "Misifú",
-      imagen:
-        "https://i.imgur.com/qJ4UV1i.png",
+      imagen: "https://i.imgur.com/qJ4UV1i.png",
     });
   }
 }
