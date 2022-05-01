@@ -83,7 +83,10 @@ function Login() {
               </a>
             </p>
             <div className="justify-content-center mt-4">
-              <button className="btn btn-primary login-button" onClick={loginEmail}>
+              <button
+                className="btn btn-primary login-button"
+                onClick={loginEmail}
+              >
                 Iniciar Sesión
               </button>
             </div>
