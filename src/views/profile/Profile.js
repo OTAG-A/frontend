@@ -38,7 +38,12 @@ function Profile() {
       <div className="container p-2">
         <div className="row">
           <div className="col text-center p-5">
-            <img className="mb-3" src={user.image} alt="" />
+            <img
+              className="mb-3 img img-responsive"
+              src={user.image}
+              style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
+              alt=""
+            />
             <h2 className="mb-4">{user.name}</h2>
             <p className="text-start px-5">{user.bio}</p>
             {isSelf && (
