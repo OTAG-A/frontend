@@ -11,6 +11,7 @@ import {
   Login,
   Registro,
   Profile,
+  EditProfile,
 } from "./views";
 
 // Application environment
@@ -36,6 +37,7 @@ ReactDOM.render(
           <Route path="/registro" element={<Registro />} />
           <Route path="/perfil" element={<Profile />} />
           <Route path="/perfil/:userId" element={<Profile />} />
+          <Route path="/editar-perfil" element={<EditProfile />} />
         </Routes>
 
         {/* <Footer /> */}

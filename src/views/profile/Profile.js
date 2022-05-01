@@ -13,10 +13,10 @@ function Profile() {
   let { userId } = useParams();
 
   useEffect(() => {
-    console.log(currentUser);
+    console.debug(currentUser);
 
     // If no id or id is the same as the current user one
-    if (!userId || isSelf) {
+    if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
       setIsSelf(true);
 
       // Load self user if some
@@ -26,7 +26,7 @@ function Profile() {
 
     // TODO: api request to get user data
     setUser(User.preview());
-  }, [userId, currentUser, isSelf]);
+  }, []);
 
   if (!user) {
     return <></>;
@@ -65,9 +65,9 @@ function Profile() {
                   <button className="btn btn-danger me-2">
                     Eliminar usuario
                   </button>
-                  <button className="btn btn-outline-warning">
+                  <a className="btn btn-outline-warning" href="/editar-perfil">
                     Editar perfil
-                  </button>
+                  </a>
                 </div>
               </div>
             )}
