@@ -22,13 +22,13 @@ function Registro() {
     e.preventDefault();
     console.log(
       "Nombre:" +
-        state.name +
-        " Email:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
+      state.name +
+      " Email:" +
+      state.email +
+      " Contraseña:" +
+      state.password +
+      " Confirmar-contraseña:" +
+      state.password
     );
   };
 
@@ -37,13 +37,13 @@ function Registro() {
     e.preventDefault();
     console.log(
       "Nombre:" +
-        state.name +
-        " Cuenta-google:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
+      state.name +
+      " Cuenta-google:" +
+      state.email +
+      " Contraseña:" +
+      state.password +
+      " Confirmar-contraseña:" +
+      state.password
     );
   };
 
@@ -52,13 +52,13 @@ function Registro() {
     e.preventDefault();
     console.log(
       "Nombre:" +
-        state.name +
-        " Cuenta-twitter:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
+      state.name +
+      " Cuenta-twitter:" +
+      state.email +
+      " Contraseña:" +
+      state.password +
+      " Confirmar-contraseña:" +
+      state.password
     );
   };
 
@@ -114,7 +114,7 @@ function Registro() {
               />
             </div>
             <div className="justify-content-center mt-4">
-              <button className="btn btn-primary m-auto" onClick={signupEmail}>
+              <button className="btn btn-primary login-button m-auto" onClick={signupEmail}>
                 Registrarse
               </button>
             </div>

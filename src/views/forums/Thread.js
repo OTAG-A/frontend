@@ -14,6 +14,18 @@ function Thread() {
     setPost(Post.preview());
   }, []);
 
+  function autoResize(event) {
+    console.debug(event);
+    const elem = event.target;
+    elem.style.height = "";
+    elem.style.height = elem.scrollHeight + 3 + "px";
+  }
+
+  function resetSize(event) {
+    const elem = event.target;
+    elem.style.height = "";
+  }
+
   if (post !== null) {
     return (
       <div>
@@ -23,6 +35,25 @@ function Thread() {
           {post.comments.map((comment, i) => (
             <CommentComponent comment={comment} key={i} />
           ))}
+          <div className="comment p-2 card mb-3">
+            <div className="row">
+              <div className="col">
+                <textarea
+                  className="w-100 mx-1 border-0 overflow-hidden"
+                  placeholder="Escribe aquí tu respuesta"
+                  rows={4}
+                  onFocus={autoResize}
+                  onBlur={resetSize}
+                  onInput={autoResize}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col text-end">
+                <button className="btn btn-primary">Enviar</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

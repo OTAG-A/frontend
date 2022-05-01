@@ -46,11 +46,10 @@ a:hover {
   border-color: var(--primary) !important;
 }
 
-.btn-primary,
-.btn-secondary {
+.login-button {
   font-size: 20px;
   width: 350px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   height: 40px;
 }
 
