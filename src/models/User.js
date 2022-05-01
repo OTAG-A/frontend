@@ -21,7 +21,7 @@ class User {
       creationDate: new Date(),
       messagesNum: 500,
       image:
-        "http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg",
+        "https://i.imgur.com/qJ4UV1i.png",
       isAdmin: true,
     });
   }

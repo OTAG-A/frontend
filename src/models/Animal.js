@@ -62,7 +62,7 @@ class Animal {
       tamagno: "chiquito",
       nombre: "Misifú",
       imagen:
-        "http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg",
+        "https://i.imgur.com/qJ4UV1i.png",
     });
   }
 }
