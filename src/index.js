@@ -12,6 +12,10 @@ import {
   Registro,
   Profile,
   EditProfile,
+  Forums,
+  GeneralCategory,
+  ConcreteCategory,
+  Thread,
 } from "./views";
 
 // Application environment
@@ -38,6 +42,13 @@ ReactDOM.render(
           <Route path="/perfil" element={<Profile />} />
           <Route path="/perfil/:userId" element={<Profile />} />
           <Route path="/editar-perfil" element={<EditProfile />} />
+          <Route path="/foro" element={<Forums />}>
+            <Route path="" element={<GeneralCategory />} />
+            <Route path=":category">
+              <Route path="" element={<ConcreteCategory />} />
+              <Route path=":idThread" element={<Thread />} />
+            </Route>
+          </Route>
         </Routes>
 
         {/* <Footer /> */}
