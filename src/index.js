@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import Footer from "./views/Footer";
 
 import {
   Home,
@@ -37,7 +38,7 @@ ReactDOM.render(
           <Route path="/about" element={<About />} />
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </UserProvider>
   </React.StrictMode>,
