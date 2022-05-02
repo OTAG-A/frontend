@@ -12,8 +12,14 @@ code {
     monospace;
 }
 
-.navbar-light .navbar-nav .nav-link.active {
-  color: orange !important;
+.navbar-light .navbar-nav .nav-link.active,
+a {
+  color: orange;
+}
+
+.navbar-light .navbar-nav .nav-link.active:hover,
+a:hover {
+  color: darkorange;
 }
 
 /*Formularios y botones*/
@@ -40,11 +46,10 @@ code {
   border-color: var(--primary) !important;
 }
 
-.btn-primary,
-.btn-secondary {
+.login-button {
   font-size: 20px;
   width: 350px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   height: 40px;
 }
 
@@ -54,4 +59,15 @@ code {
 
 .navbar-nav {
   white-space: nowrap;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.clickable {
+  cursor: pointer;
 }
