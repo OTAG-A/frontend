@@ -10,6 +10,8 @@ import {
   AnimalDetails,
   Login,
   Registro,
+  Profile,
+  EditProfile,
   Forums,
   GeneralCategory,
   ConcreteCategory,
@@ -37,6 +39,9 @@ ReactDOM.render(
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+          <Route path="/perfil" element={<Profile />} />
+          <Route path="/perfil/:userId" element={<Profile />} />
+          <Route path="/editar-perfil" element={<EditProfile />} />
           <Route path="/foro" element={<Forums />}>
             <Route path="" element={<GeneralCategory />} />
             <Route path=":category">

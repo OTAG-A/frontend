@@ -61,6 +61,11 @@ a:hover {
   white-space: nowrap;
 }
 
+.btn-outline-warning:hover {
+  background-color: orange !important;
+  border-color: orange !important;
+}
+
 .link-unstyled,
 .link-unstyled:link,
 .link-unstyled:hover {
