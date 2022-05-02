@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { TwitterTimelineEmbed, TwitterFollowButton } from "react-twitter-embed";
 
 function Home() {
   const navigate = useNavigate();
@@ -109,17 +110,35 @@ function Home() {
           <div class=" fs-5 row justify-content-center my-4">
             <div class="col ">
               <p>
-                Síguenos en nuestra cuenta de Twitter.
+                <span style={{ color: "orange" }}>Síguenos </span>
+                en nuestra cuenta de{" "}
+                <span style={{ color: "orange" }}>Twitter</span>
                 <br></br>
-                <br></br>Puedes encontrar información sobre las adopciones que
-                se realizan.
+              </p>
+              <TwitterFollowButton
+                screenName={"adoptadiCOs"}
+                options={{ size: "large" }}
+              />
+              <p>
+                <br></br>Puedes{" "}
+                <span style={{ color: "orange" }}>
+                  encontrar información sobre las adopciones{" "}
+                </span>
+                que se realizan.
                 <br></br>
                 <br></br>A parte de utilizar nuestro foro, las redes sociales
                 son un buen luegar para encontrar información adicional, y
-                comunicarte con personas con los mismos intereses{" "}
+                comunicarte con personas con los mismos intereses.{" "}
               </p>
             </div>
-            <div class="col ">Columna 2</div>
+            <div class="col ">
+              <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="adoptadiCOs"
+                options={{ height: 300 }}
+                borderColor="#1DA1F2"
+              />
+            </div>
           </div>
         </div>
       </div>
