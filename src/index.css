@@ -23,7 +23,7 @@ code {
 
   background: white;
   border-radius: 10px;
-  width: 350px;
+  width: 100%;
   height: 40px;
   border-color: orange;
 }
@@ -43,9 +43,9 @@ code {
 .btn-primary,
 .btn-secondary {
   font-size: 20px;
-  width: 350px;
   border-radius: 10px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
 }
 
 .nav-item {
