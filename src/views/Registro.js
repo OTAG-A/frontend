@@ -114,7 +114,10 @@ function Registro() {
               />
             </div>
             <div className="justify-content-center mt-4">
-              <button className="btn btn-primary m-auto" onClick={signupEmail}>
+              <button
+                className="btn btn-primary login-button m-auto"
+                onClick={signupEmail}
+              >
                 Registrarse
               </button>
             </div>
