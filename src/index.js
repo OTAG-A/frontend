@@ -16,6 +16,7 @@ import {
   GeneralCategory,
   ConcreteCategory,
   Thread,
+  AdminPanel,
 } from "./views";
 
 // Application environment
@@ -49,6 +50,7 @@ ReactDOM.render(
               <Route path=":idThread" element={<Thread />} />
             </Route>
           </Route>
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
 
         {/* <Footer /> */}
