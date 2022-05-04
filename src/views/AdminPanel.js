@@ -31,7 +31,7 @@ function AdminPanel() {
           Panel Administración
         </h1>
       </header>
-      <div className="container mt-4">
+      <div className="container my-4">
         <div className="row align-items-center">
           <p class="h3" style={{ color: "orange" }}>
             Analíticas
@@ -79,10 +79,10 @@ function AdminPanel() {
                 </div>
               </div>
             </div>
-            <p class="h3 mt-4" style={{ color: "orange" }}>
+            <p class="h3 mt-4 pt-4" style={{ color: "orange" }}>
               Usuarios registrados
             </p>
-            <div class="container border overflow-auto">
+            <div class="container mt-4 border overflow-auto">
               {table.map((row, i) => (
                 <div className="row" key={i}>
                   {row.map((animal, j) => (
