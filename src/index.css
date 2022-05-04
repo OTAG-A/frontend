@@ -76,3 +76,7 @@ a:hover {
 .clickable {
   cursor: pointer;
 }
+
+.admin-box {
+  border-color: orange !important;
+} 
