@@ -13,15 +13,11 @@ function Home() {
       <div className="container p-4">
         <div className="row align-items-center mb-5">
           <p class="fs-5 text-center">
-            ¡Has llegado a <span style={{ color: "orange" }}>adoptadiCOs</span>!{" "}
-            <br></br> El servicio de información sobre adopción de animales en
-            la ciudad de Zaragoza.
+            El servicio de información sobre adopción de animales en la ciudad
+            de Zaragoza.
           </p>
-          <div class="row justify-content-center my-4">
-            <div
-              class="col card m-4"
-              style={{ width: "40%", borderColor: "orange" }}
-            >
+          <div class="row justify-content-center my-4 mx-auto">
+            <div class="col-md-5 card m-3" style={{ borderColor: "orange" }}>
               <div class="card-body text-center">
                 <h5 class="card-title" style={{ color: "orange" }}>
                   ¿Estás pensando en adoptar?
@@ -42,10 +38,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div
-              class="col card m-4"
-              style={{ width: "40%", borderColor: "orange" }}
-            >
+            <div class="col-md-5 card m-3" style={{ borderColor: "orange" }}>
               <div class="card-body text-center">
                 <h5 class="card-title" style={{ color: "orange" }}>
                   ¿Tienes dudas sobre los animales?
@@ -68,11 +61,11 @@ function Home() {
             </div>
           </div>
           <p class="fs-5 m-2 text-center">
-            Gracias a <span style={{ color: "orange" }}>adoptadiCOs </span>
+            Gracias a <b>adoptadiCOs </b>
             puedes:
           </p>
           <div class=" fs-5 row justify-content-center my-4">
-            <div class="col">
+            <div class="col-lg-5">
               <ul>
                 <li>Saber qué animales están en adopción en Zaragoza</li>
                 <br></br>
@@ -82,7 +75,7 @@ function Home() {
                 </li>
               </ul>
             </div>
-            <div class="col">
+            <div class="col-lg-5">
               <ul>
                 <li>
                   Resolver tus dudas sobre adopciones y/o cuidados de distintos
@@ -105,9 +98,11 @@ function Home() {
             necesitan un hogar lo tengan.
           </p>
           <p class="fs-2 text-center">
-            <span style={{ color: "orange" }}>ADOPTA, NO COMPRES </span>
+            <span style={{ color: "orange" }}>
+              <b>ADOPTA</b>, NO COMPRES{" "}
+            </span>
           </p>
-          <div class=" fs-5 row justify-content-center my-4">
+          <div class=" fs-5 row justify-content-center my-4 mt-5">
             <div class="col ">
               <p>
                 <span style={{ color: "orange" }}>Síguenos </span>
