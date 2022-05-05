@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { LoadCanvasTemplate } from "react-simple-captcha";
+import React, { useState, useEffect } from "react";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 function Registro() {
   const [state, setState] = useState({
@@ -7,6 +11,7 @@ function Registro() {
     email: "",
     password: "",
     confirmPassword: "",
+    captcha: "",
   });
 
   const handleChange = (e) => {
@@ -21,16 +26,25 @@ function Registro() {
   const signupEmail = async (e) => {
     //TODO:contraseña = confirmar contraseña
     e.preventDefault();
-    console.log(
-      "Nombre:" +
-        state.name +
-        " Email:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
-    );
+    //Validar Captcha
+    if (validateCaptcha(state.captcha, false)) {
+      console.log(
+        "Nombre:" +
+          state.name +
+          " Email:" +
+          state.email +
+          " Contraseña:" +
+          state.password +
+          " Confirmar-contraseña:" +
+          state.password +
+          " Captcha: " +
+          state.captcha
+      );
+    } else {
+      setState((state.captcha = ""));
+      console.log(" Captcha: " + state.captcha);
+      loadCaptchaEnginge(6, "black", "orange");
+    }
   };
 
   //TODO:funcionalidad
@@ -62,6 +76,10 @@ function Registro() {
         state.password
     );
   };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6, "black", "orange");
+  }, []);
 
   return (
     <div className="login">
@@ -114,9 +132,21 @@ function Registro() {
                 onChange={handleChange}
               />
             </div>
+            <div className="mb-3">
+              <input
+                type="captcha"
+                id="captcha"
+                className="form-control"
+                placeholder="Código captcha"
+                onChange={handleChange}
+              />
+            </div>
             <div className="justify-content-center mt-4">
-              <div>
-                <LoadCanvasTemplate />
+              <div className="col mt-3">
+                <LoadCanvasTemplate
+                  reloadText="Recargar Captcha"
+                  reloadColor="orange"
+                />
               </div>
             </div>
             <div className="justify-content-center mt-4">
