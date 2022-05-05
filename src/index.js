@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import Footer from "./views/Footer";
 
 import {
   Home,
@@ -10,6 +11,7 @@ import {
   AnimalDetails,
   Login,
   Registro,
+  About,
   Profile,
   EditProfile,
   Forums,
@@ -39,6 +41,7 @@ ReactDOM.render(
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+          <Route path="/about" element={<About />} />
           <Route path="/perfil" element={<Profile />} />
           <Route path="/perfil/:userId" element={<Profile />} />
           <Route path="/editar-perfil" element={<EditProfile />} />
@@ -51,7 +54,7 @@ ReactDOM.render(
           </Route>
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </UserProvider>
   </React.StrictMode>,
