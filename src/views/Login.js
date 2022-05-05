@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Popup from "./components/Popup";
 
 function Login() {
   const [state, setState] = useState({
@@ -40,8 +41,8 @@ function Login() {
   };
 
   //TODO: popup olvido contraseña
-  const goPWD = () => {
-    console.log("PopUp recordar contraseña");
+  const recoverPassword = () => {
+    console.log("Recuperar contraseña al correo " + state.email + " del form");
   };
 
   return (
@@ -78,10 +79,19 @@ function Login() {
               />
             </div>
             <p className="text-center">
-              <a href="#!" className="text-warning" onClick={goPWD}>
+              <a
+                href="#!"
+                className="text-warning"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              >
                 ¿Has olvidado la contraseña?
               </a>
             </p>
+            <Popup
+              message={"¿Enviar correo de recuperación de contraseña?"}
+              action={recoverPassword}
+            />
             <div className="justify-content-center mt-4">
               <button
                 className="btn btn-primary login-button"
