@@ -22,7 +22,7 @@ function splitInGroups(arr, n) {
 function AdminPanel() {
   let currentUser = useContext(UserContext);
   const users = [...Array(20)].map(() => User.preview());
-  let table = splitInGroups(users, 3);
+  let table = splitInGroups(users, 4);
 
   return (
     <div className="home">
@@ -36,15 +36,15 @@ function AdminPanel() {
           <p class="h3" style={{ color: "orange" }}>
             Analíticas
           </p>
-          <div class="container">
+          <div class="container px-4">
             <div class="row gx-5 ">
-              <div class="col-md-6 mt-4 mx-auto">
-                <div class="p-3 border  admin-box ">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
+                <div class="p-3 border admin-box ">
                   <b>Animales totales en adopción: </b>
                   {numAnimals}
                 </div>
               </div>
-              <div class="col-md-6 mt-4 mx-auto">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Adopciones totales realizadas: </b>
                   {numAdoptions}
@@ -52,13 +52,13 @@ function AdminPanel() {
               </div>
             </div>
             <div class="row gx-5">
-              <div class="col-md-6 mt-4 mx-auto">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Usuarios totales registrados: </b>
                   {numUsers}
                 </div>
               </div>
-              <div class="col-md-6 mt-4 mx-auto">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Visitas a la web totales recibidas: </b>
                   {numVisits}
@@ -66,32 +66,38 @@ function AdminPanel() {
               </div>
             </div>
             <div class="row gx-5">
-              <div class="col-md-6 mt-4 mx-auto">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Post totales en el foro: </b>
                   {numPost}
                 </div>
               </div>
-              <div class="col-md-6 mt-4 mx-auto">
+              <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Tweets totales posteados: </b>
                   {numTweets}
                 </div>
               </div>
             </div>
-            <p class="h3 mt-4 pt-4" style={{ color: "orange" }}>
-              Usuarios registrados
-            </p>
-            <div class="container mt-4 border overflow-auto">
-              {table.map((row, i) => (
-                <div className="row" key={i}>
-                  {row.map((animal, j) => (
-                    <div className="col-md-4" key={j}>
-                      <UserBox user={currentUser} />
+          </div>
+          <div className="container my-4">
+            <div className="row align-items-center">
+              <p class="h3 pt-4" style={{ color: "orange" }}>
+                Usuarios registrados
+              </p>
+              <div class="container px-4 mt-4 vh-50">
+                <div class="border users-box">
+                  {table.map((row, i) => (
+                    <div className="row" key={i}>
+                      {row.map((animal, j) => (
+                        <div className="col-md-3" key={j}>
+                          <UserBox user={currentUser} />
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

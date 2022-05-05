@@ -79,4 +79,9 @@ a:hover {
 
 .admin-box {
   border-color: orange !important;
-} 
+}
+
+.users-box {
+  height: 300px;
+  overflow-y: scroll;
+}
