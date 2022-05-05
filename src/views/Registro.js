@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LoadCanvasTemplate } from "react-simple-captcha";
 
 function Registro() {
   const [state, setState] = useState({
@@ -112,6 +113,11 @@ function Registro() {
                 placeholder="Confirmar contraseña"
                 onChange={handleChange}
               />
+            </div>
+            <div className="justify-content-center mt-4">
+              <div>
+                <LoadCanvasTemplate />
+              </div>
             </div>
             <div className="justify-content-center mt-4">
               <button
