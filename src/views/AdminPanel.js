@@ -21,6 +21,7 @@ function splitInGroups(arr, n) {
 
 function AdminPanel() {
   let currentUser = useContext(UserContext);
+  //TODO: users todos los de bbdd y no siempre currentUser
   const users = [...Array(20)].map(() => User.preview());
   let table = splitInGroups(users, 4);
 
