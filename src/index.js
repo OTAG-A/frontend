@@ -27,7 +27,7 @@ import { UserProvider } from "./environment";
 
 import Navigation from "./Navigation.js";
 
-(async function() {
+(async function () {
   await import("bootstrap/dist/css/bootstrap.min.css");
   await import("react-popupbox/dist/react-popupbox.css");
   await import("./index.css");
