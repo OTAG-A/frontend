@@ -18,6 +18,7 @@ function UserComponent({ user }) {
             backgroundColor: "lightgray",
           }}
           width={60}
+          height={60}
           alt={user.name}
         />
         <b>{user.name}</b>
