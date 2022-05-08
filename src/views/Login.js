@@ -81,14 +81,17 @@ function Login() {
             <p className="text-center">
               <a
                 href="#!"
+                id="popup-reuperacion-label"
                 className="text-warning"
                 data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+                data-bs-target="#popup-recuperacion"
               >
                 ¿Has olvidado la contraseña?
               </a>
             </p>
             <Popup
+              id="popup-recuperacion"
+              labelId="popup-recuperacion-label"
               message={"¿Enviar correo de recuperación de contraseña?"}
               action={recoverPassword}
             />

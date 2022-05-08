@@ -1,39 +1,39 @@
 import React from "react";
 
-function PopUp({ message, action }) {
+function PopUp({ id, labelId, message, action }) {
   return (
     <div
-      class="modal fade"
-      id="staticBackdrop"
+      className="modal fade"
+      id={id}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
+      tabIndex="-1"
+      aria-labelledby={labelId}
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="modal-header">
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">{message}</div>
-          <div class="modal-footer justify-content-between">
+          <div className="modal-body">{message}</div>
+          <div className="modal-footer justify-content-between">
             <button
               type="button"
-              class="btn btn-secondary col-5"
+              className="btn btn-secondary col-5"
               data-bs-dismiss="modal"
             >
               Cancelar
             </button>
-            <div class="col-md-auto"></div>
+            <div className="col-md-auto"></div>
             <button
               type="button"
-              class="btn btn-primary col-5"
+              className="btn btn-primary col-5"
               onClick={action}
               data-bs-dismiss="modal"
             >
