@@ -7,7 +7,7 @@ import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
 
 function Thread() {
-  const currentUser = useContext(UserContext);
+  const { user: currentUser } = useContext(UserContext);
 
   const [post, setPost] = useState(null);
   // const threadId = useParams("threadId");
@@ -43,7 +43,7 @@ function Thread() {
         <PostComponent
           post={post}
           compact={false}
-          onDelete={currentUser.isAdmin ? onPostDelete : null}
+          onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
         />
 
         <h2 className="mt-5 mb-3">Respuestas</h2>
@@ -52,7 +52,7 @@ function Thread() {
             <CommentComponent
               comment={comment}
               key={i}
-              onDelete={currentUser.isAdmin ? onCommentDelete : null}
+              onDelete={currentUser && currentUser.isAdmin ? onCommentDelete : null}
             />
           ))}
 

@@ -6,7 +6,7 @@ import { UserContext } from "../../environment";
 
 function AnimalDetails() {
   let { idAnimal } = useParams();
-  let currentUser = useContext(UserContext);
+  let { user: currentUser } = useContext(UserContext);
 
   useEffect(() => {
     // TODO: Obtener detalles de animal de la API dado su ID

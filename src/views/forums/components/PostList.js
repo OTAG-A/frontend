@@ -3,7 +3,7 @@ import { UserContext } from "../../../environment";
 import PostComponent from "./PostComponent";
 
 function PostList({ posts, thread = false }) {
-  let currentUser = useContext(UserContext);
+  let { user: currentUser } = useContext(UserContext);
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
@@ -16,7 +16,7 @@ function PostList({ posts, thread = false }) {
           post={post}
           compact={!thread}
           key={i}
-          onDelete={currentUser.isAdmin ? onPostDelete : null}
+          onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
         />
       ))}
     </div>

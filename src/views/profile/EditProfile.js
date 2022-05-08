@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { UserContext } from "../../environment/UserProvider";
 
 function EditProfile() {
-  let user = useContext(UserContext);
+  let { user } = useContext(UserContext);
   let [img, setImg] = useState(user.image);
 
   const inputRef = useRef(null);
