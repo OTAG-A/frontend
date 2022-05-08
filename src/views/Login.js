@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { openQuestionPopup } from "./components/PopupQuestion";
+
+import { User } from "../models";
+import { UserContext } from "../environment/UserProvider";
 
 function Login() {
   const [state, setState] = useState({
@@ -9,6 +12,8 @@ function Login() {
   });
 
   const navigate = useNavigate();
+
+  const { setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -22,6 +27,9 @@ function Login() {
   const loginEmail = async (e) => {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
+
+    setUser(User.preview());
+    navigate("/");
   };
 
   //TODO:funcionalidad
