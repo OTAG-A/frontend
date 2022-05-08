@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../../environment";
 import PostComponent from "./PostComponent";
 
 function PostList({ posts, thread = false }) {
+  let currentUser = useContext(UserContext);
+
+  const onPostDelete = (post) => {
+    console.log("delete post with id " + post.id);
+  }
+
   return (
     <div>
       {posts.map((post, i) => (
-        <PostComponent post={post} compact={!thread} key={i} />
+        <PostComponent
+          post={post}
+          compact={!thread}
+          key={i}
+          onDelete={currentUser.isAdmin ? onPostDelete : null}
+        />
       ))}
     </div>
   );

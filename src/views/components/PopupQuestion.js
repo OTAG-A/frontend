@@ -5,9 +5,9 @@ import { Row, Col, Button } from "react-bootstrap";
 import Popup from "./Popup";
 
 export default function QuestionPopup({ question, onAccept, onCancel }) {
-  const onCancelWrapper = () => {
+  const actionWrapper = (action) => {
     PopupboxManager.close();
-    onCancel();
+    action();
   };
 
   return (
@@ -17,7 +17,7 @@ export default function QuestionPopup({ question, onAccept, onCancel }) {
           <Button
             className="success-button"
             style={{ width: "100%" }}
-            onClick={onAccept}
+            onClick={() => actionWrapper(onAccept)}
           >
             Sí
           </Button>
@@ -26,7 +26,7 @@ export default function QuestionPopup({ question, onAccept, onCancel }) {
           <Button
             className="btn-secondary"
             style={{ width: "100%" }}
-            onClick={onCancelWrapper}
+            onClick={() => actionWrapper(onCancel)}
           >
             No
           </Button>
@@ -38,8 +38,8 @@ export default function QuestionPopup({ question, onAccept, onCancel }) {
 
 export function openQuestionPopup(
   question,
-  onAccept = () => {},
-  onCancel = () => {}
+  onAccept = () => { },
+  onCancel = () => { }
 ) {
   const content = (
     <QuestionPopup

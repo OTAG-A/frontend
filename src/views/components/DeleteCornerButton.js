@@ -2,7 +2,7 @@ import React from "react";
 
 function DeleteCornerButton({ id, action }) {
   return (
-    <button type="button" className="delete-corner-button" onClick={action} />
+    <button type="button" className="btn-corner-cross" onClick={action} />
   );
 }
 
