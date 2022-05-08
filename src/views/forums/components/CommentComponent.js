@@ -6,16 +6,17 @@ import UserComponent from "./UserComponent";
 
 function CommentComponent({ comment, onDelete = null }) {
   const comentDelete = (action) => {
-    openQuestionPopup("¿Quieres eliminar el comentario de `" + comment.user.name + "`?", () => {
-      action(comment);
-    });
-  }
+    openQuestionPopup(
+      "¿Quieres eliminar el comentario de `" + comment.user.name + "`?",
+      () => {
+        action(comment);
+      }
+    );
+  };
 
   return (
     <div className="comment p-2 card mb-3">
-      {onDelete &&
-        <DeleteCornerButton action={() => comentDelete(onDelete)} />
-      }
+      {onDelete && <DeleteCornerButton action={() => comentDelete(onDelete)} />}
       <div className="row">
         <UserComponent user={comment.user} />
         <p className="col-sm-10 ml-5">{comment.body}</p>

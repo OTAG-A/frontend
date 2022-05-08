@@ -15,16 +15,16 @@ const postDelete = (post, action) => {
   openQuestionPopup("¿Quieres eliminar el post `" + post.title + "`?", () => {
     action(post);
   });
-}
+};
 
 // PostComponent describes either a thread post or the original post inside the
 // thread.
 function PostComponent({ post, compact = true, onDelete = null }) {
   return (
     <div className="post p-2 card mb-3">
-      {onDelete &&
+      {onDelete && (
         <DeleteCornerButton action={() => postDelete(post, onDelete)} />
-      }
+      )}
 
       <div className="row mb-3">
         {compact ? (

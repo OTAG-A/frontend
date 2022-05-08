@@ -38,8 +38,8 @@ export default function QuestionPopup({ question, onAccept, onCancel }) {
 
 export function openQuestionPopup(
   question,
-  onAccept = () => { },
-  onCancel = () => { }
+  onAccept = () => {},
+  onCancel = () => {}
 ) {
   const content = (
     <QuestionPopup

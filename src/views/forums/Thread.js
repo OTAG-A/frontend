@@ -31,11 +31,11 @@ function Thread() {
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
-  }
+  };
 
   const onCommentDelete = (comment) => {
     console.log("delete comment with id " + comment.id);
-  }
+  };
 
   if (post !== null) {
     return (

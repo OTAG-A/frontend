@@ -7,7 +7,7 @@ function PostList({ posts, thread = false }) {
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
-  }
+  };
 
   return (
     <div>
