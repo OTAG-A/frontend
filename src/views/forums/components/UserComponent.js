@@ -9,7 +9,7 @@ function UserComponent({ user }) {
     <div className="col-sm-2 user text-center">
       <div
         className="col align-items-center d-flex flex-column clickable"
-        onClick={() => navigate("/usuario/" + user.id)}
+        onClick={() => navigate("/perfil/" + user.id)}
       >
         <img
           src={user.image}

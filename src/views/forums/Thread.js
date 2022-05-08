@@ -52,7 +52,9 @@ function Thread() {
             <CommentComponent
               comment={comment}
               key={i}
-              onDelete={currentUser && currentUser.isAdmin ? onCommentDelete : null}
+              onDelete={
+                currentUser && currentUser.isAdmin ? onCommentDelete : null
+              }
             />
           ))}
 

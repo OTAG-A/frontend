@@ -8,7 +8,7 @@ function UserBox({ user }) {
     <div className="card border admin-box m-2 clickable">
       <div
         className="row m-1 p-1 "
-        onClick={() => navigate("/usuario/" + user.id)}
+        onClick={() => navigate("/perfil/" + user.id)}
       >
         <div className="col-4	col-sm-4	col-md-2	col-lg-5  mt-1">
           <img

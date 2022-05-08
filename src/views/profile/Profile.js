@@ -57,6 +57,8 @@ function Profile() {
     return <></>;
   }
 
+  console.debug(currentUser);
+
   return (
     <div className="profile">
       <div className="container p-2">
@@ -91,7 +93,7 @@ function Profile() {
               <br />
               <br />
             </p>
-            {!isSelf && currentUser.isAdmin && (
+            {!isSelf && currentUser && currentUser.isAdmin && (
               <div className="row text-center">
                 <div className="col">
                   <button
