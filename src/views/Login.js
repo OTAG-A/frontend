@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "./components/Popup";
+import { openQuestionPopup } from "./components/PopupQuestion";
 
 function Login() {
   const [state, setState] = useState({
@@ -40,9 +40,13 @@ function Login() {
     );
   };
 
-  //TODO: popup olvido contraseña
-  const recoverPassword = () => {
-    console.log("Recuperar contraseña al correo " + state.email + " del form");
+  const handleRecoverPassword = (e) => {
+    e.preventDefault();
+    openQuestionPopup("¿Enviar correo de recuperación de contraseña?", () => {
+      console.log(
+        "Recuperar contraseña al correo " + state.email + " del form"
+      );
+    });
   };
 
   return (
@@ -56,7 +60,7 @@ function Login() {
             <div className="text-center my-3 ">
               <img
                 src="assets/person-circle.svg"
-                class="img-fluid"
+                className="img-fluid"
                 alt="Icon Twitter"
               ></img>
             </div>
@@ -79,19 +83,13 @@ function Login() {
               />
             </div>
             <p className="text-center">
-              <a
-                href="#!"
-                className="text-warning"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+              <button
+                className="btn-unstyled text-warning"
+                onClick={handleRecoverPassword}
               >
                 ¿Has olvidado la contraseña?
-              </a>
+              </button>
             </p>
-            <Popup
-              message={"¿Enviar correo de recuperación de contraseña?"}
-              action={recoverPassword}
-            />
             <div className="justify-content-center mt-4">
               <button
                 className="btn btn-primary login-button"
@@ -108,21 +106,21 @@ function Login() {
                 Registrarse
               </button>
             </div>
-            <div class="row justify-content-center mt-4">
+            <div className="row justify-content-center mt-4">
               <div className="text-center mb-0 col-4 ">
-                <div button class="btn btn-default" onClick={loginGoogle}>
+                <div className="btn btn-default" onClick={loginGoogle}>
                   <img
                     src="assets/logo-google.svg"
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="Logo Google"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <div button class="btn btn-default" onClick={loginTwitter}>
+                <div className="btn btn-default" onClick={loginTwitter}>
                   <img
                     src="assets/twitter.svg"
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="Icon Twitter"
                   ></img>
                 </div>

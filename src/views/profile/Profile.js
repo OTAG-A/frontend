@@ -3,6 +3,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import format from "date-fns/format";
 
+import { openQuestionPopup } from "../components/PopupQuestion";
 import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 
@@ -28,6 +29,21 @@ function Profile() {
     // TODO: api request to get user data
     setUser(User.preview());
   });
+
+  const handleDeleteSelfAccount = () => {
+    openQuestionPopup(
+      "¿Estás seguro de que quieres eliminar tu cuenta?",
+      () => {
+        console.log("Eliminar cuenta propia");
+      }
+    );
+  };
+
+  const handleDeleteOtherAccount = (user) => {
+    openQuestionPopup("¿Quieres eliminar al usuario " + user.name + "?", () => {
+      console.log("Eliminar cuenta de otro");
+    });
+  };
 
   if (!user) {
     return <></>;
@@ -65,11 +81,26 @@ function Profile() {
               <br />
               <br />
             </p>
+            {!isSelf && currentUser.isAdmin && (
+              <div className="row text-center">
+                <div className="col">
+                  <button
+                    className="btn btn-danger me-2"
+                    onClick={() => handleDeleteOtherAccount(user)}
+                  >
+                    Eliminar usuario
+                  </button>
+                </div>
+              </div>
+            )}
             {isSelf && (
               <div className="row text-center">
                 <div className="col">
-                  <button className="btn btn-danger me-2">
-                    Eliminar usuario
+                  <button
+                    className="btn btn-danger me-2"
+                    onClick={() => handleDeleteSelfAccount(user)}
+                  >
+                    Eliminar cuenta
                   </button>
                   <a className="btn btn-outline-warning" href="/editar-perfil">
                     Editar perfil

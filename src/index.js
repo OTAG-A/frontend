@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { PopupboxContainer } from "react-popupbox";
 import reportWebVitals from "./reportWebVitals";
 import Footer from "./views/Footer";
 
@@ -10,7 +11,7 @@ import {
   AnimalList,
   AnimalDetails,
   Login,
-  Registro,
+  Signup,
   About,
   Profile,
   EditProfile,
@@ -19,6 +20,7 @@ import {
   ConcreteCategory,
   Thread,
   AdminPanel,
+  Estadistics,
 } from "./views";
 
 // Application environment
@@ -26,12 +28,17 @@ import { UserProvider } from "./environment";
 
 import Navigation from "./Navigation.js";
 
-import "./index.css";
+(async function () {
+  await import("bootstrap/dist/css/bootstrap.min.css");
+  await import("react-popupbox/dist/react-popupbox.css");
+  await import("./index.css");
+})();
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
       <Router>
+        <PopupboxContainer />
         <Navigation />
 
         <Routes>
@@ -41,7 +48,7 @@ ReactDOM.render(
             <Route path=":idAnimal" element={<AnimalDetails />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
+          <Route path="/registro" element={<Signup />} />
           <Route path="/about" element={<About />} />
           <Route path="/perfil" element={<Profile />} />
           <Route path="/perfil/:userId" element={<Profile />} />
@@ -54,6 +61,7 @@ ReactDOM.render(
             </Route>
           </Route>
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/estadisticas" element={<Estadistics />} />
         </Routes>
 
         <Footer />
