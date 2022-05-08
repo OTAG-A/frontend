@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { PopupboxContainer } from "react-popupbox";
 import reportWebVitals from "./reportWebVitals";
 import Footer from "./views/Footer";
 
@@ -26,12 +27,17 @@ import { UserProvider } from "./environment";
 
 import Navigation from "./Navigation.js";
 
-import "./index.css";
+(async function () {
+  await import("./index.css");
+  await import("bootstrap/dist/css/bootstrap.min.css");
+  await import("react-popupbox/dist/react-popupbox.css");
+})();
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
       <Router>
+        <PopupboxContainer />
         <Navigation />
 
         <Routes>

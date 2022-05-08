@@ -1,49 +1,38 @@
 import React from "react";
+import { PopupboxManager } from "react-popupbox";
+import { Container, Row } from "react-bootstrap";
 
-function PopUp({ id, labelId, message, action }) {
+export default function Popup({
+  title,
+  close = true,
+  onClose = () => {},
+  children,
+}) {
+  function handleClose() {
+    PopupboxManager.close();
+    onClose();
+  }
+
   return (
-    <div
-      className="modal fade"
-      id={id}
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabIndex="-1"
-      aria-labelledby={labelId}
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">{message}</div>
-          <div className="modal-footer justify-content-between">
-            <button
-              type="button"
-              className="btn btn-secondary col-5"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-            <div className="col-md-auto"></div>
-            <button
-              type="button"
-              className="btn btn-primary col-5"
-              onClick={action}
-              data-bs-dismiss="modal"
-            >
-              Aceptar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container style={{ overflow: "shown" }}>
+      {close && <button className="btn-corner-cross" onClick={handleClose} />}
+      <Row className="justify-content-center mb-4 align-items-center">
+        <h2 className="popup-title mb-0">{title}</h2>
+      </Row>
+      {children}
+    </Container>
   );
 }
 
-export default PopUp;
+export function openPopup(title, close, onCloseAction) {
+  const content = (
+    <Popup title={title} close={close} onCloseAction={onCloseAction} />
+  );
+  PopupboxManager.open({
+    content,
+    config: {
+      fadeIn: true,
+      fadeInSpeed: 400,
+    },
+  });
+}

@@ -3,7 +3,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import format from "date-fns/format";
 
-import Popup from "../components/Popup";
+import { openQuestionPopup } from "../components/PopupQuestion";
 import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 
@@ -29,6 +29,21 @@ function Profile() {
     // TODO: api request to get user data
     setUser(User.preview());
   });
+
+  const handleDeleteSelfAccount = () => {
+    openQuestionPopup(
+      "¿Estás seguro de que quieres eliminar tu cuenta?",
+      () => {
+        console.log("Eliminar cuenta propia");
+      }
+    );
+  };
+
+  const handleDeleteOtherAccount = (user) => {
+    openQuestionPopup("¿Quieres eliminar al usuario " + user.name + "?", () => {
+      console.log("Eliminar cuenta de otro");
+    });
+  };
 
   if (!user) {
     return <></>;
@@ -69,17 +84,9 @@ function Profile() {
             {!isSelf && currentUser.isAdmin && (
               <div className="row text-center">
                 <div className="col">
-                  <Popup
-                    id="popup-eliminar-usuario"
-                    labelId="btn-eliminar-usuario"
-                    message={"¿Quieres eliminar al usuario " + user.name + "?"}
-                    action={() => console.log("test")}
-                  />
                   <button
-                    id="btn-eliminar-usuario"
                     className="btn btn-danger me-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#popup-eliminar-usuario"
+                    onClick={() => handleDeleteOtherAccount(user)}
                   >
                     Eliminar usuario
                   </button>
@@ -89,17 +96,9 @@ function Profile() {
             {isSelf && (
               <div className="row text-center">
                 <div className="col">
-                  <Popup
-                    id="popup-eliminar-cuenta"
-                    labelId="btn-eliminar-cuenta"
-                    message={"¿Estás seguro de que quieres eliminar tu cuenta?"}
-                    action={() => console.log("test")}
-                  />
                   <button
-                    id="btn-eliminar-cuenta"
                     className="btn btn-danger me-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#popup-eliminar-cuenta"
+                    onClick={() => handleDeleteSelfAccount(user)}
                   >
                     Eliminar cuenta
                   </button>

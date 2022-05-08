@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "./components/Popup";
+import { openQuestionPopup } from "./components/PopupQuestion";
 
 function Login() {
   const [state, setState] = useState({
@@ -40,9 +40,13 @@ function Login() {
     );
   };
 
-  //TODO: popup olvido contraseña
-  const recoverPassword = () => {
-    console.log("Recuperar contraseña al correo " + state.email + " del form");
+  const handleRecoverPassword = (e) => {
+    e.preventDefault();
+    openQuestionPopup("¿Enviar correo de recuperación de contraseña?", () => {
+      console.log(
+        "Recuperar contraseña al correo " + state.email + " del form"
+      );
+    });
   };
 
   return (
@@ -79,22 +83,13 @@ function Login() {
               />
             </div>
             <p className="text-center">
-              <a
-                href="#!"
-                id="popup-reuperacion-label"
-                className="text-warning"
-                data-bs-toggle="modal"
-                data-bs-target="#popup-recuperacion"
+              <button
+                className="btn-unstyled text-warning"
+                onClick={handleRecoverPassword}
               >
                 ¿Has olvidado la contraseña?
-              </a>
+              </button>
             </p>
-            <Popup
-              id="popup-recuperacion"
-              labelId="popup-recuperacion-label"
-              message={"¿Enviar correo de recuperación de contraseña?"}
-              action={recoverPassword}
-            />
             <div className="justify-content-center mt-4">
               <button
                 className="btn btn-primary login-button"

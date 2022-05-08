@@ -2,6 +2,8 @@ import React from "react";
 
 import UserComponent from "./UserComponent";
 
+import DeleteCornerButton from "../../components/DeleteCornerButton";
+
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
 const truncate = (str, n) => {
@@ -10,9 +12,11 @@ const truncate = (str, n) => {
 
 // PostComponent describes either a thread post or the original post inside the
 // thread.
-function PostComponent({ post, compact = true }) {
+function PostComponent({ post, compact = true, onDelete = null }) {
   return (
     <div className="post p-2 card mb-3">
+      <DeleteCornerButton action={onDelete} />
+
       <div className="row mb-3">
         {compact ? (
           <h2>
