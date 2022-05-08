@@ -10,7 +10,12 @@ function Footer() {
               Síguenos en Twitter
             </h6>
             <div>
-              <a href="https://twitter.com/adoptadiCOs">@adoptadiCOs</a>
+              <a
+                href="https://twitter.com/adoptadiCOs"
+                style={{ color: "white" }}
+              >
+                @adoptadiCOs
+              </a>
             </div>
           </div>
           <div className="col col-sm-3 mx-auto mb-2">
