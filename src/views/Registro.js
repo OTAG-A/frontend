@@ -123,7 +123,7 @@ function Registro() {
                 onChange={handleChange}
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-5">
               <input
                 type="password"
                 id="confirmpassword"
@@ -131,6 +131,14 @@ function Registro() {
                 placeholder="Confirmar contraseña"
                 onChange={handleChange}
               />
+            </div>
+            <div className="justify-content-center mt-4 mb-2">
+              <div className="col mt-3">
+                <LoadCanvasTemplate
+                  reloadText="Recargar Captcha"
+                  reloadColor="orange"
+                />
+              </div>
             </div>
             <div className="mb-3">
               <input
@@ -140,14 +148,6 @@ function Registro() {
                 placeholder="Código captcha"
                 onChange={handleChange}
               />
-            </div>
-            <div className="justify-content-center mt-4">
-              <div className="col mt-3">
-                <LoadCanvasTemplate
-                  reloadText="Recargar Captcha"
-                  reloadColor="orange"
-                />
-              </div>
             </div>
             <div className="justify-content-center mt-4">
               <button
