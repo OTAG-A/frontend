@@ -3,6 +3,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import format from "date-fns/format";
 
+import Popup from "../components/Popup";
 import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 
@@ -65,11 +66,42 @@ function Profile() {
               <br />
               <br />
             </p>
+            {!isSelf && currentUser.isAdmin && (
+              <div className="row text-center">
+                <div className="col">
+                  <Popup
+                    id="popup-eliminar-usuario"
+                    labelId="btn-eliminar-usuario"
+                    message={"¿Quieres eliminar al usuario " + user.name + "?"}
+                    action={() => console.log("test")}
+                  />
+                  <button
+                    id="btn-eliminar-usuario"
+                    className="btn btn-danger me-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#popup-eliminar-usuario"
+                  >
+                    Eliminar usuario
+                  </button>
+                </div>
+              </div>
+            )}
             {isSelf && (
               <div className="row text-center">
                 <div className="col">
-                  <button className="btn btn-danger me-2">
-                    Eliminar usuario
+                  <Popup
+                    id="popup-eliminar-cuenta"
+                    labelId="btn-eliminar-cuenta"
+                    message={"¿Estás seguro de que quieres eliminar tu cuenta?"}
+                    action={() => console.log("test")}
+                  />
+                  <button
+                    id="btn-eliminar-cuenta"
+                    className="btn btn-danger me-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#popup-eliminar-cuenta"
+                  >
+                    Eliminar cuenta
                   </button>
                   <a className="btn btn-outline-warning" href="/editar-perfil">
                     Editar perfil
