@@ -118,6 +118,7 @@ a:hover {
   z-index: 99;
   padding: 0;
 }
+
 .btn-corner-cross::after {
   content: "×";
   height: 30px;
@@ -130,4 +131,9 @@ a:hover {
 
 .popupbox-wrapper {
   overflow: visible !important;
+}
+
+.estadistics-container {
+  width: 100%;
+  height: 250px;
 }

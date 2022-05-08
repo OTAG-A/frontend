@@ -11,7 +11,7 @@ import {
   AnimalList,
   AnimalDetails,
   Login,
-  Registro,
+  Signup,
   About,
   Profile,
   EditProfile,
@@ -20,6 +20,7 @@ import {
   ConcreteCategory,
   Thread,
   AdminPanel,
+  Estadistics,
 } from "./views";
 
 // Application environment
@@ -47,7 +48,7 @@ ReactDOM.render(
             <Route path=":idAnimal" element={<AnimalDetails />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
+          <Route path="/registro" element={<Signup />} />
           <Route path="/about" element={<About />} />
           <Route path="/perfil" element={<Profile />} />
           <Route path="/perfil/:userId" element={<Profile />} />
@@ -60,6 +61,7 @@ ReactDOM.render(
             </Route>
           </Route>
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/estadisticas" element={<Estadistics />} />
         </Routes>
 
         <Footer />
