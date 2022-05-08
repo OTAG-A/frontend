@@ -82,6 +82,16 @@ a:hover {
   text-decoration: inherit;
 }
 
+.btn-unstyled {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -93,6 +103,34 @@ a:hover {
 .users-box {
   height: 300px;
   overflow-y: scroll;
+}
+
+.btn-corner-cross {
+  cursor: pointer !important;
+  font-size: 30px;
+  position: absolute;
+  color: white;
+  border: none;
+  background: none;
+  right: -15px;
+  top: -15px;
+  line-height: 1;
+  z-index: 99;
+  padding: 0;
+}
+
+.btn-corner-cross::after {
+  content: "×";
+  height: 30px;
+  width: 30px;
+  line-height: 25px;
+  background-color: black;
+  border-radius: 50%;
+  display: block;
+}
+
+.popupbox-wrapper {
+  overflow: visible !important;
 }
 
 .estadistics-container {

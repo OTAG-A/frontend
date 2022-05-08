@@ -92,7 +92,7 @@ function Signup() {
             <div className="text-center my-3 ">
               <img
                 src="assets/person-circle.svg"
-                class="img-fluid"
+                className="img-fluid"
                 alt="Icon Twitter"
               ></img>
             </div>
@@ -157,21 +157,21 @@ function Signup() {
                 Registrarse
               </button>
             </div>
-            <div class="row justify-content-center mt-4">
+            <div className="row justify-content-center mt-4">
               <div className="text-center mb-0 col-4 ">
-                <div button class="btn btn-default" onClick={signupGoogle}>
+                <div className="btn btn-default" onClick={signupGoogle}>
                   <img
                     src="assets/logo-google.svg"
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="Logo Google"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <div button class="btn btn-default" onClick={signupTwitter}>
+                <div className="btn btn-default" onClick={signupTwitter}>
                   <img
                     src="assets/twitter.svg"
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="Icon Twitter"
                   ></img>
                 </div>
