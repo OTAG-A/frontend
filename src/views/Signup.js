@@ -5,7 +5,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
-function Registro() {
+function Signup() {
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -184,4 +184,4 @@ function Registro() {
   );
 }
 
-export default Registro;
+export default Signup;
