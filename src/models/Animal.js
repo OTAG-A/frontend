@@ -62,6 +62,21 @@ class Animal {
       tamagno: "chiquito",
       nombre: "Misifú",
       imagen: "https://i.imgur.com/qJ4UV1i.png",
+      especie: "gatos",
+      raza: "siames",
+      edad: "1 mes",
+      peso: "300 g",
+      microchip: "si",
+      esterilizado: "no",
+      fechaIngreso: Date.now(),
+      color: "Blanco y negro",
+      peligroso: false,
+      nombreSolicitante: "Policía Local",
+      domicilioSolicitante: "C/ Rioja nº 14",
+      observacionesVet:
+        "Es muy bueno y juguetón con la gente, muy activo. Pero no se lleva bien con otros gatos.",
+      observaciones:
+        "Actualmente no se encuentra en el centro por lo que si quieres adoptarlo debes contactar con nosotros en el 976836554.",
     });
   }
 }
