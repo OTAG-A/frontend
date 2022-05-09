@@ -12,6 +12,128 @@ code {
     monospace;
 }
 
-.navbar-light .navbar-nav .nav-link.active {
+.navbar-light .navbar-nav .nav-link.active,
+a {
+  color: orange;
+}
+
+.navbar-light .navbar-nav .nav-link.active:hover,
+a:hover {
+  color: darkorange;
+}
+
+/*Formularios y botones*/
+.form-control {
+  /* Centrarlo */
+  margin: auto;
+
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  border-color: orange;
+}
+
+.btn-primary {
+  color: white !important;
+  background-color: orange !important;
+  border-color: orange !important;
+}
+
+.btn-secondary {
   color: orange !important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.login-button {
+  font-size: 20px;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-item {
+  margin: auto;
+}
+
+.navbar-nav {
+  white-space: nowrap;
+}
+
+.card-text {
+  color: orange;
+}
+
+.footer {
+  background-color: orange;
+  min-height: 12%;
+}
+
+.btn-outline-warning:hover {
+  background-color: orange !important;
+  border-color: orange !important;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.btn-unstyled {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.admin-box {
+  border-color: orange !important;
+}
+
+.users-box {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.btn-corner-cross {
+  cursor: pointer !important;
+  font-size: 30px;
+  position: absolute;
+  color: white;
+  border: none;
+  background: none;
+  right: -15px;
+  top: -15px;
+  line-height: 1;
+  z-index: 99;
+  padding: 0;
+}
+
+.btn-corner-cross::after {
+  content: "×";
+  height: 30px;
+  width: 30px;
+  line-height: 25px;
+  background-color: black;
+  border-radius: 50%;
+  display: block;
+}
+
+.popupbox-wrapper {
+  overflow: visible !important;
+}
+
+.estadistics-container {
+  width: 100%;
+  height: 250px;
 }

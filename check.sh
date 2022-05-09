@@ -8,8 +8,8 @@ function check {
   fi
 }
 
-npm run build --if-present >/dev/null 2>&1
-check "Compilación" "npm run build"
+CI=true npm run build --if-present >/dev/null 2>&1
+check "Compilación" "CI=true npm run build"
 
 npm run test --script-shell >/dev/null 2>&1
 check "Tests" "npm run test"
