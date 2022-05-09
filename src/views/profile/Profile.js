@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import format from "date-fns/format";
 
 import { openQuestionPopup } from "../components/PopupQuestion";
@@ -11,8 +12,10 @@ function Profile() {
   let [user, setUser] = useState(null);
   let [isSelf, setIsSelf] = useState(false);
 
-  let currentUser = useContext(UserContext);
+  let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
   let { userId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffectOnce(() => {
     console.debug(currentUser);
@@ -45,9 +48,16 @@ function Profile() {
     });
   };
 
+  const handleLogout = () => {
+    setContextUser(null);
+    navigate("/");
+  };
+
   if (!user) {
     return <></>;
   }
+
+  console.debug(currentUser);
 
   return (
     <div className="profile">
@@ -63,7 +73,9 @@ function Profile() {
             <h2 className="mb-4">{user.name}</h2>
             <p className="text-start px-5">{user.bio}</p>
             {isSelf && (
-              <button className="btn btn-danger">Cerrar sesión</button>
+              <button className="btn btn-danger" onClick={handleLogout}>
+                Cerrar sesión
+              </button>
             )}
           </div>
 
@@ -81,7 +93,7 @@ function Profile() {
               <br />
               <br />
             </p>
-            {!isSelf && currentUser.isAdmin && (
+            {!isSelf && currentUser && currentUser.isAdmin && (
               <div className="row text-center">
                 <div className="col">
                   <button

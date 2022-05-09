@@ -4,7 +4,7 @@ import { UserContext } from "./environment";
 
 // Navigation bar of the application
 function Navigation() {
-  let currentUser = useContext(UserContext);
+  let { user: currentUser } = useContext(UserContext);
 
   return (
     <div className="navigation">
@@ -60,9 +60,6 @@ function Navigation() {
             <li className="nav-item">
               {/* Si está loggeado, mostrar la foto de perfil. Sino, mostrar el botón de login. */}
               {currentUser ? (
-                <NavLink className="nav-link" to="/login">
-                  Log In
-                </NavLink> /* (
                 <NavLink className="nav-link" to="/perfil">
                   {currentUser.image ? (
                     <img
@@ -82,7 +79,6 @@ function Navigation() {
                     ></div>
                   )}
                 </NavLink>
-              )  */
               ) : (
                 <NavLink className="nav-link" to="/login">
                   Log In
