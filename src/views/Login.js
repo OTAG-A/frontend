@@ -5,6 +5,8 @@ import { openQuestionPopup } from "./components/PopupQuestion";
 import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
 
+import { loginUser } from "../api/Api";
+
 function Login() {
   const [state, setState] = useState({
     email: "",
@@ -28,7 +30,17 @@ function Login() {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
 
-    setUser(User.preview());
+    const error = loginUser({
+      email: state.email,
+      password: state.password,
+    })
+
+    if (!error) {
+      console.log("error login");
+      return;
+    }
+
+    // setUser(User.preview());
     navigate("/");
   };
 
