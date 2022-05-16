@@ -6,37 +6,35 @@ function serverRequest(path, requestOptions) {
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
     token = JSON.parse(token);
-    requestOptions.headers['Authorization'] = "Bearer " + token;
+    requestOptions.headers["Authorization"] = "Bearer " + token;
   }
   console.log(requestOptions);
 
-  return fetch(baseUrl + path, requestOptions)
-    .then(async (response) => {
-      if (response.ok) {
-        return await response.json();
-      }
-      throw await response.json();
-    });
+  return fetch(baseUrl + path, requestOptions).then(async (response) => {
+    if (response.ok) {
+      return await response.json();
+    }
+    throw await response.json();
+  });
 }
 
 function postRequest(path, body) {
   let requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
   };
   return serverRequest(path, requestOptions);
 }
 
-function putRequest(path, body) {
-  let requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  };
-  return serverRequest(path, requestOptions);
-
-}
+// function putRequest(path, body) {
+//   let requestOptions = {
+//     method: "PUT",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(body),
+//   };
+//   return serverRequest(path, requestOptions);
+// }
 
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
@@ -45,13 +43,21 @@ function getRequest(path, body = {}) {
   }
 
   let requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
   };
-  return serverRequest(path + (params.length > 0 ? "?" + params : ""), requestOptions);
+  return serverRequest(
+    path + (params.length > 0 ? "?" + params : ""),
+    requestOptions
+  );
 }
 
-export async function registerUser({ username, email, password, repeatedPassword }) {
+export async function registerUser({
+  username,
+  email,
+  password,
+  repeatedPassword,
+}) {
   return postRequest("/users", arguments[0]);
 }
 

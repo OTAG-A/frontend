@@ -9,7 +9,7 @@ class User {
   role = "user";
 
   get isAdmin() {
-    return this.role == "admin";
+    return this.role === "admin";
   }
 
   static from(json) {

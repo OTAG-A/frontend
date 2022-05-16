@@ -5,7 +5,7 @@ import { useLocalStorage } from "../extensions/localStorage";
 // TokenContext stores the current logged user or None if not logged.
 export var TokenContext = React.createContext({
   token: null,
-  setToken: (_) => { },
+  setToken: (_) => {},
 });
 
 function TokenProvider({ children }) {

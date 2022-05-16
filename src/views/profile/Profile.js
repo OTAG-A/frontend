@@ -18,7 +18,7 @@ function Profile() {
   let [isSelf, setIsSelf] = useState(false);
 
   let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
-  let { token, setToken } = useContext(TokenContext);
+  let { setToken } = useContext(TokenContext);
   let { userId } = useParams();
 
   const navigate = useNavigate();
@@ -49,9 +49,12 @@ function Profile() {
   };
 
   const handleDeleteOtherAccount = (user) => {
-    openQuestionPopup("¿Quieres eliminar al usuario " + user.username + "?", () => {
-      console.log("Eliminar cuenta de otro");
-    });
+    openQuestionPopup(
+      "¿Quieres eliminar al usuario " + user.username + "?",
+      () => {
+        console.log("Eliminar cuenta de otro");
+      }
+    );
   };
 
   const handleLogout = () => {

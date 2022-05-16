@@ -35,15 +35,15 @@ function Signup() {
     if (validateCaptcha(state.captcha, false)) {
       console.log(
         "Nombre:" +
-        state.name +
-        " Email:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password +
-        " Captcha: " +
-        state.captcha
+          state.name +
+          " Email:" +
+          state.email +
+          " Contraseña:" +
+          state.password +
+          " Confirmar-contraseña:" +
+          state.password +
+          " Captcha: " +
+          state.captcha
       );
 
       registerUser({
@@ -60,7 +60,6 @@ function Signup() {
           console.log(error);
           setAlertMsg(error.error);
         });
-
     } else {
       setState((state.captcha = ""));
       console.log(" Captcha: " + state.captcha);
@@ -73,13 +72,13 @@ function Signup() {
     e.preventDefault();
     console.log(
       "Nombre:" +
-      state.name +
-      " Cuenta-google:" +
-      state.email +
-      " Contraseña:" +
-      state.password +
-      " Confirmar-contraseña:" +
-      state.password
+        state.name +
+        " Cuenta-google:" +
+        state.email +
+        " Contraseña:" +
+        state.password +
+        " Confirmar-contraseña:" +
+        state.password
     );
   };
 
@@ -88,13 +87,13 @@ function Signup() {
     e.preventDefault();
     console.log(
       "Nombre:" +
-      state.name +
-      " Cuenta-twitter:" +
-      state.email +
-      " Contraseña:" +
-      state.password +
-      " Confirmar-contraseña:" +
-      state.password
+        state.name +
+        " Cuenta-twitter:" +
+        state.email +
+        " Contraseña:" +
+        state.password +
+        " Confirmar-contraseña:" +
+        state.password
     );
   };
 
@@ -117,16 +116,12 @@ function Signup() {
                 alt=""
               ></img>
             </div>
-            {alertMsg != "" &&
-              <div className="alert alert-danger">
-                {alertMsg}
-              </div>
-            }
-            {successMsg != "" &&
-              <div className="alert alert-success">
-                {successMsg}
-              </div>
-            }
+            {alertMsg !== "" && (
+              <div className="alert alert-danger">{alertMsg}</div>
+            )}
+            {successMsg !== "" && (
+              <div className="alert alert-success">{successMsg}</div>
+            )}
             <div className="mb-3">
               <input
                 type="name"
