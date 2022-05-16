@@ -1,6 +1,8 @@
 import React from "react";
 
-import * as moment from "moment";
+import { Link } from "react-router-dom";
+
+import moment from "moment";
 
 function ComunDetails({ animal }) {
   return (
@@ -21,13 +23,13 @@ function ComunDetails({ animal }) {
           <div className="row mt-2 p-2">
             <p>
               Visita el foro de{" "}
-              <a
-                href={"/foro/" + animal.especie}
+              <Link
+                to={"/foro/" + animal.especie}
                 class="text-decoration-underline"
                 style={{ color: "orange" }}
               >
                 {animal.especie}
-              </a>{" "}
+              </Link>{" "}
               para resolver tus dudas
             </p>
           </div>

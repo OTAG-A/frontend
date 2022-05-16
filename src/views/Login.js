@@ -4,6 +4,7 @@ import { openQuestionPopup } from "./components/PopupQuestion";
 
 import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
+import { TokenContext } from "../environment/TokenProvider";
 
 import { loginUser } from "../api/Api";
 
@@ -16,6 +17,7 @@ function Login() {
   const navigate = useNavigate();
 
   const { setUser } = useContext(UserContext);
+  const { setToken } = useContext(TokenContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -30,18 +32,30 @@ function Login() {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
 
-    const error = loginUser({
+    loginUser({
       email: state.email,
       password: state.password,
     })
+      .then((response) => {
+        console.log(response);
+        // Guardamos el token
+        console.log(response.accessToken);
+        setToken(response.accessToken);
+        // Eliminamos el token para no añadirlo al usuario
+        delete response.accessToken;
 
-    if (!error) {
-      console.log("error login");
-      return;
-    }
+        // Parseamos el usuario
+        let user = User.from(response);
+        console.log(user);
+        setUser(user);
 
-    // setUser(User.preview());
-    navigate("/");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+        // setAlertMsg(error.error);
+      });
   };
 
   //TODO:funcionalidad

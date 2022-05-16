@@ -19,9 +19,9 @@ function UserComponent({ user }) {
           }}
           width={60}
           height={60}
-          alt={user.name}
+          alt={user.username}
         />
-        <b>{user.name}</b>
+        <b>{user.username}</b>
       </div>
     </div>
   );

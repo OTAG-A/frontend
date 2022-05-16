@@ -33,5 +33,5 @@ export async function registerUser({ username, email, password, repeatedPassword
 }
 
 export async function loginUser({ email, password }) {
-  return getRequest("/users/login", arguments[0]);
+  return postRequest("/users/login", arguments[0]);
 }

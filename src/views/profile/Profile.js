@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import { useEffectOnce } from "usehooks-ts";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
-import format from "date-fns/format";
+import moment from "moment";
+
+import { Link } from "react-router-dom";
 
 import { openQuestionPopup } from "../components/PopupQuestion";
 import User from "../../models/User";
@@ -43,7 +45,7 @@ function Profile() {
   };
 
   const handleDeleteOtherAccount = (user) => {
-    openQuestionPopup("¿Quieres eliminar al usuario " + user.name + "?", () => {
+    openQuestionPopup("¿Quieres eliminar al usuario " + user.username + "?", () => {
       console.log("Eliminar cuenta de otro");
     });
   };
@@ -70,7 +72,7 @@ function Profile() {
               style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
               alt=""
             />
-            <h2 className="mb-4">{user.name}</h2>
+            <h2 className="mb-4">{user.username}</h2>
             <p className="text-start px-5">{user.bio}</p>
             {isSelf && (
               <button className="btn btn-danger" onClick={handleLogout}>
@@ -80,13 +82,13 @@ function Profile() {
           </div>
 
           <div className="col p-5 my-auto">
-            <h1 className="mb-5">Información de {user.name}</h1>
+            <h1 className="mb-5">Información de {user.username}</h1>
             <p>
               <b>Email:</b> {user.email}
               <br />
               <br />
               <b>Fecha de creación:</b>{" "}
-              {format(user.creationDate, "dd/MM/yyyy")}
+              {moment(user.createdAt).format("DD-MM-YYYY")}
               <br />
               <br />
               <b>Mensajes:</b> {user.messagesNum}
@@ -114,9 +116,9 @@ function Profile() {
                   >
                     Eliminar cuenta
                   </button>
-                  <a className="btn btn-outline-warning" href="/editar-perfil">
+                  <Link to="/editar-perfil" className="btn btn-outline-warning">
                     Editar perfil
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}

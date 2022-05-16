@@ -65,7 +65,7 @@ function EditProfile() {
                 <input
                   type={"text"}
                   className="mb-4"
-                  defaultValue={user.name}
+                  defaultValue={user.username}
                 />
               </Col>
             </Row>
