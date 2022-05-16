@@ -19,14 +19,25 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-function getRequest(path, body) {
+function putRequest(path, body) {
   let requestOptions = {
-    method: 'GET',
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   };
   return serverRequest(path, requestOptions);
+
 }
+
+// function getRequest(path, body) {
+//   let requestOptions = {
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//     // TODO: get requests don't have body
+//     body: JSON.stringify(body)
+//   };
+//   return serverRequest(path, requestOptions);
+// }
 
 export async function registerUser({ username, email, password, repeatedPassword }) {
   return postRequest("/users", arguments[0]);
@@ -35,3 +46,8 @@ export async function registerUser({ username, email, password, repeatedPassword
 export async function loginUser({ email, password }) {
   return postRequest("/users/login", arguments[0]);
 }
+
+// TODO: no me dicen si algo esta o no listo
+// export async function updateUser({ bio, avatar }) {
+//   return putRequest("/users", arguments[0]);
+// }
