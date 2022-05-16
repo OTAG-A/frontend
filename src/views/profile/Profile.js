@@ -9,12 +9,16 @@ import { Link } from "react-router-dom";
 import { openQuestionPopup } from "../components/PopupQuestion";
 import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
+import { TokenContext } from "../../environment/TokenProvider";
+
+import { logoutUser } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
   let [isSelf, setIsSelf] = useState(false);
 
   let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
+  let { token, setToken } = useContext(TokenContext);
   let { userId } = useParams();
 
   const navigate = useNavigate();
@@ -51,8 +55,18 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    setContextUser(null);
-    navigate("/");
+    logoutUser()
+      .then((response) => {
+        console.log(response);
+        // Logout satisfactorio
+        setToken(null);
+        setContextUser(null);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
   };
 
   if (!user) {
