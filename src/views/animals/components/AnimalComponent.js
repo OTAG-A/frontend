@@ -7,14 +7,19 @@ function AnimalComponent({ id, name, image }) {
   return (
     <div
       className="animal text-center p-3"
-      onClick={() => navigate("/animales/" + id)}
     >
-      <img
-        src={image}
-        style={{ height: "25vh", width: "25vh", objectFit: "cover" }}
-        alt={name}
-      />
-      <h2>{name}</h2>
+      <div
+        className="clickable"
+        onClick={() => navigate("/animales/" + id)}
+        style={{ width: "fit-content", margin: "auto" }}
+      >
+        <img
+          src={image}
+          style={{ height: "25vh", width: "25vh", objectFit: "cover" }}
+          alt={name}
+        />
+        <h2>{name}</h2>
+      </div>
     </div>
   );
 }

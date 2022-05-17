@@ -6,7 +6,8 @@ function serverRequest(path, requestOptions) {
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
     token = JSON.parse(token);
-    requestOptions.headers["Authorization"] = "Bearer " + token;
+    if (token)
+      requestOptions.headers["Authorization"] = "Bearer " + token;
   }
   console.log(requestOptions);
 
@@ -39,7 +40,8 @@ function postRequest(path, body) {
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
-    params.append(key, value);
+    if (value)
+      params.append(key, value);
   }
 
   let requestOptions = {
@@ -73,3 +75,7 @@ export async function logoutUser() {
 // export async function updateUser({ bio, avatar }) {
 //   return putRequest("/users", arguments[0]);
 // }
+
+export async function getAnimals({ starts = null, rows = null, specie = null, breed = null }) {
+  return getRequest("/pets", arguments[0]);
+}

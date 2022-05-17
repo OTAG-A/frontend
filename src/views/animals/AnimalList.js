@@ -1,7 +1,10 @@
-import React from "react";
-import { Animal } from "../../models";
+import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
 
+import { ListAnimal } from "../../models";
 import AnimalComponent from "./components/AnimalComponent";
+
+import { getAnimals } from "../../api/Api";
 
 // Source: https://stackoverflow.com/a/58519810
 function splitInGroups(arr, n) {
@@ -12,7 +15,25 @@ function splitInGroups(arr, n) {
 }
 
 function AnimalList() {
-  const animals = [...Array(10)].map(() => Animal.preview());
+  const [animals, setAnimals] = useState([]);
+
+  useEffectOnce(() => {
+    console.debug("fetching animal list");
+
+    getAnimals({
+      starts: 0,
+      rows: 1,
+    })
+      .then((result) => {
+        console.log(result);
+        let animal_list = result.data.map((animal) => ListAnimal.from(animal));
+        console.log("list: ", animal_list);
+        setAnimals(animal_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   let table = splitInGroups(animals, 3);
   console.log(table);
@@ -32,9 +53,9 @@ function AnimalList() {
             {row.map((animal, j) => (
               <div className="col-md-4" key={j}>
                 <AnimalComponent
-                  id={animal.id}
-                  name={animal.nombre}
-                  image={animal.imagen}
+                  id={animal._id}
+                  name={animal.name}
+                  image={animal.photo}
                 />
               </div>
             ))}
