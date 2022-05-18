@@ -5,9 +5,7 @@ function AnimalComponent({ id, name, image }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="animal text-center p-3"
-    >
+    <div className="animal text-center p-3">
       <div
         className="clickable"
         onClick={() => navigate("/animales/" + id)}

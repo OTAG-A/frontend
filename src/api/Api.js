@@ -6,8 +6,7 @@ function serverRequest(path, requestOptions) {
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
     token = JSON.parse(token);
-    if (token)
-      requestOptions.headers["Authorization"] = "Bearer " + token;
+    if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
   }
   console.log(requestOptions);
 
@@ -41,18 +40,14 @@ function getRequest(path, body = {}) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
     console.log(key, ":", value);
-    if (value)
-      params.append(key, value);
+    if (value) params.append(key, value);
   }
 
   let requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
-  return serverRequest(
-    path + "?" + params,
-    requestOptions
-  );
+  return serverRequest(path + "?" + params, requestOptions);
 }
 
 export async function registerUser({
@@ -77,10 +72,23 @@ export async function logoutUser() {
 //   return putRequest("/users", arguments[0]);
 // }
 
-export async function getAnimals({ starts = null, rows = null, specie = null, breed = null }) {
+export async function getAnimals({
+  starts = null,
+  rows = null,
+  specie = null,
+  breed = null,
+}) {
   return getRequest("/pets", arguments[0]);
 }
 
 export async function getStatistics() {
   return getRequest("/statistics");
+}
+
+export async function getAnimalPublicDetails({ id = null }) {
+  return getRequest("/pet/public", arguments[0]);
+}
+
+export async function getAnimalPrivateDetails({ id = null }) {
+  return getRequest("/pet", arguments[0]);
 }

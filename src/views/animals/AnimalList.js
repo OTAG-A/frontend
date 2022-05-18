@@ -40,7 +40,8 @@ function AnimalList() {
   };
 
   // Obtenemos la pagina de los parametros de url
-  const paginaParam = parseInt(new URLSearchParams(loc.search).get("pagina")) || 0;
+  const paginaParam =
+    parseInt(new URLSearchParams(loc.search).get("pagina")) || 0;
   const pagina = Math.max(0, Math.min(getNumPages() - 1, paginaParam));
 
   useEffectOnce(() => {
@@ -76,9 +77,9 @@ function AnimalList() {
   const gotoPage = (page) => {
     navigate({
       pathname: "/animales",
-      search: '?pagina=' + page,
+      search: "?pagina=" + page,
     });
-  }
+  };
 
   let table = splitInGroups(animals, 3);
   console.log(table);
@@ -98,7 +99,7 @@ function AnimalList() {
             {row.map((animal, j) => (
               <div className="col-md-4" key={j}>
                 <AnimalComponent
-                  id={animal._id}
+                  id={animal.id}
                   name={animal.name}
                   image={animal.photo}
                 />
@@ -110,47 +111,34 @@ function AnimalList() {
         <div className="row">
           <Pagination className="justify-content-end">
             <Pagination.First onClick={() => gotoPage(1)} />
-            {pagina - 3 > 0 &&
-              <Pagination.Ellipsis />
-            }
+            {pagina - 3 > 0 && <Pagination.Ellipsis />}
 
-            {pagina - 2 > 0 &&
-              <Pagination.Item onClick={() => gotoPage(pagina - 2)}>{pagina - 2}</Pagination.Item>
-            }
-            {pagina - 1 > 0 &&
-              <Pagination.Item onClick={() => gotoPage(pagina - 1)}>{pagina - 1}</Pagination.Item>
-            }
+            {pagina - 2 > 0 && (
+              <Pagination.Item onClick={() => gotoPage(pagina - 2)}>
+                {pagina - 2}
+              </Pagination.Item>
+            )}
+            {pagina - 1 > 0 && (
+              <Pagination.Item onClick={() => gotoPage(pagina - 1)}>
+                {pagina - 1}
+              </Pagination.Item>
+            )}
             <Pagination.Item active>{pagina}</Pagination.Item>
-            {pagina + 1 < getNumPages() &&
-              <Pagination.Item onClick={() => gotoPage(pagina + 1)}>{pagina + 1}</Pagination.Item>
-            }
-            {pagina + 2 < getNumPages() &&
-              <Pagination.Item onClick={() => gotoPage(pagina + 2)}>{pagina + 2}</Pagination.Item>
-            }
+            {pagina + 1 < getNumPages() && (
+              <Pagination.Item onClick={() => gotoPage(pagina + 1)}>
+                {pagina + 1}
+              </Pagination.Item>
+            )}
+            {pagina + 2 < getNumPages() && (
+              <Pagination.Item onClick={() => gotoPage(pagina + 2)}>
+                {pagina + 2}
+              </Pagination.Item>
+            )}
 
-            {pagina + 3 < getNumPages() &&
-              <Pagination.Ellipsis />
-            }
+            {pagina + 3 < getNumPages() && <Pagination.Ellipsis />}
 
             <Pagination.Last onClick={() => gotoPage(getNumPages() - 1)} />
           </Pagination>
-          {/* <ul className="pagination justify-content-end"> */}
-          {/*   <li className="page-item"> */}
-          {/*     <button className="page-link" aria-label="Previous"> */}
-          {/*       <span aria-hidden="true">&laquo;</span> */}
-          {/*     </button> */}
-          {/*   </li> */}
-          {/*   {[...Array(getNumPages())].map((_, i) => ( */}
-          {/*     <li className="page-item" key={i}> */}
-          {/*       <button className="page-link">{i + 1}</button> */}
-          {/*     </li> */}
-          {/*   ))} */}
-          {/*   <li className="page-item"> */}
-          {/*     <button className="page-link" aria-label="Next"> */}
-          {/*       <span aria-hidden="true">&raquo;</span> */}
-          {/*     </button> */}
-          {/*   </li> */}
-          {/* </ul> */}
         </div>
       </div>
     </div>

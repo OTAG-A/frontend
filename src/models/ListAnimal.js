@@ -1,6 +1,5 @@
-
 class ListAnimal {
-  _id = "";
+  id = 0;
   breed = "";
   name = "";
   photo = "";
@@ -13,7 +12,7 @@ class ListAnimal {
 
   static preview() {
     return ListAnimal.from({
-      _id: "0d99c0dbb60bf00",
+      id: 123,
       breed: "CRUCE DE AMERICAN STAFFORDSHIRE TERRIER",
       name: "Lola",
       photo: "//www.zaragoza.es/cont/paginas/IMSP/mascotas/LOLA.jpg",
