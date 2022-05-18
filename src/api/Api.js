@@ -40,6 +40,7 @@ function postRequest(path, body) {
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
+    console.log(key, ":", value);
     if (value)
       params.append(key, value);
   }
@@ -49,7 +50,7 @@ function getRequest(path, body = {}) {
     headers: { "Content-Type": "application/json" },
   };
   return serverRequest(
-    path + (params.length > 0 ? "?" + params : ""),
+    path + "?" + params,
     requestOptions
   );
 }
@@ -78,4 +79,8 @@ export async function logoutUser() {
 
 export async function getAnimals({ starts = null, rows = null, specie = null, breed = null }) {
   return getRequest("/pets", arguments[0]);
+}
+
+export async function getStatistics() {
+  return getRequest("/statistics");
 }
