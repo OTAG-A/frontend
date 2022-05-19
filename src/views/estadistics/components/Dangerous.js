@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -7,12 +7,34 @@ import {
   Legend,
 } from "chart.js";
 import { PolarArea } from "react-chartjs-2";
+import { getStatistics } from "../../../api/Api";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 function Dangerous() {
-  //TODO: información API
-  const nums = [25, 50];
+  const [gangerous, setDangerous] = useState(0);
+  const [notDangerous, setNotDangerous] = useState(0);
+
+  useEffect(() => {
+    console.debug("Fetching número animales peligrosos y no peligrosos");
+
+    getStatistics()
+      .then((result) => {
+        console.log(
+          "Animales peligrosos: " +
+            gangerous +
+            "\nAnimales no peligrosos: " +
+            notDangerous
+        );
+        setDangerous(result[3].dangerous);
+        setNotDangerous(result[3].not_dangerous);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  const nums = [gangerous, notDangerous];
 
   const data = {
     labels: ["Animales peligrosos", "Animales no peligrosos"],

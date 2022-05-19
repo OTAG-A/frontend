@@ -17,8 +17,8 @@ function Home() {
           <div className="col-12 col-sm-6 col-md-6 col-lg-6 p-2 text-justify">
             <p>
               En esta gráfica se puede observar la
-              <b> cantdidad de cada tipo de animal</b> de todos los animales que
-              están en adopción actualmente en Zaragoza.
+              <b> cantdidad de cada tipo de animal</b>, de todos los animales
+              que están en adopción actualmente en Zaragoza.
             </p>
           </div>
         </div>
@@ -29,8 +29,12 @@ function Home() {
           <div className="col-12 col-sm-6 col-md-6 col-lg-6 p-2 text-justify">
             <p>
               En esta gráfica se puede observar la diferencia entre el
-              <b>número de animales en adopción y adopciones realizadas</b> de
-              entre todos los animales registrados en Zaragoza.
+              <b>
+                {" "}
+                número de animales en adopción y el número de adopciones
+                realizadas
+              </b>{" "}
+              de entre todos los animales registrados actualmente en Zaragoza.
             </p>
           </div>
         </div>
@@ -42,9 +46,10 @@ function Home() {
             <p>
               En esta gráfica se puede observar el
               <b>
+                {" "}
                 número de animales no peligros frente al número de animales
                 peligros
-              </b>
+              </b>{" "}
               que están en adopción en Zaragoza.
             </p>
           </div>

@@ -92,3 +92,7 @@ export async function getAnimalPublicDetails({ id = null }) {
 export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
 }
+
+export async function getUsers() {
+  return getRequest("/users");
+}

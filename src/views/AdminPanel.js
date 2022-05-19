@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UserBox from "./components/UserBox";
 import { UserContext } from ".././environment";
 import { User } from ".././models";
+import { getStatistics } from "../api/Api";
+//getUsers
 
 //TODO: valores de las variables traer de backend
-var numAnimals = "250";
 var numUsers = "500";
 var numPost = "1500";
-var numAdoptions = "30";
 var numVisits = "3000";
 var numTweets = "50";
 
@@ -21,9 +21,53 @@ function splitInGroups(arr, n) {
 
 function AdminPanel() {
   let { user: currentUser } = useContext(UserContext);
-  //TODO: users todos los de bbdd y no siempre currentUser
+
+  //Analíticas
+  const [totalAnimals, setTotalAnimals] = useState(0);
+  const [totalAdoptions, setTotalAdoptions] = useState(0);
+  //Usuarios totales registrados -> al coger users length
+  //Visitas a la web totales -> falta
+  //Post totales en el foro -> falta? coger todos los posts mucha carga, mejor que lo pasen como estadística
+  //Tweets totales -> falta
+
+  useEffect(() => {
+    console.debug("Fetching total de animales y adopciones");
+
+    getStatistics()
+      .then((result) => {
+        console.log(
+          "Animales en adopcion: " +
+            totalAnimals +
+            "\nAnimales adoptados: " +
+            totalAdoptions
+        );
+        setTotalAnimals(result[2].animals_in_adoption);
+        setTotalAdoptions(result[2].total_adoptions);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  //TODO: users todos los de bbdd
   const users = [...Array(20)].map(() => User.preview());
+  //const [users, setUsers] = useState([]);
   let table = splitInGroups(users, 4);
+  //Me falta un user admin para poder tener el token
+
+  /* useEffect(() => {
+    console.debug("Fetching total de animales y adopciones");
+
+    getUsers()
+      .then((result) => {
+        console.log(result);
+        let users_list = result.data.map((user) => User.from(user));
+        setUsers(users_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }); */
 
   return (
     <div className="home">
@@ -42,13 +86,13 @@ function AdminPanel() {
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box ">
                   <b>Animales totales en adopción: </b>
-                  {numAnimals}
+                  {totalAnimals}
                 </div>
               </div>
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Adopciones totales realizadas: </b>
-                  {numAdoptions}
+                  {totalAdoptions}
                 </div>
               </div>
             </div>

@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { getStatistics } from "../../../api/Api";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function AdopVSAban() {
-  //TODO: información API
-  const nums = [150, 20];
+  const [totalAnimals, setTotalAnimals] = useState(0);
+  const [totalAdoptions, setTotalAdoptions] = useState(0);
+
+  useEffect(() => {
+    console.debug("Fetching total de animales y adopciones");
+
+    getStatistics()
+      .then((result) => {
+        console.log(
+          "Animales en adopcion: " +
+            totalAnimals +
+            "\nAnimales adoptados: " +
+            totalAdoptions
+        );
+        setTotalAnimals(result[2].animals_in_adoption);
+        setTotalAdoptions(result[2].total_adoptions);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  const nums = [totalAnimals, totalAdoptions];
 
   const data = {
     labels: ["Animales en adopción", "Animales adoptados"],
