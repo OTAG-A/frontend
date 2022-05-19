@@ -5,6 +5,8 @@ import { Row, Col, Button, Form, FloatingLabel } from "react-bootstrap";
 import Popup from "../../components/Popup";
 
 export default function PopupCreatePost({ onAccept, onCancel }) {
+  const categories = ["gatos", "perros", "canarios", "cocodrilos"];
+
   const actionWrapper = (action) => {
     PopupboxManager.close();
     action();
@@ -15,6 +17,14 @@ export default function PopupCreatePost({ onAccept, onCancel }) {
       <Form>
         <FloatingLabel className="mb-3" controlId="floatingTextarea2" label="Título">
           <Form.Control type="text" placeholder="Título" />
+        </FloatingLabel>
+
+        <FloatingLabel className="mb-3" controlId="floatingSelect" label="Categoría">
+          <Form.Select aria-label="Seleccionar categoría">
+            {categories.map((category, i) => (
+              <option value={category} key={i}>{category}</option>
+            ))}
+          </Form.Select>
         </FloatingLabel>
 
         <FloatingLabel className="mb-3" controlId="floatingTextarea2" label="Cuerpo">
