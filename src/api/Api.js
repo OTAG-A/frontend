@@ -92,3 +92,11 @@ export async function getAnimalPublicDetails({ id = null }) {
 export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
 }
+
+export async function postList() {
+  return getRequest("/forum/list");
+}
+
+export async function newPost({ title = null, user_explanation = null, category = null }) {
+  return postRequest("/forum/new", arguments[0]);
+}
