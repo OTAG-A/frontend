@@ -19,7 +19,13 @@ function GeneralCategory() {
       </div>
 
       <div className="col-md-3">
-        <div className="categories card p-3 mb-5">
+        <div className="row px-3 mb-4">
+          <button className="btn btn-primary py-2">
+            Crear hilo
+          </button>
+        </div>
+
+        <div className="categories card p-3 mb-4">
           <h2>Categorias</h2>
           <input
             type={"text"}
