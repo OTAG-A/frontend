@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import UserComponent from "./UserComponent";
 
 import DeleteCornerButton from "../../components/DeleteCornerButton";
@@ -29,9 +31,9 @@ function PostComponent({ post, compact = true, onDelete = null }) {
       <div className="row mb-3">
         {compact ? (
           <h2>
-            <a href={post.get_url()} className="link-unstyled">
+            <Link to={post.get_url()} className="link-unstyled">
               {post.title}
-            </a>
+            </Link>
           </h2>
         ) : (
           <h1>{post.title}</h1>
@@ -43,9 +45,9 @@ function PostComponent({ post, compact = true, onDelete = null }) {
         <p className="col-sm-10 ml-5">
           {compact ? truncate(post.body, 300) : post.body}
           {compact && (
-            <a className="float-end" href={post.get_url()}>
+            <Link to={post.get_url()} className="float-end">
               Leer más
-            </a>
+            </Link>
           )}
         </p>
       </div>

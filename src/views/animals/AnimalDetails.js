@@ -4,6 +4,8 @@ import { Animal } from "../../models";
 import ComunDetails from "./components/ComunDetails";
 import { UserContext } from "../../environment";
 
+import { Link } from "react-router-dom";
+
 function AnimalDetails() {
   let { idAnimal } = useParams();
   let { user: currentUser } = useContext(UserContext);
@@ -49,9 +51,9 @@ function AnimalDetails() {
                 Para más información y detalles de adopción es necesario{" "}
                 <b>
                   estar{" "}
-                  <a href={"/registro"} style={{ color: "black" }}>
+                  <Link to="/registro" style={{ color: "black" }}>
                     registrado
-                  </a>
+                  </Link>
                 </b>
               </p>
             </div>

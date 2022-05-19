@@ -19,11 +19,11 @@ function UserBox({ user }) {
               width: 60,
               height: 60,
             }}
-            alt={user.name}
+            alt={user.username}
           />
         </div>
         <div className="col-8	col-sm-8	col-md-10	col-lg-7 mt-3 ">
-          <b className="align-middle">{user.name}</b>
+          <b className="align-middle">{user.username}</b>
         </div>
       </div>
     </div>

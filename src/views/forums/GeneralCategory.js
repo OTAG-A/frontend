@@ -2,6 +2,8 @@ import React from "react";
 import { Post } from "../../models";
 import PostList from "./components/PostList";
 
+import { Link } from "react-router-dom";
+
 function GeneralCategory() {
   // TODO: replace with real data
   const posts = [...Array(10)].map(() => Post.preview());
@@ -28,7 +30,7 @@ function GeneralCategory() {
           <ul>
             {categories.map((category, i) => (
               <li key={i}>
-                <a href={"/foro/" + category}>{category}</a>
+                <Link to={"/foro/" + category}>{category}</Link>
               </li>
             ))}
           </ul>
@@ -39,7 +41,7 @@ function GeneralCategory() {
           <ul>
             {popular_posts.map((post, i) => (
               <li key={i}>
-                <a href={post.get_url()}>{post.title}</a>
+                <Link to={post.get_url()}>{post.title}</Link>
               </li>
             ))}
           </ul>

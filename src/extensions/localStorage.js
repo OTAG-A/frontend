@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { User } from "../models";
-
 function getStorageValue(key, defaultValue) {
   // getting stored value
   const saved = localStorage.getItem(key);
   const initial = JSON.parse(saved);
-  return User.from(initial) || defaultValue;
+  return initial || defaultValue;
 }
 
 export const useLocalStorage = (key, defaultValue) => {
@@ -16,6 +14,7 @@ export const useLocalStorage = (key, defaultValue) => {
 
   useEffect(() => {
     // storing input name
+    console.log("stored value");
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 

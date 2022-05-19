@@ -5,7 +5,12 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
+import { registerUser } from "../api/Api";
+
 function Signup() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -40,6 +45,21 @@ function Signup() {
           " Captcha: " +
           state.captcha
       );
+
+      registerUser({
+        username: state.name,
+        email: state.email,
+        password: state.password,
+        repeatedPassword: state.confirmPassword,
+      })
+        .then((response) => {
+          console.log(response);
+          setSuccessMsg(response.message);
+        })
+        .catch((error) => {
+          console.log(error);
+          setAlertMsg(error.error);
+        });
     } else {
       setState((state.captcha = ""));
       console.log(" Captcha: " + state.captcha);
@@ -88,14 +108,20 @@ function Signup() {
       </header>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
+          <form className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
                 src="assets/person-circle.svg"
                 className="img-fluid"
-                alt="Icon Twitter"
+                alt=""
               ></img>
             </div>
+            {alertMsg !== "" && (
+              <div className="alert alert-danger">{alertMsg}</div>
+            )}
+            {successMsg !== "" && (
+              <div className="alert alert-success">{successMsg}</div>
+            )}
             <div className="mb-3">
               <input
                 type="name"
@@ -126,7 +152,7 @@ function Signup() {
             <div className="mb-5">
               <input
                 type="password"
-                id="confirmpassword"
+                id="confirmPassword"
                 className="form-control"
                 placeholder="Confirmar contraseña"
                 onChange={handleChange}
@@ -177,7 +203,7 @@ function Signup() {
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

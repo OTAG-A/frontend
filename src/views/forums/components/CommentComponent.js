@@ -7,7 +7,7 @@ import UserComponent from "./UserComponent";
 function CommentComponent({ comment, onDelete = null }) {
   const comentDelete = (action) => {
     openQuestionPopup(
-      "¿Quieres eliminar el comentario de `" + comment.user.name + "`?",
+      "¿Quieres eliminar el comentario de `" + comment.user.username + "`?",
       () => {
         action(comment);
       }
