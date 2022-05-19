@@ -4,8 +4,9 @@ import { Container, Row } from "react-bootstrap";
 
 export default function Popup({
   title,
+  style = {},
   close = true,
-  onClose = () => {},
+  onClose = () => { },
   children,
 }) {
   function handleClose() {
@@ -14,7 +15,7 @@ export default function Popup({
   }
 
   return (
-    <Container style={{ overflow: "shown" }}>
+    <Container style={style}>
       {close && <button className="btn-corner-cross" onClick={handleClose} />}
       <Row className="justify-content-center mb-4 align-items-center">
         <h2 className="popup-title mb-0">{title}</h2>

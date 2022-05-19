@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
+import { Link } from "react-router-dom";
+
 import { Post } from "../../models";
 import PostList from "./components/PostList";
+import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { Link } from "react-router-dom";
+import { postList } from "../../api/Api";
 
 function GeneralCategory() {
   // TODO: replace with real data
+  // const [posts, setPosts] = useState([]);
   const posts = [...Array(10)].map(() => Post.preview());
   // TODO: replace with real data
   const categories = ["gatos", "perros", "canarios", "cocodrilos"];
   // TODO: replace with real data
   const popular_posts = posts.slice(0, 4);
+
+  useEffectOnce(() => {
+    postList()
+      .then((result) => {
+        // setPosts(result.data);
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   return (
     <div className="row">
@@ -20,7 +36,7 @@ function GeneralCategory() {
 
       <div className="col-md-3">
         <div className="row px-3 mb-4">
-          <button className="btn btn-primary py-2">
+          <button onClick={openPopupCreatePost} className="btn btn-primary py-2">
             Crear hilo
           </button>
         </div>
