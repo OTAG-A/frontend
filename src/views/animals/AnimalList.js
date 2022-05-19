@@ -42,7 +42,7 @@ function AnimalList() {
   // Obtenemos la pagina de los parametros de url
   const paginaParam =
     parseInt(new URLSearchParams(loc.search).get("pagina")) || 0;
-  const pagina = Math.max(0, Math.min(getNumPages() - 1, paginaParam));
+  const pagina = Math.max(1, Math.min(getNumPages() - 1, paginaParam));
 
   useEffectOnce(() => {
     console.debug("fetching total animal number");
