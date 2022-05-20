@@ -6,12 +6,12 @@ import { Post } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { postList } from "../../api/Api";
+import { postList, newPost } from "../../api/Api";
 
 function GeneralCategory() {
   // TODO: replace with real data
-  // const [posts, setPosts] = useState([]);
-  const posts = [...Array(10)].map(() => Post.preview());
+  const [posts, setPosts] = useState([]);
+  // const posts = [...Array(10)].map(() => Post.preview());
   // TODO: replace with real data
   const categories = ["gatos", "perros", "canarios", "cocodrilos"];
   // TODO: replace with real data
@@ -20,13 +20,24 @@ function GeneralCategory() {
   useEffectOnce(() => {
     postList()
       .then((result) => {
-        // setPosts(result.data);
+        let post_list = result.data.map((post) => Post.from(post));
+        setPosts(post_list);
         console.log(result);
       })
       .catch((error) => {
         console.error(error);
       });
   });
+
+  const handleNewPost = (fields) => {
+    newPost(fields)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="row">
@@ -36,7 +47,7 @@ function GeneralCategory() {
 
       <div className="col-md-3">
         <div className="row px-3 mb-4">
-          <button onClick={openPopupCreatePost} className="btn btn-primary py-2">
+          <button onClick={() => openPopupCreatePost(handleNewPost)} className="btn btn-primary py-2">
             Crear hilo
           </button>
         </div>
