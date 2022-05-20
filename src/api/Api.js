@@ -27,14 +27,14 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-// function putRequest(path, body) {
-//   let requestOptions = {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(body),
-//   };
-//   return serverRequest(path, requestOptions);
-// }
+function putRequest(path, body) {
+  let requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
+}
 
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
@@ -91,4 +91,16 @@ export async function getAnimalPublicDetails({ id = null }) {
 
 export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
+}
+
+export async function updateBio({ bio = null }) {
+  return putRequest("/users/biography", arguments[0]);
+}
+
+export async function updatePassword({ password = null, newPassword = null, repeatedNewPassword = null }) {
+  return putRequest("/users/password", arguments[0]);
+}
+
+export async function updateUsername({ newUsername = null }) {
+  return putRequest("/users/username", arguments[0]);
 }
