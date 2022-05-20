@@ -13,7 +13,7 @@ class Post {
   createdAt = "";
   updatedAt = "";
 
-  comments = [];
+  replies = [];
 
   static from(json) {
     return Object.assign(new Post(), json);
@@ -29,7 +29,7 @@ class Post {
       user: User.preview(),
       createdAt: "2022-05-19T12:17:52.036Z",
       updatedAt: "2022-05-19T12:17:52.036Z",
-      comments: [...Array(10)].map(() => Comment.preview()),
+      replies: [...Array(10)].map(() => Comment.preview()),
     });
   }
 
