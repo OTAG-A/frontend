@@ -1,53 +1,69 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { getStatistics } from "../../../api/Api";
+import { useEffectOnce } from "usehooks-ts";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function AnimalKinds() {
-  const [dogs, setDogs] = useState(0);
-  const [cats, setCats] = useState(0);
-  const [others, setOthers] = useState(0);
+  const [kinds, setKinds] = useState(["kind"]);
+  const [numKind, setNumKind] = useState([1]);
+  const [bgColors, setColors] = useState(["rgba(255, 99, 132, 0.2)"]);
+  const [bColor, setBColor] = useState(["rgba(255, 99, 132, 1)"]);
 
-  useEffect(() => {
+  //Según cuántos tipos de animales haya, asigna el id, número y color para ese tipo
+  const updateKinds = (result) => {
+    var k = [];
+    var n = [];
+    var colors = [];
+    var bg = [];
+    var b = [];
+    for (let i = 0; i < result.length; i++) {
+      k.push(result[i]._id);
+      n.push(result[i].count);
+      colors = random_rgba_color();
+      bg.push(colors[0]);
+      b.push(colors[1]);
+      console.log("k: " + k + "n: " + n + " bg:" + bg + " b:" + b);
+    }
+    setKinds(k);
+    setNumKind(n);
+    setColors(bg);
+    setBColor(b);
+  };
+
+  //Crea background and border color aleatorios
+  function random_rgba_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = 100 + Math.floor(Math.random() * 256);
+    var z = 50 + Math.floor(Math.random() * 256);
+    var background = "rgba(" + x + "," + y + "," + z + ", 0.5)";
+    var border = "rgba(" + x + "," + y + "," + z + ", 1)";
+    return [background, border];
+  }
+
+  useEffectOnce(() => {
     console.debug("Fetching tipos y cantidad de animales");
 
     getStatistics()
       .then((result) => {
-        console.log(
-          "Perros: " + dogs + "\nGatos: " + cats + "\nOtros: " + others
-        );
-        setDogs(result[1].dogs_adopted);
-        setCats(result[1].cats_adopted);
-        setOthers(result[1].others);
+        console.log(result[1]);
+        updateKinds(result[1]);
       })
       .catch((error) => {
         console.error(error);
       });
   });
 
-  //TODO: información API - esta no es la info y sino  no sale gráfica con todo ceros
-  const kinds = ["Gatos", "Perros", "Otros"];
-  //const numAnimals = [cats, dogs, others];
-  const numAnimals = [10, 5, 2];
-
   const data = {
     labels: kinds,
     datasets: [
       {
         label: "Número de animales",
-        data: numAnimals,
-        backgroundColor: [
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-        ],
-        borderColor: [
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-        ],
+        data: numKind,
+        backgroundColor: bgColors,
+        borderColor: bColor,
         borderWidth: 1,
       },
     ],
