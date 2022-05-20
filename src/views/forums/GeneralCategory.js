@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Post } from "../../models";
+import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
@@ -23,6 +23,16 @@ function GeneralCategory() {
     postList()
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
+
+        console.log("set users");
+        for (let i = 0; i < post_list.length; i++) {
+          // TODO: get user info
+          post_list[i].user = User.from({
+            username: "test",
+            id: post_list[i].user_id,
+          });
+        }
+
         setPosts(post_list);
         setAlertMsg("");
         console.log(result);

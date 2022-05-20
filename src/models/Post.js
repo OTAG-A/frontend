@@ -3,6 +3,8 @@ import { default as Comment } from "./Comment";
 
 class Post {
   id = "";
+  user_id = "";
+
   title = "";
   user_explanation = "";
   category = "";
