@@ -14,7 +14,7 @@ export default function PopupCreatePost({ onSubmit }) {
   console.log(onSubmit);
 
   const submitWrapper = (action) => {
-    console.log(action);
+    PopupboxManager.close();
     action({
       title: title,
       category: category,

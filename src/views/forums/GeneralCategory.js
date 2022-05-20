@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffectOnce } from "usehooks-ts";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { Post } from "../../models";
@@ -9,32 +8,49 @@ import { openPopupCreatePost } from "./components/PopupCreatePost";
 import { postList, newPost } from "../../api/Api";
 
 function GeneralCategory() {
-  // TODO: replace with real data
-  const [posts, setPosts] = useState([]);
   // const posts = [...Array(10)].map(() => Post.preview());
+  const [posts, setPosts] = useState([]);
+
+  const [alertMsg, setAlertMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
   // TODO: replace with real data
   const categories = ["gatos", "perros", "canarios", "cocodrilos"];
   // TODO: replace with real data
   const popular_posts = posts.slice(0, 4);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     postList()
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
         setPosts(post_list);
+        setAlertMsg("");
         console.log(result);
       })
       .catch((error) => {
+        setAlertMsg("Error al cargar los posts");
         console.error(error);
       });
-  });
+  }, [successMsg]);
 
   const handleNewPost = (fields) => {
     newPost(fields)
       .then((result) => {
+        setAlertMsg("")
+        setSuccessMsg("Post publicado con éxito")
+
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000); // 3 seconds
         console.log(result);
       })
       .catch((error) => {
+        setAlertMsg("No se pudo publicar el post")
+        setSuccessMsg("")
+
+        setTimeout(() => {
+          setAlertMsg("");
+        }, 3000); // 3 seconds
         console.error(error);
       });
   };
@@ -42,6 +58,12 @@ function GeneralCategory() {
   return (
     <div className="row">
       <div className="col-md-9">
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
         <PostList posts={posts} />
       </div>
 
