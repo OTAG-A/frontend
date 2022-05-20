@@ -141,3 +141,9 @@ a:hover {
 .border-primary {
   border-color: orange !important;
 }
+
+.profile-pic {
+  height: 15vw !important;
+  width: 15vw !important;
+  object-fit: "cover"
+}

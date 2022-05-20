@@ -90,8 +90,7 @@ function EditProfile() {
                   onChange={handleChange}
                 />
                 <img
-                  className="mb-3 img img-responsive rounded-circle clickable w-100 border border-primary"
-                  style={{ height: "15vw", objectFit: "cover" }}
+                  className="mb-3 img img-responsive rounded-circle clickable w-100 border border-primary profile-pic"
                   onClick={handleUpload}
                   src={img}
                   alt=""

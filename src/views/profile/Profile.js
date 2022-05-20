@@ -84,9 +84,8 @@ function Profile() {
         <div className="row">
           <div className="col text-center p-5">
             <img
-              className="mb-3 img img-responsive"
+              className="mb-3 img img-responsive profile-pic"
               src={user.image}
-              style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
               alt=""
             />
             <h2 className="mb-4">{user.username}</h2>
