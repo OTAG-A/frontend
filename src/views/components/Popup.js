@@ -6,7 +6,7 @@ export default function Popup({
   title,
   style = {},
   close = true,
-  onClose = () => { },
+  onClose = () => {},
   children,
 }) {
   function handleClose() {

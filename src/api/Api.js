@@ -94,6 +94,10 @@ export async function postList() {
   return getRequest("/forum/list");
 }
 
-export async function newPost({ title = null, user_explanation = null, category = null }) {
+export async function newPost({
+  title = null,
+  user_explanation = null,
+  category = null,
+}) {
   return postRequest("/forum/new", arguments[0]);
 }

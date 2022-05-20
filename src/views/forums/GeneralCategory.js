@@ -36,8 +36,8 @@ function GeneralCategory() {
   const handleNewPost = (fields) => {
     newPost(fields)
       .then((result) => {
-        setAlertMsg("")
-        setSuccessMsg("Post publicado con éxito")
+        setAlertMsg("");
+        setSuccessMsg("Post publicado con éxito");
 
         setTimeout(() => {
           setSuccessMsg("");
@@ -45,8 +45,8 @@ function GeneralCategory() {
         console.log(result);
       })
       .catch((error) => {
-        setAlertMsg("No se pudo publicar el post")
-        setSuccessMsg("")
+        setAlertMsg("No se pudo publicar el post");
+        setSuccessMsg("");
 
         setTimeout(() => {
           setAlertMsg("");
@@ -69,7 +69,10 @@ function GeneralCategory() {
 
       <div className="col-md-3">
         <div className="row px-3 mb-4">
-          <button onClick={() => openPopupCreatePost(handleNewPost)} className="btn btn-primary py-2">
+          <button
+            onClick={() => openPopupCreatePost(handleNewPost)}
+            className="btn btn-primary py-2"
+          >
             Crear hilo
           </button>
         </div>
