@@ -82,9 +82,8 @@ function AdminPanel() {
 
     getBestCategory()
       .then((result) => {
-        console.log("best category: " + result.data);
-        console.log("best category: " + result);
-        setBestCategory(result.data);
+        console.log("best category: " + result.best);
+        setBestCategory(result.best);
       })
       .catch((error) => {
         console.error(error);
