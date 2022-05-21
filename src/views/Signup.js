@@ -53,6 +53,7 @@ function Signup() {
         repeatedPassword: state.confirmPassword,
       })
         .then((response) => {
+          setAlertMsg("");
           console.log(response);
           setSuccessMsg(response.message);
         })
