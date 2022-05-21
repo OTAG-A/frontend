@@ -58,6 +58,15 @@ function deleteRequest(path) {
   return serverRequest(path, requestOptions);
 }
 
+function deleteRequestBody(path, body) {
+  let requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
+}
+
 export async function registerUser({
   username,
   email,
@@ -119,4 +128,12 @@ export async function getBestCategory() {
 
 export async function deleteUser(id) {
   return deleteRequest("/users/" + id);
+}
+
+export async function deleteForum({ id_forum }) {
+  return deleteRequestBody("/forum/admin/delete", arguments[0]);
+}
+
+export async function deleteComment({ id_comment, id_forum, username }) {
+  return deleteRequestBody("/forum/admin/delete", arguments[0]);
 }

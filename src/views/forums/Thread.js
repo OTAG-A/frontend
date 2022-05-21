@@ -5,6 +5,7 @@ import Post from "../../models/Post";
 import PostComponent from "./components/PostComponent";
 import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
+import { deleteComment, deleteForum } from "../../api/Api";
 
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
@@ -31,10 +32,32 @@ function Thread() {
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
+    deleteForum({
+      id_forum: post.id,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
   };
 
-  const onCommentDelete = (comment) => {
+  const onCommentDelete = (comment, post) => {
     console.log("delete comment with id " + comment.id);
+    deleteComment({
+      id_comment: comment.id,
+      id_forum: post.id,
+      username: comment.user.username,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
   };
 
   if (post !== null) {

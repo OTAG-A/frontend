@@ -55,8 +55,8 @@ function Profile() {
       () => {
         deleteUser(userId)
           .then((response) => {
-            navigate("/admin");
             console.log(response);
+            navigate("/admin");
           })
           .catch((error) => {
             console.log(error);
