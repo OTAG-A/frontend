@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser } from "../../api/Api";
+import { logoutUser, deleteUser } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -49,10 +49,19 @@ function Profile() {
   };
 
   const handleDeleteOtherAccount = (user) => {
+    console.log("Eliminar cuenta del usuario con id: " + userId);
     openQuestionPopup(
       "¿Quieres eliminar al usuario " + user.username + "?",
       () => {
-        console.log("Eliminar cuenta de otro");
+        deleteUser(userId)
+          .then((response) => {
+            navigate("/admin");
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+            return;
+          });
       }
     );
   };
