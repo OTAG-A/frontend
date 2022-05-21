@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserBox from "./components/UserBox";
-import { ListUser, User } from "./../models";
+import { ListUser } from "./../models";
+
 import {
   getStatistics,
   getNumberForums,
@@ -8,11 +9,6 @@ import {
   getBestCategory,
   getUsers,
 } from "../api/Api";
-import { set } from "date-fns";
-import { useEffectOnce } from "usehooks-ts";
-
-//TODO: valores de las variables traer de backend
-var numUsers = "500";
 
 // Source: https://stackoverflow.com/a/58519810
 function splitInGroups(arr, n) {
@@ -29,8 +25,12 @@ function AdminPanel() {
   const [numberForums, setNumberForums] = useState(0);
   const [numberReplies, setNumberReplies] = useState(0);
   const [bestCategory, setBestCategory] = useState("");
-  //Usuarios totales registrados -> al coger users length
+  const [totalUsers, setTotalUsers] = useState(0);
+  //Usuarios
+  const [users, setUsers] = useState([]);
+  let table = splitInGroups(users, 4);
 
+  //Analiticas foro
   useEffect(() => {
     console.debug("Fetching total de animales y adopciones");
 
@@ -50,7 +50,6 @@ function AdminPanel() {
       });
   });
 
-  //Analiticas foro
   useEffect(() => {
     console.debug("Fetching número total posts");
 
@@ -92,26 +91,20 @@ function AdminPanel() {
       });
   });
 
-  //TODO: users todos los de bbdd
-  const users = [...Array(20)].map(() => User.preview());
-  //const [users, setUsers] = useState([]);
-  let table = splitInGroups(users, 4);
-
+  // Listado y número de usuarios
   useEffect(() => {
     console.debug("Fetching usuarios");
 
     getUsers()
       .then((result) => {
-        console.log("users: " + result);
-        console.log("número de usuarios: " + result.length);
-        //let users_list = result.data.map((users) => ListUser.from(users));
-        //setUsers(users_list);
-        //console.log("usuarios en lista" + users_list);
+        setTotalUsers(result.users.length);
+        let users_list = result.users.map((users) => ListUser.from(users));
+        setUsers(users_list);
       })
       .catch((error) => {
         console.error(error);
       });
-  });
+  }, []);
 
   return (
     <div className="home">
@@ -144,7 +137,7 @@ function AdminPanel() {
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Usuarios totales registrados: </b>
-                  {numUsers}
+                  {totalUsers}
                 </div>
               </div>
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
