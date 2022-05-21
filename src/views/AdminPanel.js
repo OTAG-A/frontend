@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserBox from "./components/UserBox";
-import { UserContext } from ".././environment";
-import { User } from ".././models";
-import { getStatistics } from "../api/Api";
-//getUsers
+import { ListUser, User } from "./../models";
+import { getStatistics, getUsers } from "../api/Api";
 
 //TODO: valores de las variables traer de backend
 var numUsers = "500";
@@ -20,8 +18,6 @@ function splitInGroups(arr, n) {
 }
 
 function AdminPanel() {
-  let { user: currentUser } = useContext(UserContext);
-
   //Analíticas
   const [totalAnimals, setTotalAnimals] = useState(0);
   const [totalAdoptions, setTotalAdoptions] = useState(0);
@@ -53,16 +49,16 @@ function AdminPanel() {
   const users = [...Array(20)].map(() => User.preview());
   //const [users, setUsers] = useState([]);
   let table = splitInGroups(users, 4);
-  //Me falta un user admin para poder tener el token
 
   /* useEffect(() => {
-    console.debug("Fetching total de animales y adopciones");
+    console.debug("Fetching usuarios");
 
     getUsers()
       .then((result) => {
         console.log(result);
-        let users_list = result.data.map((user) => User.from(user));
+        let users_list = result.data.map((users) => ListUser.from(users));
         setUsers(users_list);
+        console.log("usuarios en lista" + users_list);
       })
       .catch((error) => {
         console.error(error);
@@ -134,9 +130,13 @@ function AdminPanel() {
                 <div class="border users-box">
                   {table.map((row, i) => (
                     <div className="row" key={i}>
-                      {row.map((animal, j) => (
+                      {row.map((user, j) => (
                         <div className="col-md-3" key={j}>
-                          <UserBox user={currentUser} />
+                          <UserBox
+                            id={user.id}
+                            name={user.username}
+                            image={user.image}
+                          />
                         </div>
                       ))}
                     </div>
