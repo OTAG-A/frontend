@@ -85,7 +85,7 @@ function Profile() {
           <div className="col text-center p-5">
             <img
               className="mb-3 img img-responsive"
-              src={user.image}
+              src={user.image === "" ? "assets/person-circle.svg" : user.image}
               style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
               alt=""
             />

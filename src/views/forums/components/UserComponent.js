@@ -12,7 +12,7 @@ function UserComponent({ user }) {
         onClick={() => navigate("/perfil/" + user.id)}
       >
         <img
-          src={user.image}
+          src={user.image === "" ? "assets/person-circle.svg" : user.image}
           className="rounded-circle"
           style={{
             backgroundColor: "lightgray",
