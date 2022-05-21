@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import UserBox from "./components/UserBox";
 import { ListUser, User } from "./../models";
-import { getStatistics, getUsers } from "../api/Api";
+import {
+  getStatistics,
+  getNumberForums,
+  getNumberReplies,
+  getBestCategory,
+  getUsers,
+} from "../api/Api";
+import { set } from "date-fns";
+import { useEffectOnce } from "usehooks-ts";
 
 //TODO: valores de las variables traer de backend
 var numUsers = "500";
-var numPost = "1500";
-var numVisits = "3000";
-var numTweets = "50";
 
 // Source: https://stackoverflow.com/a/58519810
 function splitInGroups(arr, n) {
@@ -21,10 +26,10 @@ function AdminPanel() {
   //Analíticas
   const [totalAnimals, setTotalAnimals] = useState(0);
   const [totalAdoptions, setTotalAdoptions] = useState(0);
+  const [numberForums, setNumberForums] = useState(0);
+  const [numberReplies, setNumberReplies] = useState(0);
+  const [bestCategory, setBestCategory] = useState("");
   //Usuarios totales registrados -> al coger users length
-  //Visitas a la web totales -> falta
-  //Post totales en el foro -> falta? coger todos los posts mucha carga, mejor que lo pasen como estadística
-  //Tweets totales -> falta
 
   useEffect(() => {
     console.debug("Fetching total de animales y adopciones");
@@ -45,25 +50,68 @@ function AdminPanel() {
       });
   });
 
+  //Analiticas foro
+  useEffect(() => {
+    console.debug("Fetching número total posts");
+
+    getNumberForums()
+      .then((result) => {
+        console.log("number forums: " + result.data);
+        setNumberForums(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  useEffect(() => {
+    console.debug("Fetching número total respuestas");
+
+    getNumberReplies()
+      .then((result) => {
+        console.log("number replies: " + result.data);
+        setNumberReplies(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  //TODO: no funciona, esperar a que backend lo arregle
+  useEffect(() => {
+    console.debug("Fetching mejor categoría del foro");
+
+    getBestCategory()
+      .then((result) => {
+        console.log("best category: " + result.data);
+        console.log("best category: " + result);
+        setBestCategory(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
   //TODO: users todos los de bbdd
   const users = [...Array(20)].map(() => User.preview());
   //const [users, setUsers] = useState([]);
   let table = splitInGroups(users, 4);
 
-  /* useEffect(() => {
+  useEffect(() => {
     console.debug("Fetching usuarios");
 
     getUsers()
       .then((result) => {
-        console.log(result);
-        let users_list = result.data.map((users) => ListUser.from(users));
-        setUsers(users_list);
-        console.log("usuarios en lista" + users_list);
+        console.log("users: " + result);
+        console.log("número de usuarios: " + result.length);
+        //let users_list = result.data.map((users) => ListUser.from(users));
+        //setUsers(users_list);
+        //console.log("usuarios en lista" + users_list);
       })
       .catch((error) => {
         console.error(error);
       });
-  }); */
+  });
 
   return (
     <div className="home">
@@ -101,8 +149,8 @@ function AdminPanel() {
               </div>
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
-                  <b>Visitas a la web totales recibidas: </b>
-                  {numVisits}
+                  <b>Respuestas en el foro totales recibidas: </b>
+                  {numberReplies}
                 </div>
               </div>
             </div>
@@ -110,13 +158,13 @@ function AdminPanel() {
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
                   <b>Post totales en el foro: </b>
-                  {numPost}
+                  {numberForums}
                 </div>
               </div>
               <div class="col-md-6 col-sm-10 mt-4 mx-auto">
                 <div class="p-3 border admin-box">
-                  <b>Tweets totales posteados: </b>
-                  {numTweets}
+                  <b>Mejor categoría del foro: </b>
+                  {bestCategory}
                 </div>
               </div>
             </div>

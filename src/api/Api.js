@@ -96,3 +96,15 @@ export async function getAnimalPrivateDetails({ id = null }) {
 export async function getUsers() {
   return getRequest("/users");
 }
+
+export async function getNumberForums() {
+  return getRequest("/forum/admin/numberofforums");
+}
+
+export async function getNumberReplies() {
+  return getRequest("/forum/admin/numberofreplies");
+}
+
+export async function getBestCategory() {
+  return getRequest("/forum/admin/bestcategory");
+}
