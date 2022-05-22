@@ -9,6 +9,9 @@ import { TokenContext } from "../environment/TokenProvider";
 import { loginUser } from "../api/Api";
 
 function Login() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -38,6 +41,7 @@ function Login() {
     })
       .then((response) => {
         console.log(response);
+        setSuccessMsg(response.message);
         // Guardamos el token
         console.log(response.accessToken);
         setToken(response.accessToken);
@@ -53,6 +57,7 @@ function Login() {
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg(error.error);
         return;
         // setAlertMsg(error.error);
       });
@@ -98,6 +103,12 @@ function Login() {
                 alt="Icon Twitter"
               ></img>
             </div>
+            {alertMsg !== "" && (
+              <div className="alert alert-danger">{alertMsg}</div>
+            )}
+            {successMsg !== "" && (
+              <div className="alert alert-success">{successMsg}</div>
+            )}
             <div className="mb-3">
               <input
                 type="email"
