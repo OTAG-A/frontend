@@ -10,6 +10,7 @@ import { UserContext } from "../../environment";
 import { deleteComment, deleteForum } from "../../api/Api";
 
 import { postDetails, newComment, getUserDetails } from "../../api/Api";
+import { useNavigate } from "react-router-dom";
 
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
@@ -18,6 +19,8 @@ function Thread() {
   const { idThread } = useParams();
 
   const [comment, setComment] = useState("");
+
+  const navigate = useNavigate();
 
   const fetchPostDetails = () => {
     postDetails({
@@ -69,6 +72,7 @@ function Thread() {
     })
       .then((response) => {
         console.log(response);
+        navigate("/foro/" + post.category);
       })
       .catch((error) => {
         console.log(error);
@@ -85,6 +89,7 @@ function Thread() {
     })
       .then((response) => {
         console.log(response);
+        //TODO:reload o set comments de nuevo para que se quite el eliminado
       })
       .catch((error) => {
         console.log(error);
