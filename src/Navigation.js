@@ -8,8 +8,6 @@ import { toImageUrl } from "./api/Api";
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
 
-  console.log(currentUser);
-
   return (
     <div className="navigation">
       <nav className="navbar navbar-expand-md navbar-light p-3">
@@ -66,7 +64,11 @@ function Navigation() {
               {currentUser ? (
                 <NavLink className="nav-link" to="/perfil">
                   <img
-                    src={currentUser.avatar ? toImageUrl(currentUser.avatar) : "assets/person-circle.svg"}
+                    src={
+                      currentUser.avatar
+                        ? toImageUrl(currentUser.avatar)
+                        : "assets/person-circle.svg"
+                    }
                     className="rounded-circle"
                     style={{ width: 40, height: 40 }}
                     alt="Profile"

@@ -5,11 +5,20 @@ import { Col, Form, Row, FloatingLabel } from "react-bootstrap";
 import { UserContext } from "../../environment/UserProvider";
 import User from "../../models/User";
 
-import { updateBio, updatePassword, updateUsername, getUserDetails, updateAvatar, toImageUrl } from "../../api/Api";
+import {
+  updateBio,
+  updatePassword,
+  updateUsername,
+  getUserDetails,
+  updateAvatar,
+  toImageUrl,
+} from "../../api/Api";
 
 function EditProfile() {
   let { user, setUser } = useContext(UserContext);
-  let [img, setImg] = useState(user.avatar);
+  let [img, setImg] = useState(
+    user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+  );
   let [imgFile, setImgFile] = useState(null);
 
   let [username, setUsername] = useState(user.username);
@@ -22,16 +31,17 @@ function EditProfile() {
     getUserDetails({ id: user.id })
       .then((result) => {
         let user = User.from(result);
-        console.log(user);
         setUser(user);
 
         setUsername(user.username);
-        setImg(user.avatar);
+        setImg(
+          user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+        );
         setBio(user.bio);
       })
       .catch((error) => {
         console.error(error);
-      })
+      });
   });
 
   const inputRef = useRef(null);
@@ -74,7 +84,11 @@ function EditProfile() {
     }
 
     if (password !== "") {
-      updatePassword({ password: password, newPassword: newPassword, repeatedNewPassword: repeatedNewPassword })
+      updatePassword({
+        password: password,
+        newPassword: newPassword,
+        repeatedNewPassword: repeatedNewPassword,
+      })
         .then((result) => {
           console.log(result);
         })
@@ -106,12 +120,11 @@ function EditProfile() {
     getUserDetails({ id: user.id })
       .then((result) => {
         let user = User.from(result);
-        console.log(user);
         setUser(user);
       })
       .catch((error) => {
         console.error(error);
-      })
+      });
   };
 
   return (
@@ -132,7 +145,7 @@ function EditProfile() {
                 <img
                   className="mb-3 img img-responsive rounded-circle clickable w-100 border border-primary profile-pic"
                   onClick={handleUpload}
-                  src={img ? toImageUrl(img) : "assets/person-circle.svg"}
+                  src={img}
                   alt=""
                 />
               </Col>
@@ -177,7 +190,8 @@ function EditProfile() {
 
             <Form.Group>
               <Form.Text className="text-muted">
-                Si quieres cambiar tu contraseña, introduce tu contraseña actual y dos veces la nueva.
+                Si quieres cambiar tu contraseña, introduce tu contraseña actual
+                y dos veces la nueva.
               </Form.Text>
 
               <FloatingLabel
@@ -220,8 +234,9 @@ function EditProfile() {
               </FloatingLabel>
             </Form.Group>
 
-            <button type="submit" className="btn btn-outline-warning">Guardar cambios</button>
-
+            <button type="submit" className="btn btn-outline-warning">
+              Guardar cambios
+            </button>
           </div>
         </Form>
       </div>

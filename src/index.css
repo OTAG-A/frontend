@@ -149,5 +149,5 @@ a:hover {
 .profile-pic {
   height: 15vw !important;
   width: 15vw !important;
-  object-fit: "cover"
+  object-fit: "cover";
 }

@@ -94,7 +94,11 @@ export async function updateBio({ bio = null }) {
   return putRequest("/users/bio", arguments[0]);
 }
 
-export async function updatePassword({ password = null, newPassword = null, repeatedNewPassword = null }) {
+export async function updatePassword({
+  password = null,
+  newPassword = null,
+  repeatedNewPassword = null,
+}) {
   return putRequest("/users/password", arguments[0]);
 }
 
@@ -143,15 +147,15 @@ export async function getBestCategory() {
 }
 
 export async function updateAvatar({ imgFile = null }) {
-  let path = "/users/avatar"
+  let path = "/users/avatar";
 
   let data = new FormData();
-  data.append('avatar', imgFile);
+  data.append("avatar", imgFile);
 
   let requestOptions = {
     method: "PUT",
     headers: {},
-    body: data
+    body: data,
   };
   return serverRequest(path, requestOptions);
 }

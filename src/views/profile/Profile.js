@@ -41,10 +41,11 @@ function Profile() {
       .then((result) => {
         let user = User.from(result);
         setUser(user);
+        setContextUser(user);
       })
       .catch((error) => {
         console.error(error);
-      })
+      });
   });
 
   const handleDeleteSelfAccount = () => {
@@ -93,7 +94,9 @@ function Profile() {
             <img
               className="mb-3 img img-responsive profile-pic"
               src={
-                user.avatar ? toImageUrl(user.avatar) : "assets/person-circle.svg"
+                user.avatar
+                  ? toImageUrl(user.avatar)
+                  : "assets/person-circle.svg"
               }
               alt=""
             />
