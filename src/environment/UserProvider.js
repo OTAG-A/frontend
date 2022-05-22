@@ -1,15 +1,17 @@
 import React from "react";
 
-import { useLocalStorage } from "../extensions/localStorage";
+import { useLocalStorageObject } from "../extensions/localStorageObject";
+
+import { User } from "../models";
 
 // UserContext stores the current logged user or None if not logged.
 export var UserContext = React.createContext({
   user: null,
-  setUser: (_) => {},
+  setUser: (_) => { },
 });
 
 function UserProvider({ children }) {
-  const [user, setUser] = useLocalStorage("user", null);
+  const [user, setUser] = useLocalStorageObject("user", null, User);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
