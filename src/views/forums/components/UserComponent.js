@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 function UserComponent({ user }) {
   const navigate = useNavigate();
 
+  if (!user) {
+    return <></>;
+  }
+
   return (
     <div className="col-sm-2 user text-center">
       <div
@@ -12,11 +16,8 @@ function UserComponent({ user }) {
         onClick={() => navigate("/perfil/" + user.id)}
       >
         <img
-          src={user.image === "" ? "assets/person-circle.svg" : user.image}
+          src={user.image ? user.image : "assets/person-circle.svg"}
           className="rounded-circle"
-          style={{
-            backgroundColor: "lightgray",
-          }}
           width={60}
           height={60}
           alt={user.username}

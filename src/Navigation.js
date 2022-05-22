@@ -63,9 +63,9 @@ function Navigation() {
                 <NavLink className="nav-link" to="/perfil">
                   <img
                     src={
-                      currentUser.image === ""
+                      currentUser.avatar === ""
                         ? "assets/person-circle.svg"
-                        : currentUser.image
+                        : currentUser.avatar
                     }
                     className="rounded-circle"
                     style={{ width: 40, height: 40 }}
