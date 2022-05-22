@@ -92,3 +92,19 @@ export async function getAnimalPublicDetails({ id = null }) {
 export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
 }
+
+export async function getUsers() {
+  return getRequest("/users");
+}
+
+export async function getNumberForums() {
+  return getRequest("/forum/admin/numberofforums");
+}
+
+export async function getNumberReplies() {
+  return getRequest("/forum/admin/numberofreplies");
+}
+
+export async function getBestCategory() {
+  return getRequest("/forum/admin/bestcategory");
+}
