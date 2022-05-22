@@ -4,8 +4,11 @@ function getStorageValue(key, defaultValue, objectType) {
   // getting stored value
   const saved = localStorage.getItem(key);
   const initial = JSON.parse(saved);
-  let parsed = objectType.from(initial);
-  return parsed || defaultValue;
+  if (initial) {
+    let parsed = objectType.from(initial);
+    return parsed || defaultValue;
+  }
+  return defaultValue;
 }
 
 export const useLocalStorageObject = (key, defaultValue, objectType) => {
