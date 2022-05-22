@@ -5,7 +5,7 @@ import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { postList, newPost } from "../../api/Api";
+import { postList, newPost, getUserDetails } from "../../api/Api";
 
 function GeneralCategory() {
   // const posts = [...Array(10)].map(() => Post.preview());
@@ -24,14 +24,21 @@ function GeneralCategory() {
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
 
-        console.log("set users");
-        for (let i = 0; i < post_list.length; i++) {
-          // TODO: get user info
-          post_list[i].user = User.from({
-            username: "test",
-            id: post_list[i].user_id,
+
+        Promise.all(
+          post_list.map((post_data) => getUserDetails({ id: post_data.user_id }))
+        )
+          .then((all) => {
+            let updatedPosts = structuredClone(post_list);
+            updatedPosts = updatedPosts.map((post_data) => Post.from(post_data));
+            let users = all.map(User.from);
+
+            for (let i = 0; i < updatedPosts.length; i++) {
+              updatedPosts[i].user = users[i];
+            }
+            console.log(updatedPosts);
+            setPosts(updatedPosts);
           });
-        }
 
         setPosts(post_list);
         setAlertMsg("");

@@ -3,12 +3,12 @@ import { useParams } from "react-router";
 
 import { Form, FloatingLabel } from "react-bootstrap";
 
-import Post from "../../models/Post";
+import { Post, User } from "../../models";
 import PostComponent from "./components/PostComponent";
 import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
 
-import { postDetails, newComment } from "../../api/Api";
+import { postDetails, newComment, getUserDetails } from "../../api/Api";
 
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
@@ -24,6 +24,31 @@ function Thread() {
     })
       .then((result) => {
         let post = Post.from(result.data);
+        getUserDetails({ id: post.user_id })
+          .then((result) => {
+            post.user = User.from(result);
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+
+        console.log(post.replies);
+
+        Promise.all(
+          post.replies.map((reply_data) => getUserDetails({ id: reply_data.user_id }))
+        )
+          .then((all) => {
+            let updatedPost = structuredClone(post);
+            let users = all.map(User.from);
+
+            for (let i = 0; i < updatedPost.replies.length; i++) {
+              updatedPost.replies[i].user = users[i];
+            }
+            setPost(updatedPost);
+          });
+
+        console.log(post);
+
         setPost(post);
       })
       .catch((error) => {

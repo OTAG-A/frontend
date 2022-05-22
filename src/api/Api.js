@@ -114,6 +114,10 @@ export async function getUsers() {
   return getRequest("/users");
 }
 
+export async function getUserDetails({ id = null }) {
+  return getRequest("/users/" + id);
+}
+
 export async function getNumberForums() {
   return getRequest("/forum/admin/numberofforums");
 }
