@@ -11,9 +11,10 @@ export default function PopupCreatePost({ onSubmit }) {
   const [category, setCategory] = useState("");
   const [user_explanation, setUserExplanation] = useState("");
 
-  console.log(onSubmit);
-
   const submitWrapper = (action) => {
+    if (category === "") {
+      return;
+    }
     PopupboxManager.close();
     action({
       title: title,
@@ -31,6 +32,7 @@ export default function PopupCreatePost({ onSubmit }) {
           label="Título"
         >
           <Form.Control
+            required
             type="text"
             placeholder="Título"
             value={title}
@@ -44,10 +46,14 @@ export default function PopupCreatePost({ onSubmit }) {
           label="Categoría"
         >
           <Form.Select
+            required
             aria-label="Seleccionar categoría"
             value={category}
-            onInput={(e) => setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value)}
           >
+            <option disabled value="">
+              Escoge una categoría
+            </option>
             {categories.map((category, i) => (
               <option value={category} key={i}>
                 {category}
@@ -62,6 +68,7 @@ export default function PopupCreatePost({ onSubmit }) {
           label="Cuerpo"
         >
           <Form.Control
+            required
             as="textarea"
             placeholder="Leave a comment here"
             style={{ height: "200px" }}
