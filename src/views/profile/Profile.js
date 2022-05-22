@@ -55,6 +55,8 @@ function Profile() {
       () => {
         deleteUser(userId)
           .then((response) => {
+            //TODO: elimina pero no entra en response, por lo que no hace la navegación
+            console.log("Eliminado");
             console.log(response);
             navigate("/admin");
           })
