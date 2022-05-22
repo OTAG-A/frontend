@@ -7,7 +7,12 @@ import { Post, User } from "../../models";
 import PostComponent from "./components/PostComponent";
 import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
-import { deleteComment, deleteForum } from "../../api/Api";
+import {
+  deleteComment,
+  deleteCommentUser,
+  deleteForum,
+  deleteForumUser,
+} from "../../api/Api";
 
 import { postDetails, newComment, getUserDetails } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
@@ -86,6 +91,37 @@ function Thread() {
       id_comment: comment.id,
       id_forum: post.id,
       id_user: comment.user.id,
+    })
+      .then((response) => {
+        console.log(response);
+        //TODO:reload o set comments de nuevo para que se quite el eliminado
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
+
+  const onPostDeleteUser = (post) => {
+    console.log("delete post with id " + post.id);
+    deleteForumUser({
+      id_forum: post.id,
+    })
+      .then((response) => {
+        console.log(response);
+        navigate("/foro/" + post.category);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
+
+  const onCommentDeleteUser = (comment) => {
+    console.log("delete comment with id " + comment.id);
+    deleteCommentUser({
+      id_comment: comment.id,
+      id_forum: post.id,
     })
       .then((response) => {
         console.log(response);

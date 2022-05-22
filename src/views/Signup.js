@@ -27,9 +27,7 @@ function Signup() {
     }));
   };
 
-  //TODO:funcionalidad
   const signupEmail = async (e) => {
-    //TODO:contraseña = confirmar contraseña
     e.preventDefault();
     //Validar Captcha
     if (validateCaptcha(state.captcha, false)) {
@@ -63,6 +61,7 @@ function Signup() {
         });
     } else {
       setState((state.captcha = ""));
+      setAlertMsg("Captcha incorrecto");
       console.log(" Captcha: " + state.captcha);
       loadCaptchaEnginge(6, "black", "orange");
     }
