@@ -1,8 +1,6 @@
 import { default as User } from "./User";
 
 class Comment {
-  id = 0;
-
   id = "";
   user_id = "";
   reply = "";
@@ -19,7 +17,7 @@ class Comment {
       user_id: "6286c608be23981510abb356",
       reply: "reply1",
       id: "6286c608be23981510abb356",
-      reply_date: "2022-05-17T09:00:02.265Z"
+      reply_date: "2022-05-17T09:00:02.265Z",
     });
   }
 }

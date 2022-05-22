@@ -24,21 +24,21 @@ function GeneralCategory() {
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
 
-
         Promise.all(
-          post_list.map((post_data) => getUserDetails({ id: post_data.user_id }))
-        )
-          .then((all) => {
-            let updatedPosts = structuredClone(post_list);
-            updatedPosts = updatedPosts.map((post_data) => Post.from(post_data));
-            let users = all.map(User.from);
+          post_list.map((post_data) =>
+            getUserDetails({ id: post_data.user_id })
+          )
+        ).then((all) => {
+          let updatedPosts = structuredClone(post_list);
+          updatedPosts = updatedPosts.map((post_data) => Post.from(post_data));
+          let users = all.map(User.from);
 
-            for (let i = 0; i < updatedPosts.length; i++) {
-              updatedPosts[i].user = users[i];
-            }
-            console.log(updatedPosts);
-            setPosts(updatedPosts);
-          });
+          for (let i = 0; i < updatedPosts.length; i++) {
+            updatedPosts[i].user = users[i];
+          }
+          console.log(updatedPosts);
+          setPosts(updatedPosts);
+        });
 
         setPosts(post_list);
         setAlertMsg("");

@@ -85,7 +85,9 @@ function Profile() {
           <div className="col text-center p-5">
             <img
               className="mb-3 img img-responsive"
-              src={user.avatar === "" ? "assets/person-circle.svg" : user.avatar}
+              src={
+                user.avatar === "" ? "assets/person-circle.svg" : user.avatar
+              }
               style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
               alt=""
             />

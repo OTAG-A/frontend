@@ -30,22 +30,23 @@ function Thread() {
           })
           .catch((error) => {
             console.error(error);
-          })
+          });
 
         console.log(post.replies);
 
         Promise.all(
-          post.replies.map((reply_data) => getUserDetails({ id: reply_data.user_id }))
-        )
-          .then((all) => {
-            let updatedPost = structuredClone(post);
-            let users = all.map(User.from);
+          post.replies.map((reply_data) =>
+            getUserDetails({ id: reply_data.user_id })
+          )
+        ).then((all) => {
+          let updatedPost = structuredClone(post);
+          let users = all.map(User.from);
 
-            for (let i = 0; i < updatedPost.replies.length; i++) {
-              updatedPost.replies[i].user = users[i];
-            }
-            setPost(updatedPost);
-          });
+          for (let i = 0; i < updatedPost.replies.length; i++) {
+            updatedPost.replies[i].user = users[i];
+          }
+          setPost(updatedPost);
+        });
 
         console.log(post);
 
@@ -53,12 +54,12 @@ function Thread() {
       })
       .catch((error) => {
         console.error(error);
-      })
-  }
+      });
+  };
 
   useEffect(() => {
-    fetchPostDetails()
-  }, []);
+    fetchPostDetails();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
@@ -75,12 +76,12 @@ function Thread() {
     })
       .then((result) => {
         // Update post details
-        fetchPostDetails()
+        fetchPostDetails();
       })
       .catch((error) => {
         console.error(error);
-      })
-  }
+      });
+  };
 
   if (post !== null) {
     return (
@@ -123,7 +124,9 @@ function Thread() {
             </div>
             <div className="row">
               <div className="col text-end">
-                <button type="submit" className="btn btn-primary">Enviar</button>
+                <button type="submit" className="btn btn-primary">
+                  Enviar
+                </button>
               </div>
             </div>
           </Form>
