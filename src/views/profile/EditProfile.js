@@ -92,7 +92,9 @@ function EditProfile() {
                 <img
                   className="mb-3 img img-responsive rounded-circle clickable w-100 border border-primary profile-pic"
                   onClick={handleUpload}
-                  src={img}
+                  src={
+                    img === "" ? "assets/person-circle.svg" : img
+                  }
                   alt=""
                 />
               </Col>

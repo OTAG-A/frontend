@@ -91,7 +91,7 @@ export async function getAnimalPrivateDetails({ id = null }) {
 }
 
 export async function updateBio({ bio = null }) {
-  return putRequest("/users/biography", arguments[0]);
+  return putRequest("/users/bio", arguments[0]);
 }
 
 export async function updatePassword({ password = null, newPassword = null, repeatedNewPassword = null }) {

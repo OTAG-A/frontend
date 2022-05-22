@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser } from "../../api/Api";
+import { logoutUser, getUserDetails } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -26,17 +26,27 @@ function Profile() {
   useEffectOnce(() => {
     console.debug(currentUser);
 
+    let id = userId;
+
     // If no id or id is the same as the current user one
     if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
       setIsSelf(true);
+      id = currentUser.id;
 
       // Load self user if some
-      setUser(currentUser);
-      return;
+      // setUser(currentUser);
+    } else {
+      return; // Error no id
     }
 
-    // TODO: api request to get user data
-    setUser(User.preview());
+    getUserDetails({ id: id })
+      .then((result) => {
+        let user = User.from(result);
+        setUser(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   });
 
   const handleDeleteSelfAccount = () => {
