@@ -109,3 +109,19 @@ export async function newPost({
 export async function newComment({ id_forum = null, comment = null }) {
   return postRequest("/forum/reply", arguments[0]);
 }
+
+export async function getUsers() {
+  return getRequest("/users");
+}
+
+export async function getNumberForums() {
+  return getRequest("/forum/admin/numberofforums");
+}
+
+export async function getNumberReplies() {
+  return getRequest("/forum/admin/numberofreplies");
+}
+
+export async function getBestCategory() {
+  return getRequest("/forum/admin/bestcategory");
+}
