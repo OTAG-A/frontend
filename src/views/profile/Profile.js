@@ -109,7 +109,7 @@ function Profile() {
             )}
           </div>
 
-          <div className="col p-5 my-auto">
+          <div className="col p-5 my-auto  mb-5">
             <h1 className="mb-5">Información de {user.username}</h1>
             <p>
               <b>Email:</b> {user.email}

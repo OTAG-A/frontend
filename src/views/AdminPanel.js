@@ -110,7 +110,7 @@ function AdminPanel() {
 
   return (
     <div className="home">
-      <header className="px-5 pt-4">
+      <header className="px-5 pt-4 mb-5">
         <h1 className="font-weight-light text-center fw-bold">
           Panel Administración
         </h1>
@@ -164,12 +164,12 @@ function AdminPanel() {
               </div>
             </div>
           </div>
-          <div className="container my-4">
+          <div className="container my-4 mb-5">
             <div className="row align-items-center">
               <p class="h3 pt-4" style={{ color: "orange" }}>
                 Usuarios registrados
               </p>
-              <div class="container px-4 mt-4 vh-50">
+              <div class="container px-4 mt-4 vh-50 mb-5">
                 <div class="border users-box">
                   {table.map((row, i) => (
                     <div className="row" key={i}>

@@ -40,7 +40,7 @@ function EditProfile() {
     <div className="profile">
       <div className="container p-2">
         <div className="row">
-          <div className="col-md-5 text-center m-auto p-5">
+          <div className="col-md-5 text-center m-auto p-5 mb-5">
             <Row>
               <Col xs md="6" className="mx-auto">
                 <input
