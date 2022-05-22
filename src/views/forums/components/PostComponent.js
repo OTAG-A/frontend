@@ -43,7 +43,9 @@ function PostComponent({ post, compact = true, onDelete = null }) {
       <div className="row">
         <UserComponent user={post.user} />
         <p className="col-sm-10 ml-5">
-          {compact ? truncate(post.body, 300) : post.body}
+          {compact
+            ? truncate(post.user_explanation, 300)
+            : post.user_explanation}
           {compact && (
             <Link to={post.get_url()} className="float-end">
               Leer más

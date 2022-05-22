@@ -7,7 +7,7 @@ import { updateBio, updatePassword, updateUsername } from "../../api/Api";
 
 function EditProfile() {
   let { user } = useContext(UserContext);
-  let [img, setImg] = useState(user.image);
+  let [img, setImg] = useState(user.avatar);
 
   let [username, setUsername] = useState(user.username);
   let [password, setPassword] = useState("");

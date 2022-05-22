@@ -61,23 +61,16 @@ function Navigation() {
               {/* Si está loggeado, mostrar la foto de perfil. Sino, mostrar el botón de login. */}
               {currentUser ? (
                 <NavLink className="nav-link" to="/perfil">
-                  {currentUser.image ? (
-                    <img
-                      src={currentUser.image}
-                      className="rounded-circle"
-                      style={{ width: 40, height: 40 }}
-                      alt="Profile"
-                    />
-                  ) : (
-                    <div
-                      className="rounded-circle"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: "lightgray",
-                      }}
-                    ></div>
-                  )}
+                  <img
+                    src={
+                      currentUser.avatar === ""
+                        ? "assets/person-circle.svg"
+                        : currentUser.avatar
+                    }
+                    className="rounded-circle"
+                    style={{ width: 40, height: 40 }}
+                    alt="Profile"
+                  />
                 </NavLink>
               ) : (
                 <NavLink className="nav-link" to="/login">
