@@ -1,12 +1,14 @@
 import React, { useState, useContext, useRef } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import { Col, Form, Row, FloatingLabel } from "react-bootstrap";
 
 import { UserContext } from "../../environment/UserProvider";
+import User from "../../models/User";
 
-import { updateBio, updatePassword, updateUsername } from "../../api/Api";
+import { updateBio, updatePassword, updateUsername, getUserDetails } from "../../api/Api";
 
 function EditProfile() {
-  let { user } = useContext(UserContext);
+  let { user, setUser } = useContext(UserContext);
   let [img, setImg] = useState(user.avatar);
 
   let [username, setUsername] = useState(user.username);
@@ -14,6 +16,22 @@ function EditProfile() {
   let [newPassword, setNewPassword] = useState("");
   let [repeatedNewPassword, setRepeatedNewPassword] = useState("");
   let [bio, setBio] = useState(user.bio);
+
+  useEffectOnce(() => {
+    getUserDetails({ id: user.id })
+      .then((result) => {
+        let user = User.from(result);
+        console.log(user);
+        setUser(user);
+
+        setUsername(user.username);
+        setImg(user.avatar);
+        setBio(user.bio);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  });
 
   const inputRef = useRef(null);
   const handleUpload = () => {
@@ -72,6 +90,16 @@ function EditProfile() {
           console.error(error);
         });
     }
+
+    getUserDetails({ id: user.id })
+      .then((result) => {
+        let user = User.from(result);
+        console.log(user);
+        setUser(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   };
 
   return (
