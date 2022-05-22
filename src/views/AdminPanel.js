@@ -99,6 +99,7 @@ function AdminPanel() {
         setTotalUsers(result.users.length);
         let users_list = result.users.map((users) => ListUser.from(users));
         setUsers(users_list);
+        console.log("usersssss" + users_list);
       })
       .catch((error) => {
         console.error(error);
@@ -175,7 +176,7 @@ function AdminPanel() {
                           <UserBox
                             id={user.id}
                             name={user.username}
-                            image={user.image}
+                            image={user.avatar}
                           />
                         </div>
                       ))}

@@ -5,7 +5,7 @@ import { UserContext } from "../../environment/UserProvider";
 
 function EditProfile() {
   let { user } = useContext(UserContext);
-  let [img, setImg] = useState(user.image);
+  let [img, setImg] = useState(user.avatar);
 
   const inputRef = useRef(null);
   const handleUpload = () => {

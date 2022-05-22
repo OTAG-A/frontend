@@ -2,13 +2,11 @@ const baseUrl = "http://localhost:8080/api";
 
 function serverRequest(path, requestOptions) {
   let token = localStorage.getItem("token");
-  console.log("token: " + token);
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
     token = JSON.parse(token);
     if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
   }
-  console.log(requestOptions);
 
   return fetch(baseUrl + path, requestOptions).then(async (response) => {
     if (response.ok) {
@@ -39,7 +37,6 @@ function postRequest(path, body) {
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
-    console.log(key, ":", value);
     if (value) params.append(key, value);
   }
 
@@ -110,8 +107,32 @@ export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
 }
 
+export async function postList() {
+  return getRequest("/forum/list");
+}
+
+export async function postDetails({ id_forum = null }) {
+  return getRequest("/forum", arguments[0]);
+}
+
+export async function newPost({
+  title = null,
+  user_explanation = null,
+  category = null,
+}) {
+  return postRequest("/forum/new", arguments[0]);
+}
+
+export async function newComment({ id_forum = null, comment = null }) {
+  return postRequest("/forum/reply", arguments[0]);
+}
+
 export async function getUsers() {
   return getRequest("/users");
+}
+
+export async function getUserDetails({ id = null }) {
+  return getRequest("/users/" + id);
 }
 
 export async function getNumberForums() {

@@ -9,7 +9,7 @@ function UserBox({ id, name, image }) {
       <div className="row m-1 p-1 " onClick={() => navigate("/perfil/" + id)}>
         <div className="col-4	col-sm-4	col-md-2	col-lg-5  mt-1">
           <img
-            src={image}
+            src={image === "" ? "assets/person-circle.svg" : image}
             className="rounded-circle align-middle"
             style={{
               backgroundColor: "lightgray",

@@ -20,7 +20,6 @@ function AnimalDetails() {
         id: idAnimal,
       })
         .then((result) => {
-          console.log(result);
           setAnimal(result.data);
         })
         .catch((error) => {
@@ -33,7 +32,6 @@ function AnimalDetails() {
         id: idAnimal,
       })
         .then((result) => {
-          console.log(result);
           setAnimal(result.data);
         })
         .catch((error) => {

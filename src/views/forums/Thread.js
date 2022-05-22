@@ -1,34 +1,66 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { useParams } from "react-router";
+import { useParams } from "react-router";
 
-import Post from "../../models/Post";
+import { Form, FloatingLabel } from "react-bootstrap";
+
+import { Post, User } from "../../models";
 import PostComponent from "./components/PostComponent";
 import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
 import { deleteComment, deleteForum } from "../../api/Api";
 
+import { postDetails, newComment, getUserDetails } from "../../api/Api";
+
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
 
   const [post, setPost] = useState(null);
-  // const threadId = useParams("threadId");
+  const { idThread } = useParams();
+
+  const [comment, setComment] = useState("");
+
+  const fetchPostDetails = () => {
+    postDetails({
+      id_forum: idThread,
+    })
+      .then((result) => {
+        let post = Post.from(result.data);
+        getUserDetails({ id: post.user_id })
+          .then((result) => {
+            post.user = User.from(result);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        console.log(post.replies);
+
+        Promise.all(
+          post.replies.map((reply_data) =>
+            getUserDetails({ id: reply_data.user_id })
+          )
+        ).then((all) => {
+          let updatedPost = structuredClone(post);
+          let users = all.map(User.from);
+
+          for (let i = 0; i < updatedPost.replies.length; i++) {
+            updatedPost.replies[i].user = users[i];
+          }
+          setPost(updatedPost);
+        });
+
+        console.log(post);
+
+        setPost(post);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
-    // TODO: get post given id
-    setPost(Post.preview());
-  }, []);
-
-  function autoResize(event) {
-    console.debug(event);
-    const elem = event.target;
-    elem.style.height = "";
-    elem.style.height = elem.scrollHeight + 3 + "px";
-  }
-
-  function resetSize(event) {
-    const elem = event.target;
-    elem.style.height = "";
-  }
+    fetchPostDetails();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onPostDelete = (post) => {
     console.log("delete post with id " + post.id);
@@ -60,6 +92,20 @@ function Thread() {
       });
   };
 
+  const handlePostComment = () => {
+    newComment({
+      id_forum: idThread,
+      comment: comment,
+    })
+      .then((result) => {
+        // Update post details
+        fetchPostDetails();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   if (post !== null) {
     return (
       <div>
@@ -71,7 +117,7 @@ function Thread() {
 
         <h2 className="mt-5 mb-3">Respuestas</h2>
         <div className="col m-auto">
-          {post.comments.map((comment, i) => (
+          {post.replies.map((comment, i) => (
             <CommentComponent
               comment={comment}
               key={i}
@@ -81,25 +127,32 @@ function Thread() {
             />
           ))}
 
-          <div className="comment p-2 card mb-3">
+          <Form className="comment p-2 card mb-3" onSubmit={handlePostComment}>
             <div className="row">
               <div className="col">
-                <textarea
-                  className="w-100 mx-1 border-0 overflow-hidden"
-                  placeholder="Escribe aquí tu respuesta"
-                  rows={4}
-                  onFocus={autoResize}
-                  onBlur={resetSize}
-                  onInput={autoResize}
-                />
+                <FloatingLabel
+                  className="mb-3"
+                  controlId="floatingTextarea2"
+                  label="Escribe aquí tu comentario"
+                >
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Escribe aquí tu comentario"
+                    style={{ height: "200px" }}
+                    value={comment}
+                    onInput={(e) => setComment(e.target.value)}
+                  />
+                </FloatingLabel>
               </div>
             </div>
             <div className="row">
               <div className="col text-end">
-                <button className="btn btn-primary">Enviar</button>
+                <button type="submit" className="btn btn-primary">
+                  Enviar
+                </button>
               </div>
             </div>
-          </div>
+          </Form>
         </div>
       </div>
     );

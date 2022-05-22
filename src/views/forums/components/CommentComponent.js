@@ -19,7 +19,7 @@ function CommentComponent({ comment, onDelete = null }) {
       {onDelete && <DeleteCornerButton action={() => comentDelete(onDelete)} />}
       <div className="row">
         <UserComponent user={comment.user} />
-        <p className="col-sm-10 ml-5">{comment.body}</p>
+        <p className="col-sm-10 ml-5">{comment.reply}</p>
       </div>
     </div>
   );
