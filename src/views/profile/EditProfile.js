@@ -5,11 +5,12 @@ import { Col, Form, Row, FloatingLabel } from "react-bootstrap";
 import { UserContext } from "../../environment/UserProvider";
 import User from "../../models/User";
 
-import { updateBio, updatePassword, updateUsername, getUserDetails } from "../../api/Api";
+import { updateBio, updatePassword, updateUsername, getUserDetails, updateAvatar, toImageUrl } from "../../api/Api";
 
 function EditProfile() {
   let { user, setUser } = useContext(UserContext);
   let [img, setImg] = useState(user.avatar);
+  let [imgFile, setImgFile] = useState(null);
 
   let [username, setUsername] = useState(user.username);
   let [password, setPassword] = useState("");
@@ -42,6 +43,7 @@ function EditProfile() {
     if (event.target.files.length !== 1) {
       return;
     }
+    setImgFile(event.target.files[0]);
     setImg(URL.createObjectURL(event.target.files[0]));
   };
 
@@ -91,6 +93,16 @@ function EditProfile() {
         });
     }
 
+    if (imgFile) {
+      updateAvatar({ imgFile: imgFile })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+
     getUserDetails({ id: user.id })
       .then((result) => {
         let user = User.from(result);
@@ -120,9 +132,7 @@ function EditProfile() {
                 <img
                   className="mb-3 img img-responsive rounded-circle clickable w-100 border border-primary profile-pic"
                   onClick={handleUpload}
-                  src={
-                    img === "" ? "assets/person-circle.svg" : img
-                  }
+                  src={img ? toImageUrl(img) : "assets/person-circle.svg"}
                   alt=""
                 />
               </Col>

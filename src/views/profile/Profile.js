@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser, getUserDetails } from "../../api/Api";
+import { logoutUser, getUserDetails, toImageUrl } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -24,8 +24,6 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffectOnce(() => {
-    console.debug(currentUser);
-
     let id = userId;
 
     // If no id or id is the same as the current user one
@@ -70,14 +68,13 @@ function Profile() {
   const handleLogout = () => {
     logoutUser()
       .then((response) => {
-        console.log(response);
         // Logout satisfactorio
         setToken(null);
         setContextUser(null);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         return;
       });
   };
@@ -96,7 +93,7 @@ function Profile() {
             <img
               className="mb-3 img img-responsive profile-pic"
               src={
-                user.avatar === "" ? "assets/person-circle.svg" : user.avatar
+                user.avatar ? toImageUrl(user.avatar) : "assets/person-circle.svg"
               }
               alt=""
             />

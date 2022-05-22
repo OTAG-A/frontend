@@ -141,3 +141,25 @@ export async function getNumberReplies() {
 export async function getBestCategory() {
   return getRequest("/forum/admin/bestcategory");
 }
+
+export async function updateAvatar({ imgFile = null }) {
+  let path = "/users/avatar"
+
+  let data = new FormData();
+  data.append('avatar', imgFile);
+
+  let requestOptions = {
+    method: "PUT",
+    headers: {},
+    body: data
+  };
+  return serverRequest(path, requestOptions);
+}
+
+// export async function getAvatar({ avatarId = null }) {
+//   return getRequest("/users/avatar/" + avatarId);
+// }
+
+export function toImageUrl(avatarId) {
+  return baseUrl + "/users/avatar/" + avatarId;
+}

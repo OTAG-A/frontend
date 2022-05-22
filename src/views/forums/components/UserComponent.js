@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { toImageUrl } from "../../../api/Api";
+
 // UserComponent describes the image with the username under it.
 function UserComponent({ user }) {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ function UserComponent({ user }) {
         onClick={() => navigate("/perfil/" + user.id)}
       >
         <img
-          src={user.image ? user.image : "assets/person-circle.svg"}
+          src={user.avatar ? toImageUrl(user.avatar) : "assets/person-circle.svg"}
           className="rounded-circle"
           width={60}
           height={60}

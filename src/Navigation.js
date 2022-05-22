@@ -2,9 +2,13 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./environment";
 
+import { toImageUrl } from "./api/Api";
+
 // Navigation bar of the application
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
+
+  console.log(currentUser);
 
   return (
     <div className="navigation">
@@ -62,11 +66,7 @@ function Navigation() {
               {currentUser ? (
                 <NavLink className="nav-link" to="/perfil">
                   <img
-                    src={
-                      currentUser.avatar === ""
-                        ? "assets/person-circle.svg"
-                        : currentUser.avatar
-                    }
+                    src={currentUser.avatar ? toImageUrl(currentUser.avatar) : "assets/person-circle.svg"}
                     className="rounded-circle"
                     style={{ width: 40, height: 40 }}
                     alt="Profile"
