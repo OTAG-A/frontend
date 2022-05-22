@@ -76,12 +76,12 @@ function Thread() {
       });
   };
 
-  const onCommentDelete = (comment, post) => {
+  const onCommentDelete = (comment) => {
     console.log("delete comment with id " + comment.id);
     deleteComment({
       id_comment: comment.id,
       id_forum: post.id,
-      username: comment.user.username,
+      id_user: comment.user.id,
     })
       .then((response) => {
         console.log(response);

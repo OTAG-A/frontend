@@ -147,6 +147,6 @@ export async function deleteForum({ id_forum }) {
   return deleteRequest("/forum/admin/delete", arguments[0]);
 }
 
-export async function deleteComment({ id_comment, id_forum, username }) {
-  return deleteRequest("/forum/admin/delete", arguments[0]);
+export async function deleteComment({ id_forum, id_comment, id_user }) {
+  return deleteRequest("/forum/admin/deletereply", arguments[0]);
 }
