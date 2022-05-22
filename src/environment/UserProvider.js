@@ -7,7 +7,7 @@ import { User } from "../models";
 // UserContext stores the current logged user or None if not logged.
 export var UserContext = React.createContext({
   user: null,
-  setUser: (_) => { },
+  setUser: (_) => {},
 });
 
 function UserProvider({ children }) {

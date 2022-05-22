@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
+
 import UserBox from "./components/UserBox";
 import { ListUser } from "./../models";
 
@@ -31,7 +33,7 @@ function AdminPanel() {
   let table = splitInGroups(users, 4);
 
   //Analiticas foro
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching total de animales y adopciones");
 
     getStatistics()
@@ -50,7 +52,7 @@ function AdminPanel() {
       });
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching número total posts");
 
     getNumberForums()
@@ -63,7 +65,7 @@ function AdminPanel() {
       });
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching número total respuestas");
 
     getNumberReplies()
@@ -77,7 +79,7 @@ function AdminPanel() {
   });
 
   //TODO: no funciona, esperar a que backend lo arregle
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching mejor categoría del foro");
 
     getBestCategory()
@@ -91,7 +93,7 @@ function AdminPanel() {
   });
 
   // Listado y número de usuarios
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching usuarios");
 
     getUsers()
@@ -104,7 +106,7 @@ function AdminPanel() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  });
 
   return (
     <div className="home">
