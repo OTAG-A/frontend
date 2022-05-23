@@ -172,6 +172,10 @@ function Thread() {
               onDelete={
                 currentUser && currentUser.isAdmin ? onCommentDelete : null
               }
+
+              onCommentDeleteUser={
+                currentUser && currentUser.id === comment.user_id ? onCommentDelete : null
+              }
             />
           ))}
 
