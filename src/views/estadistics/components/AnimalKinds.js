@@ -7,10 +7,7 @@ import { useEffectOnce } from "usehooks-ts";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function AnimalKinds() {
-  const [kinds, setKinds] = useState(["kind"]);
-  const [numKind, setNumKind] = useState([1]);
-  const [bgColors, setColors] = useState(["rgba(255, 99, 132, 0.2)"]);
-  const [bColor, setBColor] = useState(["rgba(255, 99, 132, 1)"]);
+  const [chartData, setChartData] = useState(null);
 
   //Según cuántos tipos de animales haya, asigna el id, número y color para ese tipo
   const updateKinds = (result) => {
@@ -19,27 +16,42 @@ function AnimalKinds() {
     var colors = [];
     var bg = [];
     var b = [];
+    console.log(result);
     for (let i = 0; i < result.length; i++) {
       k.push(result[i]._id);
       n.push(result[i].count);
       colors = random_rgba_color();
       bg.push(colors[0]);
       b.push(colors[1]);
-      console.log("k: " + k + "n: " + n + " bg:" + bg + " b:" + b);
+      console.log("k: ", k, "n: ", n, " bg:", bg, " b:", b);
     }
-    setKinds(k);
-    setNumKind(n);
-    setColors(bg);
-    setBColor(b);
+
+    setChartData({
+      labels: k,
+      datasets: [
+        {
+          label: "Número de animales",
+          data: n,
+          backgroundColor: bg,
+          hoverBackgroundColor: bg,
+          borderColor: b,
+          hoverBorderColor: b,
+          borderWidth: 1,
+        },
+      ],
+    });
   };
 
   //Crea background and border color aleatorios
   function random_rgba_color() {
-    var x = Math.floor(Math.random() * 256);
-    var y = 100 + Math.floor(Math.random() * 256);
-    var z = 50 + Math.floor(Math.random() * 256);
-    var background = "rgba(" + x + "," + y + "," + z + ", 0.5)";
-    var border = "rgba(" + x + "," + y + "," + z + ", 1)";
+    let r = Math.floor(Math.random() * 256);
+    let g = 100 + Math.floor(Math.random() * 256);
+    let b = 50 + Math.floor(Math.random() * 256);
+    let background = "rgba(" + r + "," + g + "," + b + ", 1)";
+    // https://gist.github.com/p01/1005192?permalink_comment_id=1783655#gistcomment-1783655
+    const n = -80;
+    let [rb, gb, bb] = [r, g, b].map(d => (d += n) < 0 ? 0 : d > 255 ? 255 : d | 0)
+    var border = "rgba(" + rb + "," + gb + "," + bb + ", 1)";
     return [background, border];
   }
 
@@ -56,22 +68,11 @@ function AnimalKinds() {
       });
   });
 
-  const data = {
-    labels: kinds,
-    datasets: [
-      {
-        label: "Número de animales",
-        data: numKind,
-        backgroundColor: bgColors,
-        borderColor: bColor,
-        borderWidth: 1,
-      },
-    ],
-  };
-
   return (
     <div className="container">
-      <Pie data={data} />
+      {chartData &&
+        <Pie data={chartData} />
+      }
     </div>
   );
 }

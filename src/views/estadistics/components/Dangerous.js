@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -15,16 +16,16 @@ function Dangerous() {
   const [gangerous, setDangerous] = useState(0);
   const [notDangerous, setNotDangerous] = useState(0);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching número animales peligrosos y no peligrosos");
 
     getStatistics()
       .then((result) => {
         console.log(
           "Animales peligrosos: " +
-            gangerous +
-            "\nAnimales no peligrosos: " +
-            notDangerous
+          gangerous +
+          "\nAnimales no peligrosos: " +
+          notDangerous
         );
         setDangerous(result[3].dangerous);
         setNotDangerous(result[3].not_dangerous);
