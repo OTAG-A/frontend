@@ -1,24 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { postList, newPost, getUserDetails, getSpecies } from "../../api/Api";
+import { postList, newPost, getUserDetails, getSpecies, getNumberForums } from "../../api/Api";
 
 function GeneralCategory() {
+  const navigate = useNavigate();
+
   // const posts = [...Array(10)].map(() => Post.preview());
   const [posts, setPosts] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   const [alertMsg, setAlertMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
-  // TODO: replace with real data
-  // const categories = ["gatos", "perros", "canarios", "cocodrilos"];
   const [categories, setCategories] = useState(["General"]);
   // TODO: replace with real data
   const popular_posts = posts.slice(0, 4);
+
+  const postsPerPage = 7;
+
+  const loc = useLocation();
+
+  const getNumPages = () => {
+    if (postsPerPage === 0) {
+      return 1;
+    }
+    let pages = Math.ceil(totalPosts / postsPerPage);
+    if (pages <= 0) {
+      return 1;
+    }
+    return pages;
+  };
+  // Obtenemos la pagina de los parametros de url
+  const paginaParam =
+    parseInt(new URLSearchParams(loc.search).get("pagina")) || 1;
+  const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
 
   const capitalize = (str) => {
     const lower = str.toLowerCase();
@@ -27,7 +50,12 @@ function GeneralCategory() {
   };
 
   useEffect(() => {
-    postList()
+    const pag = pagina || 1;
+    console.log(pag, postsPerPage);
+    postList({
+      starts: (pag - 1) * postsPerPage,
+      rows: postsPerPage,
+    })
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
 
@@ -65,7 +93,22 @@ function GeneralCategory() {
       })
       .then((error) => {
       })
-  }, [successMsg]);
+
+    getNumberForums()
+      .then((result) => {
+        setTotalPosts(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [successMsg, totalPosts, pagina, postsPerPage]);
+
+  const gotoPage = (page) => {
+    navigate({
+      pathname: "/foro",
+      search: "?pagina=" + page,
+    });
+  };
 
   const handleNewPost = (fields) => {
     newPost(fields)
@@ -99,6 +142,39 @@ function GeneralCategory() {
           <div className="alert alert-success">{successMsg}</div>
         )}
         <PostList posts={posts} />
+
+        <div className="row">
+          <Pagination className="justify-content-end">
+            <Pagination.First onClick={() => gotoPage(1)} />
+            {pagina - 3 > 0 && <Pagination.Ellipsis />}
+
+            {pagina - 2 > 0 && (
+              <Pagination.Item onClick={() => gotoPage(pagina - 2)}>
+                {pagina - 2}
+              </Pagination.Item>
+            )}
+            {pagina - 1 > 0 && (
+              <Pagination.Item onClick={() => gotoPage(pagina - 1)}>
+                {pagina - 1}
+              </Pagination.Item>
+            )}
+            <Pagination.Item active>{pagina}</Pagination.Item>
+            {pagina + 1 <= getNumPages() && (
+              <Pagination.Item onClick={() => gotoPage(pagina + 1)}>
+                {pagina + 1}
+              </Pagination.Item>
+            )}
+            {pagina + 2 <= getNumPages() && (
+              <Pagination.Item onClick={() => gotoPage(pagina + 2)}>
+                {pagina + 2}
+              </Pagination.Item>
+            )}
+
+            {pagina + 3 <= getNumPages() && <Pagination.Ellipsis />}
+
+            <Pagination.Last onClick={() => gotoPage(getNumPages())} />
+          </Pagination>
+        </div>
       </div>
 
       <div className="col-md-3">

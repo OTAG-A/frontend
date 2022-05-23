@@ -106,8 +106,8 @@ export async function updateUsername({ newUsername = null }) {
   return putRequest("/users/username", arguments[0]);
 }
 
-export async function postList() {
-  return getRequest("/forum/list");
+export async function postList({ starts = null, rows = null }) {
+  return getRequest("/forum/list", arguments[0]);
 }
 
 export async function postListByCategory({ category = null }) {

@@ -32,7 +32,7 @@ function AnimalList() {
     if (animalsPerPage === 0) {
       return 1;
     }
-    let pages = Math.ceil(totalAnimals / animalsPerPage) - 1;
+    let pages = Math.ceil(totalAnimals / animalsPerPage);
     if (pages <= 0) {
       return 1;
     }
@@ -41,8 +41,8 @@ function AnimalList() {
 
   // Obtenemos la pagina de los parametros de url
   const paginaParam =
-    parseInt(new URLSearchParams(loc.search).get("pagina")) || 0;
-  const pagina = Math.max(1, Math.min(getNumPages() - 1, paginaParam));
+    parseInt(new URLSearchParams(loc.search).get("pagina")) || 1;
+  const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
 
   useEffectOnce(() => {
     console.debug("fetching total animal number");
@@ -59,9 +59,9 @@ function AnimalList() {
   useEffect(() => {
     console.debug("fetching animal list");
 
-    const pag = pagina || 0;
+    const pag = pagina || 1;
     getAnimals({
-      starts: pag * animalsPerPage,
+      starts: (pag - 1) * animalsPerPage,
       rows: animalsPerPage,
     })
       .then((result) => {
@@ -124,20 +124,20 @@ function AnimalList() {
               </Pagination.Item>
             )}
             <Pagination.Item active>{pagina}</Pagination.Item>
-            {pagina + 1 < getNumPages() && (
+            {pagina + 1 <= getNumPages() && (
               <Pagination.Item onClick={() => gotoPage(pagina + 1)}>
                 {pagina + 1}
               </Pagination.Item>
             )}
-            {pagina + 2 < getNumPages() && (
+            {pagina + 2 <= getNumPages() && (
               <Pagination.Item onClick={() => gotoPage(pagina + 2)}>
                 {pagina + 2}
               </Pagination.Item>
             )}
 
-            {pagina + 3 < getNumPages() && <Pagination.Ellipsis />}
+            {pagina + 3 <= getNumPages() && <Pagination.Ellipsis />}
 
-            <Pagination.Last onClick={() => gotoPage(getNumPages() - 1)} />
+            <Pagination.Last onClick={() => gotoPage(getNumPages())} />
           </Pagination>
         </div>
       </div>
