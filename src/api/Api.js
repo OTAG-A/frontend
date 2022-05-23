@@ -164,6 +164,10 @@ export async function updateAvatar({ imgFile = null }) {
   return serverRequest(path, requestOptions);
 }
 
+export async function getSpecies() {
+  return getRequest("/species");
+}
+
 // export async function getAvatar({ avatarId = null }) {
 //   return getRequest("/users/avatar/" + avatarId);
 // }

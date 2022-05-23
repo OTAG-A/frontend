@@ -5,7 +5,7 @@ import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { postList, newPost, getUserDetails } from "../../api/Api";
+import { postList, newPost, getUserDetails, getSpecies } from "../../api/Api";
 
 function GeneralCategory() {
   // const posts = [...Array(10)].map(() => Post.preview());
@@ -15,9 +15,16 @@ function GeneralCategory() {
   const [successMsg, setSuccessMsg] = useState("");
 
   // TODO: replace with real data
-  const categories = ["gatos", "perros", "canarios", "cocodrilos"];
+  // const categories = ["gatos", "perros", "canarios", "cocodrilos"];
+  const [categories, setCategories] = useState(["General"]);
   // TODO: replace with real data
   const popular_posts = posts.slice(0, 4);
+
+  const capitalize = (str) => {
+    const lower = str.toLowerCase();
+    let firstLetter = str.charAt(0);
+    return firstLetter.toUpperCase() + lower.slice(1);
+  };
 
   useEffect(() => {
     postList()
@@ -48,6 +55,16 @@ function GeneralCategory() {
         setAlertMsg("Error al cargar los posts");
         console.error(error);
       });
+
+    getSpecies()
+      .then((result) => {
+        let response_categories = result.data.map((specie) => capitalize(specie._id));
+        response_categories = response_categories.concat("General");
+        console.log(response_categories);
+        setCategories(response_categories);
+      })
+      .then((error) => {
+      })
   }, [successMsg]);
 
   const handleNewPost = (fields) => {
@@ -87,7 +104,7 @@ function GeneralCategory() {
       <div className="col-md-3">
         <div className="row px-3 mb-4">
           <button
-            onClick={() => openPopupCreatePost(handleNewPost)}
+            onClick={() => openPopupCreatePost({ onSubmit: handleNewPost, categories: categories })}
             className="btn btn-primary py-2"
           >
             Crear hilo
