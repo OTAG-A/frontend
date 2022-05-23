@@ -44,6 +44,7 @@ function getRequest(path, body = {}) {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
+
   return serverRequest(path + "?" + params, requestOptions);
 }
 
