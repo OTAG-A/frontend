@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { TokenContext } from "../environment/TokenProvider";
-import { getInfoUser, baseUrl } from "../api/Api";
+import { getInfoUser } from "../api/Api";
 import { User } from "../models";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../environment/UserProvider";
@@ -38,33 +38,7 @@ function LoginSocial() {
         console.log(error);
         return;
       });
-  }, [token]);
-
-  /* useEffect(() => {
-    const accessToken = new URLSearchParams(loc.search).get("accessToken");
-    console.log("acces token :" + accessToken);
-    let requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    // Añadimos el token de sesión a la petición si estamos loggeados
-    requestOptions.headers["Authorization"] = "Bearer " + accessToken;
-
-    fetch(baseUrl + "/users/info/me", requestOptions).then(async (response) => {
-      if (response.ok) {
-        console.log(await response.json());
-        // Parseamos el usuario
-        let user = User.from(response);
-        console.log(user);
-        setUser(user);
-        setToken(accessToken);
-
-        navigate("/");
-      } else {
-        console.log(await response.json());
-      }
-    }); 
-  });*/
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <></>;
 }

@@ -10,8 +10,7 @@ function serverRequest(path, requestOptions, tokenOverride = null) {
 
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
-    if (!tokenOverride)
-      token = JSON.parse(token);
+    if (!tokenOverride) token = JSON.parse(token);
     if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
   }
 
