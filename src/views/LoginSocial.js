@@ -9,9 +9,7 @@ import { useEffectOnce } from "usehooks-ts";
 
 function LoginSocial() {
   const { setUser } = useContext(UserContext);
-  const { setToken } = useContext(TokenContext);
-  const ls_token = localStorage.getItem("token");
-  const token = ls_token ? JSON.parse(ls_token) : null;
+  const { token, setToken } = useContext(TokenContext);
   const loc = useLocation();
   const navigate = useNavigate();
 
@@ -23,9 +21,10 @@ function LoginSocial() {
 
   useEffect(() => {
     if (!token) return;
+
     console.log(token);
-    console.log(TokenContext);
-    getInfoUser({})
+
+    getInfoUser(token)
       .then((response) => {
         console.log(response);
         // Parseamos el usuario

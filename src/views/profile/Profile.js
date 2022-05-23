@@ -33,7 +33,7 @@ function Profile() {
     }
 
     // If no id or id is the same as the current user one
-    if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
+    if (!userId || (currentUser && currentUser.id === userId)) {
       setIsSelf(true);
       is_self = true;
       id = currentUser.id;

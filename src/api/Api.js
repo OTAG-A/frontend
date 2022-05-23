@@ -1,13 +1,18 @@
 export const baseUrl = "http://localhost:8080/api";
 
-function serverRequest(path, requestOptions) {
-  let token = localStorage.getItem("token");
-  console.log("token: ", token);
+function serverRequest(path, requestOptions, tokenOverride = null) {
+  let token = null;
+  if (tokenOverride) {
+    token = tokenOverride;
+  } else {
+    token = localStorage.getItem("token");
+  }
+
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
-    token = JSON.parse(token);
+    if (!tokenOverride)
+      token = JSON.parse(token);
     if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
-    console.log(requestOptions);
   }
 
   return fetch(baseUrl + path, requestOptions).then(async (response) => {
@@ -36,7 +41,7 @@ function putRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-function getRequest(path, body = {}) {
+function getRequest(path, body = {}, tokenOverride = null) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
     if (value) params.append(key, value);
@@ -46,7 +51,7 @@ function getRequest(path, body = {}) {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
-  return serverRequest(path + "?" + params, requestOptions);
+  return serverRequest(path + "?" + params, requestOptions, tokenOverride);
 }
 
 export async function registerUser({
@@ -170,6 +175,6 @@ export function toImageUrl(avatarId) {
   return baseUrl + "/users/avatar/" + avatarId;
 }
 
-export function getInfoUser() {
-  return getRequest("/users/info/me");
+export function getInfoUser(token) {
+  return getRequest("/users/info/me", {}, token);
 }
