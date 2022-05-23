@@ -12,25 +12,25 @@ function Home() {
       </header>
       <div className="container p-4">
         <div className="row align-items-center mb-5">
-          <p class="fs-5 text-center">
+          <p className="fs-5 text-center">
             El servicio de información sobre adopción de animales en la ciudad
             de Zaragoza.
           </p>
-          <div class="row justify-content-center my-4 mx-auto">
-            <div class="col-md-5 card m-3" style={{ borderColor: "orange" }}>
-              <div class="card-body text-center">
-                <h5 class="card-title" style={{ color: "orange" }}>
+          <div className="row justify-content-center my-4 mx-auto">
+            <div className="col-md-5 card m-3" style={{ borderColor: "orange" }}>
+              <div className="card-body text-center">
+                <h5 className="card-title" style={{ color: "orange" }}>
                   ¿Estás pensando en adoptar?
                 </h5>
                 <div className="container my-3">
-                  <p class="card-text">
+                  <p className="card-text">
                     Echa un vistazo a los distintos tipos de animales que
                     necesitan un hogar en Zaragoza y ayudales a ser felices
                   </p>
                 </div>
                 <div className="container ">
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={() => navigate("/animales")}
                   >
                     Animales en adopción
@@ -38,20 +38,20 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div class="col-md-5 card m-3" style={{ borderColor: "orange" }}>
-              <div class="card-body text-center">
-                <h5 class="card-title" style={{ color: "orange" }}>
+            <div className="col-md-5 card m-3" style={{ borderColor: "orange" }}>
+              <div className="card-body text-center">
+                <h5 className="card-title" style={{ color: "orange" }}>
                   ¿Tienes dudas sobre los animales?
                 </h5>
                 <div className="container my-3">
-                  <p class="card-text">
+                  <p className="card-text">
                     Resuleve tus dudas sobre adopción o sobre los cuidados de
                     ciertos animales en el Foro o resuelve las de los demás
                   </p>
                 </div>
                 <div className="container my-1">
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     onClick={() => navigate("/foro")}
                   >
                     Comunidad adoptadiCOs
@@ -60,12 +60,12 @@ function Home() {
               </div>
             </div>
           </div>
-          <p class="fs-5 m-2 text-center">
+          <p className="fs-5 m-2 text-center">
             Gracias a <b>adoptadiCOs </b>
             puedes:
           </p>
-          <div class=" fs-5 row justify-content-center my-4">
-            <div class="col-lg-5">
+          <div className=" fs-5 row justify-content-center my-4">
+            <div className="col-lg-5">
               <ul>
                 <li>Saber qué animales están en adopción en Zaragoza</li>
                 <br></br>
@@ -75,7 +75,7 @@ function Home() {
                 </li>
               </ul>
             </div>
-            <div class="col-lg-5">
+            <div className="col-lg-5">
               <ul>
                 <li>
                   Resolver tus dudas sobre adopciones y/o cuidados de distintos
@@ -89,7 +89,7 @@ function Home() {
             </div>
           </div>
 
-          <p class="fs-5 my-4 text-center">
+          <p className="fs-5 my-4 text-center">
             El abandono de animales en España está lamentablemente extendido.{" "}
             <br></br>
             Gran parte de estos animales son perros y gatos de distintas razas.
@@ -97,13 +97,13 @@ function Home() {
             Con tu ayuda podemos hacer que los animales de Zaragoza que
             necesitan un hogar lo tengan.
           </p>
-          <p class="fs-2 text-center">
+          <p className="fs-2 text-center">
             <span style={{ color: "orange" }}>
               <b>ADOPTA</b>, NO COMPRES{" "}
             </span>
           </p>
-          <div class=" fs-5 row justify-content-center my-4 mt-5">
-            <div class="col ">
+          <div className=" fs-5 row justify-content-center my-4 mt-5">
+            <div className="col ">
               <p>
                 <span style={{ color: "orange" }}>Síguenos </span>
                 en nuestra cuenta de{" "}
@@ -126,7 +126,7 @@ function Home() {
                 comunicarte con personas con los mismos intereses.{" "}
               </p>
             </div>
-            <div class="col ">
+            <div className="col ">
               <TwitterTimelineEmbed
                 sourceType="profile"
                 screenName="adoptadiCOs"
