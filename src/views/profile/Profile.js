@@ -25,23 +25,30 @@ function Profile() {
 
   useEffectOnce(() => {
     let id = userId;
+    let is_self = false;
+
+    // No personal profile if not logged in
+    if (!userId && !currentUser) {
+      return;
+    }
 
     // If no id or id is the same as the current user one
     if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
       setIsSelf(true);
+      is_self = true;
       id = currentUser.id;
 
       // Load self user if some
       // setUser(currentUser);
-    } else {
-      return; // Error no id
     }
 
     getUserDetails({ id: id })
       .then((result) => {
         let user = User.from(result);
         setUser(user);
-        setContextUser(user);
+        if (is_self) {
+          setContextUser(user);
+        }
       })
       .catch((error) => {
         console.error(error);
