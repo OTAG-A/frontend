@@ -107,7 +107,7 @@ function Profile() {
               src={
                 user.avatar
                   ? toImageUrl(user.avatar)
-                  : "assets/person-circle.svg"
+                  : "/assets/person-circle.svg"
               }
               alt=""
             />

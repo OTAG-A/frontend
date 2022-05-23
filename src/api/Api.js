@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080/api";
+export const baseUrl = "http://localhost:8080/api";
 
 function serverRequest(path, requestOptions) {
   let token = localStorage.getItem("token");
@@ -166,4 +166,8 @@ export async function updateAvatar({ imgFile = null }) {
 
 export function toImageUrl(avatarId) {
   return baseUrl + "/users/avatar/" + avatarId;
+}
+
+export function getInfoUser() {
+  return getRequest("/users/info/me");
 }

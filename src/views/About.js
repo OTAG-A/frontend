@@ -90,7 +90,7 @@ function About() {
             <div class="col text-center">
               <img
                 class="img-fluid"
-                src="assets/Ayuntamiento_de_Zaragoza.png"
+                src="/assets/Ayuntamiento_de_Zaragoza.png"
                 alt="Ayuntamiento de Zaragoza"
               />
             </div>

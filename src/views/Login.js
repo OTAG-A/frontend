@@ -6,7 +6,7 @@ import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
 import { TokenContext } from "../environment/TokenProvider";
 
-import { loginUser } from "../api/Api";
+import { loginUser, baseUrl } from "../api/Api";
 
 function Login() {
   const [successMsg, setSuccessMsg] = useState("");
@@ -66,17 +66,15 @@ function Login() {
   //TODO:funcionalidad
   const loginGoogle = async (e) => {
     e.preventDefault();
-    console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
-    );
+    console.log("Login google");
+    window.open(baseUrl + "/users/google", "_self");
   };
 
   //TODO:funcionalidad
-  const loginTwitter = async (e) => {
+  const loginGitHub = async (e) => {
     e.preventDefault();
-    console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
-    );
+    console.log("Login github");
+    window.open(baseUrl + "/users/github", "_self");
   };
 
   const handleRecoverPassword = (e) => {
@@ -93,12 +91,12 @@ function Login() {
       <header className="mt-0 px-5 pb-0 pt-3">
         <h1 className="font-weight-light text-center fw-bold">Inicio Sesión</h1>
       </header>
-      <div className="container">
+      <div className="container mb-5">
         <div className="row justify-content-center">
           <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
-                src="assets/person-circle.svg"
+                src="/assets/person-circle.svg"
                 className="img-fluid"
                 alt="Icon Twitter"
               ></img>
@@ -151,22 +149,22 @@ function Login() {
                 Registrarse
               </button>
             </div>
-            <div className="row justify-content-center mt-4">
+            <div className="row justify-content-center mt-4 mb-5">
               <div className="text-center mb-0 col-4 ">
                 <div className="btn btn-default" onClick={loginGoogle}>
                   <img
-                    src="assets/logo-google.svg"
+                    src="/assets/logo-google.svg"
                     className="img-fluid"
                     alt="Logo Google"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <div className="btn btn-default" onClick={loginTwitter}>
+                <div className="btn btn-default" onClick={loginGitHub}>
                   <img
-                    src="assets/twitter.svg"
+                    src="/assets/github.svg"
                     className="img-fluid"
-                    alt="Icon Twitter"
+                    alt="Icon GitHub"
                   ></img>
                 </div>
               </div>

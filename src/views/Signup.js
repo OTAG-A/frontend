@@ -112,7 +112,7 @@ function Signup() {
           <form className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
-                src="assets/person-circle.svg"
+                src="/assets/person-circle.svg"
                 className="img-fluid"
                 alt=""
               ></img>
@@ -188,7 +188,7 @@ function Signup() {
               <div className="text-center mb-0 col-4 ">
                 <div className="btn btn-default" onClick={signupGoogle}>
                   <img
-                    src="assets/logo-google.svg"
+                    src="/assets/logo-google.svg"
                     className="img-fluid"
                     alt="Logo Google"
                   ></img>
@@ -197,7 +197,7 @@ function Signup() {
               <div className="text-center mb-0 col-4">
                 <div className="btn btn-default" onClick={signupTwitter}>
                   <img
-                    src="assets/twitter.svg"
+                    src="/assets/twitter.svg"
                     className="img-fluid"
                     alt="Icon Twitter"
                   ></img>
