@@ -7,7 +7,7 @@ import { Form, FloatingLabel } from "react-bootstrap";
 import { ListAnimal } from "../../models";
 import AnimalComponent from "./components/AnimalComponent";
 
-import { getAnimals, getSpecies, getStatistics } from "../../api/Api";
+import { getAnimals, getSpecies } from "../../api/Api";
 
 import { Pagination } from "react-bootstrap";
 
@@ -34,8 +34,8 @@ function AnimalList() {
   const [totalAnimals, setTotalAnimals] = useState(0);
 
   const [species, setSpecies] = useState([]);
-  const [filterSpecie, setFilterSpecie] = useState('');
-  const [filterBreed, setFilterBreed] = useState('');
+  const [filterSpecie, setFilterSpecie] = useState("");
+  const [filterBreed, setFilterBreed] = useState("");
 
   const animalsPerPage = 9;
 
@@ -69,14 +69,16 @@ function AnimalList() {
     })
       .then((result) => {
         console.log("res", result);
-        let animal_list = result.data.map((animal) => ListAnimal.from(animal));
+        setTotalAnimals(result.data.total);
+        let animal_list = result.data.pets.map((animal) =>
+          ListAnimal.from(animal)
+        );
         setAnimals(animal_list);
       })
       .catch((error) => {
         console.error(error);
       });
-  }
-
+  };
 
   // Obtenemos la pagina de los parametros de url
   const paginaParam =
@@ -84,13 +86,7 @@ function AnimalList() {
   const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
 
   useEffectOnce(() => {
-    getStatistics()
-      .then((result) => {
-        setTotalAnimals(result[2].animals_in_adoption);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchAnimals();
   });
 
   const previousFilterBreed = usePrevious(filterBreed);
@@ -105,11 +101,11 @@ function AnimalList() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [filterBreed]);
+  }, [filterBreed]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetchAnimals();
-  }, [animalsPerPage, totalAnimals, pagina, filterSpecie]);
+  }, [animalsPerPage, totalAnimals, pagina, filterSpecie]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffectOnce(() => {
     getSpecies()
@@ -119,7 +115,7 @@ function AnimalList() {
         );
         setSpecies(result_species);
       })
-      .then((error) => { });
+      .then((error) => {});
   });
 
   const gotoPage = (page) => {
@@ -146,11 +142,12 @@ function AnimalList() {
                 required
                 aria-label="Especie"
                 value={filterSpecie}
-                onChange={(e) => { setFilterSpecie(e.target.value); gotoPage(1); }}
+                onChange={(e) => {
+                  setFilterSpecie(e.target.value);
+                  gotoPage(1);
+                }}
               >
-                <option value="">
-                  Cualquier especie
-                </option>
+                <option value="">Cualquier especie</option>
                 {species.map((specie, i) => (
                   <option value={specie.toUpperCase()} key={i}>
                     {specie}
@@ -168,7 +165,10 @@ function AnimalList() {
                 type="text"
                 placeholder="Buscar por raza"
                 value={filterBreed}
-                onInput={(e) => { setFilterBreed(e.target.value); gotoPage(1); }}
+                onInput={(e) => {
+                  setFilterBreed(e.target.value);
+                  gotoPage(1);
+                }}
               />
             </FloatingLabel>
           </div>
