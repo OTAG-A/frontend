@@ -71,7 +71,7 @@ function Thread() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onPostDelete = (post) => {
-    console.log("delete post with id " + post.id);
+    console.log("delete admin thread post with id " + post.id);
     deleteForum({
       id_forum: post.id,
     })
@@ -86,7 +86,7 @@ function Thread() {
   };
 
   const onCommentDelete = (comment) => {
-    console.log("delete comment with id " + comment.id);
+    console.log("delete admin thread comment with id " + comment.id);
     deleteComment({
       id_comment: comment.id,
       id_forum: post.id,
@@ -103,7 +103,7 @@ function Thread() {
   };
 
   const onPostDeleteUser = (post) => {
-    console.log("delete post with id " + post.id);
+    console.log("delete user thread post with id " + post.id);
     deleteForumUser({
       id_forum: post.id,
     })
@@ -118,7 +118,7 @@ function Thread() {
   };
 
   const onCommentDeleteUser = (comment) => {
-    console.log("delete comment with id " + comment.id);
+    console.log("delete user thread comment with id " + comment.id);
     deleteCommentUser({
       id_comment: comment.id,
       id_forum: post.id,
@@ -148,6 +148,7 @@ function Thread() {
   };
 
   console.log(currentUser.id, " vs ", post);
+  console.log("commment", comment);
 
   if (post !== null) {
     return (
@@ -172,14 +173,15 @@ function Thread() {
               onDelete={
                 currentUser && currentUser.isAdmin ? onCommentDelete : null
               }
-
-              onCommentDeleteUser={
-                currentUser && currentUser.id === comment.user_id ? onCommentDelete : null
+              onDeleteUser={
+                currentUser && currentUser.id === comment.user_id
+                  ? onCommentDeleteUser
+                  : null
               }
             />
           ))}
 
-          <Form className="comment p-2 card mb-3" onSubmit={handlePostComment}>
+          <Form className="comment p-2 card mb-5" onSubmit={handlePostComment}>
             <div className="row">
               <div className="col">
                 <FloatingLabel
@@ -198,7 +200,7 @@ function Thread() {
               </div>
             </div>
             <div className="row">
-              <div className="col text-end">
+              <div className="col text-end ">
                 <button type="submit" className="btn btn-primary">
                   Enviar
                 </button>

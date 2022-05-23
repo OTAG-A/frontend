@@ -78,7 +78,7 @@ function GeneralCategory() {
 
   return (
     <div className="row">
-      <div className="col-md-9">
+      <div className="col-md-9 ">
         {alertMsg !== "" && (
           <div className="alert alert-danger">{alertMsg}</div>
         )}
@@ -123,7 +123,7 @@ function GeneralCategory() {
           </ul>
         </div>
 
-        <div className="most-popular card p-3">
+        <div className="most-popular card p-3 mb-5">
           <h2>Más populares</h2>
           <ul>
             {popular_posts.map((post, i) => (

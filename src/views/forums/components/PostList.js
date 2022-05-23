@@ -10,7 +10,7 @@ function PostList({ posts, thread = false, onDelete = () => {} }) {
   const navigate = useNavigate();
 
   const onPostDelete = (post) => {
-    console.log("delete post with id " + post.id);
+    console.log("delete admin post with id " + post.id);
     deleteForum({
       id_forum: post.id,
     })
@@ -25,14 +25,12 @@ function PostList({ posts, thread = false, onDelete = () => {} }) {
   };
 
   const onPostDeleteUser = (post) => {
-    console.log("delete post with id " + post.id);
+    console.log("delete user post with id " + post.id);
     deleteForumUser({
       id_forum: post.id,
     })
       .then((response) => {
         console.log(response);
-        //TODO:reload o set comments de nuevo para que se quite el eliminado
-        // navigate("/foro");
         onDelete();
       })
       .catch((error) => {
@@ -42,7 +40,7 @@ function PostList({ posts, thread = false, onDelete = () => {} }) {
   };
 
   return (
-    <div>
+    <div className="mb-5 pb-5">
       {posts.map((post, i) => (
         <PostComponent
           post={post}
