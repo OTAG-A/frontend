@@ -63,14 +63,12 @@ function Login() {
       });
   };
 
-  //TODO:funcionalidad
   const loginGoogle = async (e) => {
     e.preventDefault();
     console.log("Login google");
     window.open(baseUrl + "/users/google", "_self");
   };
 
-  //TODO:funcionalidad
   const loginGitHub = async (e) => {
     e.preventDefault();
     console.log("Login github");
