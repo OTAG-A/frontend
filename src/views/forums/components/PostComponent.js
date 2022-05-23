@@ -29,7 +29,7 @@ function PostComponent({
 }) {
   return (
     <div className="post p-2 card mb-3">
-      {onDelete && (
+      {(onDelete || onDeleteUser) && (
         <DeleteCornerButton action={() => postDelete(post, onDelete)} />
       )}
 

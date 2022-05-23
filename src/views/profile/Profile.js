@@ -44,10 +44,8 @@ function Profile() {
       "¿Estás seguro de que quieres eliminar tu cuenta?",
       () => {
         console.log("Eliminar cuenta propia");
-        //TODO: seguro que es sin id_user?? sino como se sabe cuál borrar
         deleteSelfUser()
           .then((response) => {
-            //TODO: ver si elimina pero no entra en response, por lo que no hace la navegación
             console.log("Eliminado");
             console.log(response);
             navigate("/");
@@ -67,7 +65,6 @@ function Profile() {
       () => {
         deleteUser(userId)
           .then((response) => {
-            //TODO: elimina pero no entra en response, por lo que no hace la navegación
             console.log("Eliminado");
             console.log(response);
             navigate("/admin");

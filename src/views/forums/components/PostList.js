@@ -48,6 +48,9 @@ function PostList({ posts, thread = false }) {
           compact={!thread}
           key={i}
           onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
+          onDeleteUser={
+            currentUser && currentUser.id === post.id ? onPostDeleteUser : null
+          }
         />
       ))}
     </div>

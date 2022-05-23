@@ -52,6 +52,7 @@ function Login() {
         let user = User.from(response);
         console.log(user);
         setUser(user);
+        console.log(user);
 
         navigate("/");
       })

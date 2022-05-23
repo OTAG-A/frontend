@@ -154,6 +154,9 @@ function Thread() {
           post={post}
           compact={false}
           onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
+          onDeleteUser={
+            currentUser && currentUser.id === post.id ? onPostDeleteUser : null
+          }
         />
 
         <h2 className="mt-5 mb-3">Respuestas</h2>
