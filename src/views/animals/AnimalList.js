@@ -19,6 +19,14 @@ function splitInGroups(arr, n) {
   );
 }
 
+function usePrevious(value) {
+  const ref = React.useRef(value);
+  React.useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 function AnimalList() {
   const navigate = useNavigate();
 
@@ -26,8 +34,8 @@ function AnimalList() {
   const [totalAnimals, setTotalAnimals] = useState(0);
 
   const [species, setSpecies] = useState([]);
-  const [filterSpecie, setFilterSpecie] = useState();
-  const [filterBreed, setFilterBreed] = useState();
+  const [filterSpecie, setFilterSpecie] = useState('');
+  const [filterBreed, setFilterBreed] = useState('');
 
   const animalsPerPage = 9;
 
@@ -50,14 +58,32 @@ function AnimalList() {
     return pages;
   };
 
+  const fetchAnimals = () => {
+    const pag = pagina || 1;
+    console.log("`" + (filterBreed ? filterBreed : null) + "`");
+    getAnimals({
+      starts: (pag - 1) * animalsPerPage,
+      rows: animalsPerPage,
+      specie: filterSpecie || null,
+      breed: filterBreed ? filterBreed.toUpperCase() : null,
+    })
+      .then((result) => {
+        console.log("res", result);
+        let animal_list = result.data.map((animal) => ListAnimal.from(animal));
+        setAnimals(animal_list);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+
   // Obtenemos la pagina de los parametros de url
   const paginaParam =
     parseInt(new URLSearchParams(loc.search).get("pagina")) || 1;
   const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
 
   useEffectOnce(() => {
-    console.debug("fetching total animal number");
-
     getStatistics()
       .then((result) => {
         setTotalAnimals(result[2].animals_in_adoption);
@@ -67,23 +93,23 @@ function AnimalList() {
       });
   });
 
+  const previousFilterBreed = usePrevious(filterBreed);
+  // useEffect with cooldown for quick typers
   useEffect(() => {
-    console.debug("fetching animal list");
+    // Only query if changed
+    if (filterBreed === previousFilterBreed) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      fetchAnimals();
+    }, 500);
 
-    const pag = pagina || 1;
-    getAnimals({
-      starts: (pag - 1) * animalsPerPage,
-      rows: animalsPerPage,
-    })
-      .then((result) => {
-        console.log(result);
-        let animal_list = result.data.map((animal) => ListAnimal.from(animal));
-        setAnimals(animal_list);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [animalsPerPage, totalAnimals, pagina]);
+    return () => clearTimeout(timer);
+  }, [filterBreed]);
+
+  useEffect(() => {
+    fetchAnimals();
+  }, [animalsPerPage, totalAnimals, pagina, filterSpecie]);
 
   useEffectOnce(() => {
     getSpecies()
@@ -120,13 +146,13 @@ function AnimalList() {
                 required
                 aria-label="Especie"
                 value={filterSpecie}
-                onChange={(e) => setFilterSpecie(e.target.value)}
+                onChange={(e) => { setFilterSpecie(e.target.value); gotoPage(1); }}
               >
                 <option value="">
                   Cualquier especie
                 </option>
                 {species.map((specie, i) => (
-                  <option value={specie} key={i}>
+                  <option value={specie.toUpperCase()} key={i}>
                     {specie}
                   </option>
                 ))}
@@ -142,7 +168,7 @@ function AnimalList() {
                 type="text"
                 placeholder="Buscar por raza"
                 value={filterBreed}
-                onInput={(e) => setFilterBreed(e.target.value)}
+                onInput={(e) => { setFilterBreed(e.target.value); gotoPage(1); }}
               />
             </FloatingLabel>
           </div>
