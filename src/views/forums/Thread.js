@@ -147,6 +147,8 @@ function Thread() {
       });
   };
 
+  console.log(currentUser.id, " vs ", post);
+
   if (post !== null) {
     return (
       <div>
@@ -155,7 +157,9 @@ function Thread() {
           compact={false}
           onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
           onDeleteUser={
-            currentUser && currentUser.id === post.id ? onPostDeleteUser : null
+            currentUser && currentUser.id === post.user_id
+              ? onPostDeleteUser
+              : null
           }
         />
 

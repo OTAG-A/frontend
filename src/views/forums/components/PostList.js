@@ -4,7 +4,7 @@ import PostComponent from "./PostComponent";
 import { deleteForum, deleteForumUser } from "../../../api/Api";
 import { useNavigate } from "react-router-dom";
 
-function PostList({ posts, thread = false }) {
+function PostList({ posts, thread = false, onDelete = () => {} }) {
   let { user: currentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function PostList({ posts, thread = false }) {
     })
       .then((response) => {
         console.log(response);
-        navigate("/foro/" + post.category);
+        navigate("/foro");
       })
       .catch((error) => {
         console.log(error);
@@ -32,7 +32,8 @@ function PostList({ posts, thread = false }) {
       .then((response) => {
         console.log(response);
         //TODO:reload o set comments de nuevo para que se quite el eliminado
-        navigate("/foro/" + post.category);
+        // navigate("/foro");
+        onDelete();
       })
       .catch((error) => {
         console.log(error);
@@ -49,7 +50,9 @@ function PostList({ posts, thread = false }) {
           key={i}
           onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
           onDeleteUser={
-            currentUser && currentUser.id === post.id ? onPostDeleteUser : null
+            currentUser && currentUser.id === post.user_id
+              ? onPostDeleteUser
+              : null
           }
         />
       ))}

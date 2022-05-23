@@ -20,6 +20,10 @@ function GeneralCategory() {
   const popular_posts = posts.slice(0, 4);
 
   useEffect(() => {
+    if (successMsg) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     postList()
       .then((result) => {
         let post_list = result.data.map((post) => Post.from(post));
@@ -81,7 +85,15 @@ function GeneralCategory() {
         {successMsg !== "" && (
           <div className="alert alert-success">{successMsg}</div>
         )}
-        <PostList posts={posts} />
+        <PostList
+          posts={posts}
+          onDelete={() => {
+            setSuccessMsg("Eliminado con éxito");
+            setTimeout(() => {
+              setSuccessMsg("");
+            }, 2000); // 2 seconds
+          }}
+        />
       </div>
 
       <div className="col-md-3">
