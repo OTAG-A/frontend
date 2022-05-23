@@ -27,6 +27,7 @@ function GeneralCategory() {
   const [successMsg, setSuccessMsg] = useState("");
 
   const [categories, setCategories] = useState(["General"]);
+  const [categoriesFilter, setCategoriesFilter] = useState('');
   // TODO: replace with real data
   const popular_posts = posts.slice(0, 4);
 
@@ -99,7 +100,7 @@ function GeneralCategory() {
         console.log(response_categories);
         setCategories(response_categories);
       })
-      .then((error) => {});
+      .then((error) => { });
 
     getNumberForums()
       .then((result) => {
@@ -206,13 +207,17 @@ function GeneralCategory() {
             id="category"
             className="mb-3"
             placeholder="Filtrar categorias"
+            value={categoriesFilter}
+            onChange={e => setCategoriesFilter(e.target.value)}
           />
           <ul>
-            {categories.map((category, i) => (
-              <li key={i}>
-                <Link to={"/foro/" + category}>{category}</Link>
-              </li>
-            ))}
+            {categories
+              .filter(f => categoriesFilter === '' || f.toLowerCase().includes(categoriesFilter))
+              .map((category, i) => (
+                <li key={i}>
+                  <Link to={"/foro/" + category}>{category}</Link>
+                </li>
+              ))}
           </ul>
         </div>
 
