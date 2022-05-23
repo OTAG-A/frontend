@@ -110,7 +110,7 @@ export async function postList({ starts = null, rows = null }) {
   return getRequest("/forum/list", arguments[0]);
 }
 
-export async function postListByCategory({ category = null }) {
+export async function postListByCategory({ starts = null, rows = null, category = null }) {
   return getRequest("/forum/category", arguments[0]);
 }
 
@@ -139,7 +139,11 @@ export async function getUserDetails({ id = null }) {
 }
 
 export async function getNumberForums() {
-  return getRequest("/forum/admin/numberofforums");
+  return getRequest("/forum/numberofforums");
+}
+
+export async function getNumberForumsByCategory({ category = null }) {
+  return getRequest("/forum/numberofforumscategory", arguments[0]);
 }
 
 export async function getNumberReplies() {
