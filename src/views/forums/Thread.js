@@ -27,6 +27,9 @@ function Thread() {
 
   const navigate = useNavigate();
 
+  const [alertMsg, setAlertMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
   const fetchPostDetails = () => {
     postDetails({
       id_forum: idThread,
@@ -67,8 +70,11 @@ function Thread() {
   };
 
   useEffect(() => {
+    if (successMsg) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     fetchPostDetails();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [successMsg]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onPostDelete = (post) => {
     console.log("delete admin thread post with id " + post.id);
@@ -94,10 +100,21 @@ function Thread() {
     })
       .then((response) => {
         console.log(response);
-        //TODO:reload o set comments de nuevo para que se quite el eliminado
+        setAlertMsg("");
+        setSuccessMsg("Respuesta eliminada con éxito");
+
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000); // 3 seconds
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg("No se pudo eliminar la respuesta");
+        setSuccessMsg("");
+
+        setTimeout(() => {
+          setAlertMsg("");
+        }, 3000); // 3 seconds
         return;
       });
   };
@@ -125,10 +142,21 @@ function Thread() {
     })
       .then((response) => {
         console.log(response);
-        //TODO:reload o set comments de nuevo para que se quite el eliminado
+        setAlertMsg("");
+        setSuccessMsg("Respuesta eliminada con éxito");
+
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000); // 3 seconds
       })
       .catch((error) => {
         console.log(error);
+        setAlertMsg("No se pudo eliminar la respuesta");
+        setSuccessMsg("");
+
+        setTimeout(() => {
+          setAlertMsg("");
+        }, 3000); // 3 seconds
         return;
       });
   };
@@ -147,12 +175,15 @@ function Thread() {
       });
   };
 
-  console.log(currentUser.id, " vs ", post);
-  console.log("commment", comment);
-
   if (post !== null) {
     return (
       <div>
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
         <PostComponent
           post={post}
           compact={false}
