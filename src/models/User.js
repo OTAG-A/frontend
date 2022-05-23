@@ -2,7 +2,6 @@ class User {
   id = "";
   username = "";
   bio = "";
-  email = "";
   createdAt = Date();
   messagesNum = 0;
   avatar = "";
@@ -21,7 +20,6 @@ class User {
     return User.from({
       id: "12319283719283712937",
       username: "Test user",
-      email: "test@test.com",
       bio: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       createdAt: new Date(),
       messagesNum: 500,

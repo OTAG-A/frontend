@@ -34,7 +34,11 @@ class Post {
   }
 
   get_url() {
-    return "/foro/" + this.category + "/" + this.id;
+    let category = this.category;
+    if (!this.category) {
+      category = "general";
+    }
+    return "/foro/" + category + "/" + this.id;
   }
 }
 

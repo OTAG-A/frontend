@@ -25,14 +25,14 @@ function postRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-// function putRequest(path, body) {
-//   let requestOptions = {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(body),
-//   };
-//   return serverRequest(path, requestOptions);
-// }
+function putRequest(path, body) {
+  let requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
+}
 
 function getRequest(path, body = {}) {
   let params = new URLSearchParams();
@@ -90,6 +90,22 @@ export async function getAnimalPrivateDetails({ id = null }) {
   return getRequest("/pet", arguments[0]);
 }
 
+export async function updateBio({ bio = null }) {
+  return putRequest("/users/bio", arguments[0]);
+}
+
+export async function updatePassword({
+  password = null,
+  newPassword = null,
+  repeatedNewPassword = null,
+}) {
+  return putRequest("/users/password", arguments[0]);
+}
+
+export async function updateUsername({ newUsername = null }) {
+  return putRequest("/users/username", arguments[0]);
+}
+
 export async function postList() {
   return getRequest("/forum/list");
 }
@@ -128,4 +144,26 @@ export async function getNumberReplies() {
 
 export async function getBestCategory() {
   return getRequest("/forum/admin/bestcategory");
+}
+
+export async function updateAvatar({ imgFile = null }) {
+  let path = "/users/avatar";
+
+  let data = new FormData();
+  data.append("avatar", imgFile);
+
+  let requestOptions = {
+    method: "PUT",
+    headers: {},
+    body: data,
+  };
+  return serverRequest(path, requestOptions);
+}
+
+// export async function getAvatar({ avatarId = null }) {
+//   return getRequest("/users/avatar/" + avatarId);
+// }
+
+export function toImageUrl(avatarId) {
+  return baseUrl + "/users/avatar/" + avatarId;
 }

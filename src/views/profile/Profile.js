@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser } from "../../api/Api";
+import { getUserDetails, toImageUrl } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -24,19 +24,35 @@ function Profile() {
   const navigate = useNavigate();
 
   useEffectOnce(() => {
-    console.debug(currentUser);
+    let id = userId;
+    let is_self = false;
+
+    // No personal profile if not logged in
+    if (!userId && !currentUser) {
+      return;
+    }
 
     // If no id or id is the same as the current user one
     if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
       setIsSelf(true);
+      is_self = true;
+      id = currentUser.id;
 
       // Load self user if some
-      setUser(currentUser);
-      return;
+      // setUser(currentUser);
     }
 
-    // TODO: api request to get user data
-    setUser(User.preview());
+    getUserDetails({ id: id })
+      .then((result) => {
+        let user = User.from(result);
+        setUser(user);
+        if (is_self) {
+          setContextUser(user);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 
   const handleDeleteSelfAccount = () => {
@@ -58,18 +74,21 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    logoutUser()
-      .then((response) => {
-        console.log(response);
-        // Logout satisfactorio
-        setToken(null);
-        setContextUser(null);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        return;
-      });
+    setToken(null);
+    setContextUser(null);
+    navigate("/");
+
+    // logoutUser()
+    //   .then((response) => {
+    //     // Logout satisfactorio
+    //     setToken(null);
+    //     setContextUser(null);
+    //     navigate("/");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     return;
+    //   });
   };
 
   if (!user) {
@@ -84,11 +103,12 @@ function Profile() {
         <div className="row">
           <div className="col text-center p-5">
             <img
-              className="mb-3 img img-responsive"
+              className="mb-3 img img-responsive profile-pic"
               src={
-                user.avatar === "" ? "assets/person-circle.svg" : user.avatar
+                user.avatar
+                  ? toImageUrl(user.avatar)
+                  : "assets/person-circle.svg"
               }
-              style={{ height: "15vw", width: "15vw", objectFit: "cover" }}
               alt=""
             />
             <h2 className="mb-4">{user.username}</h2>
@@ -103,9 +123,6 @@ function Profile() {
           <div className="col p-5 my-auto">
             <h1 className="mb-5">Información de {user.username}</h1>
             <p>
-              <b>Email:</b> {user.email}
-              <br />
-              <br />
               <b>Fecha de creación:</b>{" "}
               {moment(user.createdAt).format("DD-MM-YYYY")}
               <br />
