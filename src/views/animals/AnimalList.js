@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffectOnce } from "usehooks-ts";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Form, FloatingLabel } from "react-bootstrap";
 import { ListAnimal } from "../../models";
 import AnimalComponent from "./components/AnimalComponent";
 
-import { getAnimals, getSpecies, getStatistics } from "../../api/Api";
+import { getAnimals, getSpecies } from "../../api/Api";
 
 import { Pagination } from "react-bootstrap";
 
@@ -34,8 +34,8 @@ function AnimalList() {
   const [totalAnimals, setTotalAnimals] = useState(0);
 
   const [species, setSpecies] = useState([]);
-  const [filterSpecie, setFilterSpecie] = useState('');
-  const [filterBreed, setFilterBreed] = useState('');
+  const [filterSpecie, setFilterSpecie] = useState("");
+  const [filterBreed, setFilterBreed] = useState("");
 
   const animalsPerPage = 9;
 
@@ -58,7 +58,12 @@ function AnimalList() {
     return pages;
   };
 
-  const fetchAnimals = () => {
+  // Obtenemos la pagina de los parametros de url
+  const paginaParam =
+    parseInt(new URLSearchParams(loc.search).get("pagina")) || 1;
+  const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
+
+  const fetchAnimals = useCallback(() => {
     const pag = pagina || 1;
     console.log("`" + (filterBreed ? filterBreed : null) + "`");
     getAnimals({
@@ -69,28 +74,19 @@ function AnimalList() {
     })
       .then((result) => {
         console.log("res", result);
-        let animal_list = result.data.map((animal) => ListAnimal.from(animal));
+        setTotalAnimals(result.data.total);
+        let animal_list = result.data.pets.map((animal) =>
+          ListAnimal.from(animal)
+        );
         setAnimals(animal_list);
       })
       .catch((error) => {
         console.error(error);
       });
-  }
-
-
-  // Obtenemos la pagina de los parametros de url
-  const paginaParam =
-    parseInt(new URLSearchParams(loc.search).get("pagina")) || 1;
-  const pagina = Math.max(1, Math.min(getNumPages(), paginaParam));
+  }, [animalsPerPage, totalAnimals, pagina, filterSpecie]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffectOnce(() => {
-    getStatistics()
-      .then((result) => {
-        setTotalAnimals(result[2].animals_in_adoption);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchAnimals();
   });
 
   const previousFilterBreed = usePrevious(filterBreed);
@@ -105,11 +101,11 @@ function AnimalList() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [filterBreed]);
+  }, [filterBreed, fetchAnimals, previousFilterBreed]);
 
   useEffect(() => {
     fetchAnimals();
-  }, [animalsPerPage, totalAnimals, pagina, filterSpecie]);
+  }, [fetchAnimals, animalsPerPage, totalAnimals, pagina, filterSpecie]);
 
   useEffectOnce(() => {
     getSpecies()
@@ -146,11 +142,12 @@ function AnimalList() {
                 required
                 aria-label="Especie"
                 value={filterSpecie}
-                onChange={(e) => { setFilterSpecie(e.target.value); gotoPage(1); }}
+                onChange={(e) => {
+                  setFilterSpecie(e.target.value);
+                  gotoPage(1);
+                }}
               >
-                <option value="">
-                  Cualquier especie
-                </option>
+                <option value="">Cualquier especie</option>
                 {species.map((specie, i) => (
                   <option value={specie.toUpperCase()} key={i}>
                     {specie}
@@ -168,7 +165,10 @@ function AnimalList() {
                 type="text"
                 placeholder="Buscar por raza"
                 value={filterBreed}
-                onInput={(e) => { setFilterBreed(e.target.value); gotoPage(1); }}
+                onInput={(e) => {
+                  setFilterBreed(e.target.value);
+                  gotoPage(1);
+                }}
               />
             </FloatingLabel>
           </div>
