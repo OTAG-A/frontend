@@ -16,12 +16,11 @@ function CommentComponent({ comment, onDelete = null, onDeleteUser = null }) {
 
   return (
     <div className="comment p-2 card mb-3">
-      {onDelete ||
-        (onDeleteUser && (
-          <DeleteCornerButton
-            action={() => comentDelete(onDelete || onDeleteUser)}
-          />
-        ))}
+      {(onDelete || onDeleteUser) && (
+        <DeleteCornerButton
+          action={() => comentDelete(onDelete || onDeleteUser)}
+        />
+      )}
       <div className="row">
         <UserComponent user={comment.user} />
         <p className="col-sm-10 ml-5">{comment.reply}</p>

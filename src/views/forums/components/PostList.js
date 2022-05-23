@@ -16,7 +16,7 @@ function PostList({ posts, thread = false, onDelete = () => {} }) {
     })
       .then((response) => {
         console.log(response);
-        navigate("/foro");
+        onDelete();
       })
       .catch((error) => {
         console.log(error);
