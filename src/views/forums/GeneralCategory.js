@@ -112,7 +112,7 @@ function GeneralCategory() {
         </div>
 
         <div className="most-popular card p-3">
-          <h2>Más populares</h2>
+          <h2>Más recientes</h2>
           <ul>
             {popular_posts.map((post, i) => (
               <li key={i}>
