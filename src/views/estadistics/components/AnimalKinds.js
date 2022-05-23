@@ -50,7 +50,9 @@ function AnimalKinds() {
     let background = "rgba(" + r + "," + g + "," + b + ", 1)";
     // https://gist.github.com/p01/1005192?permalink_comment_id=1783655#gistcomment-1783655
     const n = -80;
-    let [rb, gb, bb] = [r, g, b].map(d => (d += n) < 0 ? 0 : d > 255 ? 255 : d | 0)
+    let [rb, gb, bb] = [r, g, b].map((d) =>
+      (d += n) < 0 ? 0 : d > 255 ? 255 : d | 0
+    );
     var border = "rgba(" + rb + "," + gb + "," + bb + ", 1)";
     return [background, border];
   }
@@ -69,11 +71,7 @@ function AnimalKinds() {
   });
 
   return (
-    <div className="container">
-      {chartData &&
-        <Pie data={chartData} />
-      }
-    </div>
+    <div className="container">{chartData && <Pie data={chartData} />}</div>
   );
 }
 export default AnimalKinds;

@@ -23,9 +23,9 @@ function Dangerous() {
       .then((result) => {
         console.log(
           "Animales peligrosos: " +
-          gangerous +
-          "\nAnimales no peligrosos: " +
-          notDangerous
+            gangerous +
+            "\nAnimales no peligrosos: " +
+            notDangerous
         );
         setDangerous(result[3].dangerous);
         setNotDangerous(result[3].not_dangerous);
