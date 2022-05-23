@@ -90,7 +90,9 @@ export default function PopupCreatePost({ onSubmit, categories }) {
 }
 
 export function openPopupCreatePost({ onSubmit = null, categories = null }) {
-  const content = <PopupCreatePost onSubmit={onSubmit} categories={categories} />;
+  const content = (
+    <PopupCreatePost onSubmit={onSubmit} categories={categories} />
+  );
   PopupboxManager.open({
     content,
     config: {

@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import PostList from "./components/PostList";
 
 import { Post, User } from "../../models";
-import { postListByCategory, getUserDetails, getNumberForumsByCategory } from "../../api/Api";
+import {
+  postListByCategory,
+  getUserDetails,
+  getNumberForumsByCategory,
+} from "../../api/Api";
 
 function ConcreteCategory() {
   const navigate = useNavigate();
@@ -84,7 +88,7 @@ function ConcreteCategory() {
       .catch((error) => {
         console.error(error);
       });
-  }, [totalPosts, pagina, postsPerPage]);
+  }, [category, totalPosts, pagina, postsPerPage]);
 
   const gotoPage = (page) => {
     navigate({
@@ -95,9 +99,7 @@ function ConcreteCategory() {
 
   return (
     <div className="row">
-      {alertMsg !== "" && (
-        <div className="alert alert-danger">{alertMsg}</div>
-      )}
+      {alertMsg !== "" && <div className="alert alert-danger">{alertMsg}</div>}
       <PostList posts={posts} />
 
       <div className="row">

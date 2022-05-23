@@ -156,7 +156,7 @@ a:hover {
   color: orange;
 }
 
-.pagination > .page-item.active > .page-link  {
+.pagination > .page-item.active > .page-link {
   color: white !important;
   background-color: orange !important;
   border-color: orange !important;

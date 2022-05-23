@@ -110,7 +110,11 @@ export async function postList({ starts = null, rows = null }) {
   return getRequest("/forum/list", arguments[0]);
 }
 
-export async function postListByCategory({ starts = null, rows = null, category = null }) {
+export async function postListByCategory({
+  starts = null,
+  rows = null,
+  category = null,
+}) {
   return getRequest("/forum/category", arguments[0]);
 }
 

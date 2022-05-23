@@ -8,7 +8,13 @@ import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
 
-import { postList, newPost, getUserDetails, getSpecies, getNumberForums } from "../../api/Api";
+import {
+  postList,
+  newPost,
+  getUserDetails,
+  getSpecies,
+  getNumberForums,
+} from "../../api/Api";
 
 function GeneralCategory() {
   const navigate = useNavigate();
@@ -86,13 +92,14 @@ function GeneralCategory() {
 
     getSpecies()
       .then((result) => {
-        let response_categories = result.data.map((specie) => capitalize(specie._id));
+        let response_categories = result.data.map((specie) =>
+          capitalize(specie._id)
+        );
         response_categories = response_categories.concat("General");
         console.log(response_categories);
         setCategories(response_categories);
       })
-      .then((error) => {
-      })
+      .then((error) => {});
 
     getNumberForums()
       .then((result) => {
@@ -180,7 +187,12 @@ function GeneralCategory() {
       <div className="col-md-3">
         <div className="row px-3 mb-4">
           <button
-            onClick={() => openPopupCreatePost({ onSubmit: handleNewPost, categories: categories })}
+            onClick={() =>
+              openPopupCreatePost({
+                onSubmit: handleNewPost,
+                categories: categories,
+              })
+            }
             className="btn btn-primary py-2"
           >
             Crear hilo
