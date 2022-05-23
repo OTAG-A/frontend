@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser, getUserDetails, toImageUrl } from "../../api/Api";
+import { getUserDetails, toImageUrl } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -67,17 +67,21 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    logoutUser()
-      .then((response) => {
-        // Logout satisfactorio
-        setToken(null);
-        setContextUser(null);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error(error);
-        return;
-      });
+    setToken(null);
+    setContextUser(null);
+    navigate("/");
+
+    // logoutUser()
+    //   .then((response) => {
+    //     // Logout satisfactorio
+    //     setToken(null);
+    //     setContextUser(null);
+    //     navigate("/");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     return;
+    //   });
   };
 
   if (!user) {
@@ -112,9 +116,6 @@ function Profile() {
           <div className="col p-5 my-auto">
             <h1 className="mb-5">Información de {user.username}</h1>
             <p>
-              <b>Email:</b> {user.email}
-              <br />
-              <br />
               <b>Fecha de creación:</b>{" "}
               {moment(user.createdAt).format("DD-MM-YYYY")}
               <br />
