@@ -151,3 +151,13 @@ a:hover {
   width: 15vw !important;
   object-fit: "cover";
 }
+
+.pagination > .page-item > .page-link {
+  color: orange;
+}
+
+.pagination > .page-item.active > .page-link {
+  color: white !important;
+  background-color: orange !important;
+  border-color: orange !important;
+}
