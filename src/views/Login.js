@@ -164,9 +164,9 @@ function Login() {
               <div className="text-center mb-0 col-4">
                 <div className="btn btn-default" onClick={loginTwitter}>
                   <img
-                    src="assets/twitter.svg"
+                    src="/assets/github.svg"
                     className="img-fluid"
-                    alt="Icon Twitter"
+                    alt="Icon GitHub"
                   ></img>
                 </div>
               </div>
