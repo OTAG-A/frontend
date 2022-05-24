@@ -1,4 +1,4 @@
-it("Login with test user", () => {
+export const login = () => {
   // cy.visit("https://adoptadicos.github.io");
   cy.visit("http://localhost:3000");
 
@@ -22,4 +22,8 @@ it("Login with test user", () => {
 
   // Display profile pic or placeholder, instead of login
   cy.get(".nav-link").last().should('not.have.text', "Log In");
+};
+
+it("Login with test user", () => {
+  login();
 });
