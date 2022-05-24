@@ -184,3 +184,7 @@ export async function getSpecies() {
 export function toImageUrl(avatarId) {
   return baseUrl + "/users/avatar/" + avatarId;
 }
+
+export async function getNumMessages({ id_user = null }) {
+  return getRequest("/forum/numberofmessages", arguments[0]);
+}

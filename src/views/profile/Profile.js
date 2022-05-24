@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { getUserDetails, toImageUrl } from "../../api/Api";
+import { getUserDetails, toImageUrl, getNumMessages } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -20,6 +20,7 @@ function Profile() {
   let { user: currentUser, setUser: setContextUser } = useContext(UserContext);
   let { setToken } = useContext(TokenContext);
   let { userId } = useParams();
+  const [numMessages, setNumMessages] = useState(0);
 
   const navigate = useNavigate();
 
@@ -49,11 +50,24 @@ function Profile() {
         if (is_self) {
           setContextUser(user);
         }
+        console.log("Antes de coger mensajes");
+        infoMessages(user.id);
       })
       .catch((error) => {
         console.error(error);
       });
   });
+
+  const infoMessages = (id) => {
+    getNumMessages({ id_user: id })
+      .then((result) => {
+        console.log(result);
+        setNumMessages(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleDeleteSelfAccount = () => {
     openQuestionPopup(
@@ -127,7 +141,7 @@ function Profile() {
               {moment(user.createdAt).format("DD-MM-YYYY")}
               <br />
               <br />
-              <b>Mensajes:</b> {user.messagesNum}
+              <b>Mensajes:</b> {numMessages}
               <br />
               <br />
             </p>
