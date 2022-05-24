@@ -46,6 +46,9 @@ function PostComponent({
         ) : (
           <h1>{post.title}</h1>
         )}
+        <p className="text-secondary">
+          Publicado el: {moment(post.createdAt).format("DD-MM-YYYY")}
+        </p>
       </div>
 
       <div className="row">
@@ -60,12 +63,6 @@ function PostComponent({
             </Link>
           )}
         </p>
-        <div className="row">
-          <div className="col-sm-10 ml-3"></div>
-          <p className="col-sm-2 ml-3">
-            Publicado el: {moment(post.createdAt).format("DD-MM-YYYY")}
-          </p>
-        </div>
       </div>
     </div>
   );
