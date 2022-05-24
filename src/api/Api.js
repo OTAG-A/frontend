@@ -1,4 +1,7 @@
-export const baseUrl = "http://localhost:8080/api";
+// export const baseUrl = "http://localhost:8080/api";
+export const baseUrl =
+  process.env.BACKEND_BASEURL || "http://localhost:8080/api";
+console.log("baseUrl:", process.env.BACKEND_BASEURL, baseUrl);
 
 function serverRequest(path, requestOptions, tokenOverride = null) {
   let token = null;
