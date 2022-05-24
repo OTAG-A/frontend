@@ -20,6 +20,9 @@ function ConcreteCategory() {
   const [posts, setPosts] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
 
+  const [alertMsg, setAlertMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
   const postsPerPage = 7;
 
   const loc = useLocation();
@@ -41,9 +44,11 @@ function ConcreteCategory() {
 
   let { category } = useParams();
 
-  const [alertMsg, setAlertMsg] = useState("");
-
   useEffect(() => {
+    if (successMsg) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     const pag = pagina || 1;
     console.log(pag, postsPerPage);
 
@@ -88,7 +93,7 @@ function ConcreteCategory() {
       .catch((error) => {
         console.error(error);
       });
-  }, [category, totalPosts, pagina, postsPerPage]);
+  }, [category, totalPosts, pagina, postsPerPage, successMsg]);
 
   const gotoPage = (page) => {
     navigate({
@@ -100,7 +105,18 @@ function ConcreteCategory() {
   return (
     <div className="row">
       {alertMsg !== "" && <div className="alert alert-danger">{alertMsg}</div>}
-      <PostList posts={posts} />
+      {successMsg !== "" && (
+        <div className="alert alert-success">{successMsg}</div>
+      )}
+      <PostList
+        posts={posts}
+        onDelete={() => {
+          setSuccessMsg("Eliminado con éxito");
+          setTimeout(() => {
+            setSuccessMsg("");
+          }, 2000); // 2 seconds
+        }}
+      />
 
       <div className="row">
         <Pagination className="justify-content-end">
