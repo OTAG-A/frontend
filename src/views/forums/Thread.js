@@ -38,15 +38,16 @@ function Thread() {
     })
       .then((result) => {
         let post = Post.from(result.data);
+
         getUserDetails({ id: post.user_id })
           .then((result) => {
-            post.user = User.from(result);
+            let postCopy = structuredClone(post);
+            postCopy.user = User.from(result);
+            setPost(postCopy);
           })
           .catch((error) => {
             console.error(error);
           });
-
-        console.log(post.replies);
 
         Promise.all(
           post.replies.map((reply_data) =>
@@ -61,8 +62,6 @@ function Thread() {
           }
           setPost(updatedPost);
         });
-
-        console.log(post);
 
         setPost(post);
       })

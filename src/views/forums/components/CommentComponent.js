@@ -24,14 +24,11 @@ function CommentComponent({ comment, onDelete = null, onDeleteUser = null }) {
         />
       )}
       <div className="row">
+        <p className="text-secondary">
+          Publicado el: {moment(comment.createdAt).format("DD-MM-YYYY HH:mm")}
+        </p>
         <UserComponent user={comment.user} />
         <p className="col-sm-10 ml-5">{comment.reply}</p>
-      </div>
-      <div className="row">
-        <div className="col-sm-10"></div>
-        <p className="col-sm-2">
-          Publicada el: {moment(comment.createdAt).format("DD-MM-YYYY")}
-        </p>
       </div>
     </div>
   );
