@@ -15,7 +15,7 @@ function Navigation() {
           <div class="col text-center">
             <img
               class="img-fluid"
-              src="assets/logo_adoptadiCOs.png"
+              src="/assets/logo_adoptadiCOs.png"
               alt="Logo adoptadicos"
               style={{ width: 250 }}
             />
