@@ -11,7 +11,12 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { getUserDetails, toImageUrl } from "../../api/Api";
+import {
+  deleteUser,
+  deleteSelfUser,
+  getUserDetails,
+  toImageUrl,
+} from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
@@ -33,7 +38,7 @@ function Profile() {
     }
 
     // If no id or id is the same as the current user one
-    if (!userId || (currentUser && currentUser.id === parseInt(userId))) {
+    if (!userId || (currentUser && currentUser.id === userId)) {
       setIsSelf(true);
       is_self = true;
       id = currentUser.id;
@@ -60,15 +65,37 @@ function Profile() {
       "¿Estás seguro de que quieres eliminar tu cuenta?",
       () => {
         console.log("Eliminar cuenta propia");
+        deleteSelfUser()
+          .then((response) => {
+            console.log("Eliminado");
+            console.log(response);
+            setToken(null);
+            setContextUser(null);
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+            return;
+          });
       }
     );
   };
 
   const handleDeleteOtherAccount = (user) => {
+    console.log("Eliminar cuenta del usuario con id: " + userId);
     openQuestionPopup(
       "¿Quieres eliminar al usuario " + user.username + "?",
       () => {
-        console.log("Eliminar cuenta de otro");
+        deleteUser(userId)
+          .then((response) => {
+            console.log("Eliminado");
+            console.log(response);
+            navigate("/admin");
+          })
+          .catch((error) => {
+            console.log(error);
+            return;
+          });
       }
     );
   };
@@ -107,12 +134,12 @@ function Profile() {
               src={
                 user.avatar
                   ? toImageUrl(user.avatar)
-                  : "assets/person-circle.svg"
+                  : "/assets/person-circle.svg"
               }
               alt=""
             />
             <h2 className="mb-4">{user.username}</h2>
-            <p className="text-start px-5">{user.bio}</p>
+            <p className="text-start px-5 mb-5">{user.bio}</p>
             {isSelf && (
               <button className="btn btn-danger" onClick={handleLogout}>
                 Cerrar sesión
@@ -120,7 +147,7 @@ function Profile() {
             )}
           </div>
 
-          <div className="col p-5 my-auto">
+          <div className="col p-5 my-auto  mb-5">
             <h1 className="mb-5">Información de {user.username}</h1>
             <p>
               <b>Fecha de creación:</b>{" "}
@@ -135,7 +162,7 @@ function Profile() {
               <div className="row text-center">
                 <div className="col">
                   <button
-                    className="btn btn-danger me-2"
+                    className="btn btn-danger me-2 mb-5"
                     onClick={() => handleDeleteOtherAccount(user)}
                   >
                     Eliminar usuario

@@ -19,7 +19,7 @@ function UserComponent({ user }) {
       >
         <img
           src={
-            user.avatar ? toImageUrl(user.avatar) : "assets/person-circle.svg"
+            user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
           }
           className="rounded-circle"
           width={60}

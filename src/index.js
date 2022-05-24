@@ -21,6 +21,7 @@ import {
   Thread,
   AdminPanel,
   Estadistics,
+  LoginSocial,
 } from "./views";
 
 // Application environment
@@ -63,6 +64,7 @@ ReactDOM.render(
             </Route>
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/estadisticas" element={<Estadistics />} />
+            <Route path="/success" element={<LoginSocial />} />
 
             <Route path="/" exact element={<Home />} />
           </Routes>

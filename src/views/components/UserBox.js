@@ -11,7 +11,7 @@ function UserBox({ id, name, image }) {
       <div className="row m-1 p-1 " onClick={() => navigate("/perfil/" + id)}>
         <div className="col-4	col-sm-4	col-md-2	col-lg-5  mt-1">
           <img
-            src={image ? toImageUrl(image) : "assets/person-circle.svg"}
+            src={image ? toImageUrl(image) : "/assets/person-circle.svg"}
             className="rounded-circle align-middle"
             style={{
               backgroundColor: "lightgray",

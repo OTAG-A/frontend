@@ -57,6 +57,10 @@ function GeneralCategory() {
   };
 
   useEffect(() => {
+    if (successMsg) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     const pag = pagina || 1;
     console.log(pag, postsPerPage);
     postList({
@@ -142,14 +146,23 @@ function GeneralCategory() {
 
   return (
     <div className="row">
-      <div className="col-md-9">
+      <div className="col-md-9 ">
         {alertMsg !== "" && (
           <div className="alert alert-danger">{alertMsg}</div>
         )}
         {successMsg !== "" && (
           <div className="alert alert-success">{successMsg}</div>
         )}
-        <PostList posts={posts} />
+
+        <PostList
+          posts={posts}
+          onDelete={() => {
+            setSuccessMsg("Eliminado con éxito");
+            setTimeout(() => {
+              setSuccessMsg("");
+            }, 2000); // 2 seconds
+          }}
+        />
 
         <div className="row">
           <Pagination className="justify-content-end">
@@ -225,8 +238,8 @@ function GeneralCategory() {
           </ul>
         </div>
 
-        <div className="most-popular card p-3">
-          <h2>Más recientes</h2>
+        <div className="most-popular card p-3 mb-5">
+          <h2>Más populares</h2>
           <ul>
             {popular_posts.map((post, i) => (
               <li key={i}>
