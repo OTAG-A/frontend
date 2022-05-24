@@ -92,10 +92,7 @@ function Login() {
         <h1 className="font-weight-light text-center fw-bold">Inicio Sesión</h1>
       </header>
       <div className="container mb-5">
-        <Form
-          className="row justify-content-center"
-          onSubmit={loginEmail}
-        >
+        <Form className="row justify-content-center" onSubmit={loginEmail}>
           <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
@@ -129,10 +126,7 @@ function Login() {
               />
             </div>
             <div className="justify-content-center mt-4">
-              <button
-                type="submit"
-                className="btn btn-primary login-button"
-              >
+              <button type="submit" className="btn btn-primary login-button">
                 Iniciar Sesión
               </button>
             </div>
