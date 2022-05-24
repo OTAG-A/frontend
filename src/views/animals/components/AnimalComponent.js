@@ -12,7 +12,7 @@ function AnimalComponent({ id, name, image }) {
         style={{ width: "fit-content", margin: "auto" }}
       >
         <img
-          src={image}
+          src={image ? image : "/assets/animales.png"}
           style={{ height: "25vh", width: "25vh", objectFit: "cover" }}
           alt={name}
         />
