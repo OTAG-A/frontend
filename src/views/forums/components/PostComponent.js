@@ -36,7 +36,7 @@ function PostComponent({
         />
       )}
 
-      <div className="row mb-3">
+      <div className="row">
         {compact ? (
           <h2>
             <Link to={post.get_url()} className="link-unstyled">
@@ -53,16 +53,20 @@ function PostComponent({
 
       <div className="row">
         <UserComponent user={post.user} />
-        <p className="col-sm-10 ml-5">
-          {compact
-            ? truncate(post.user_explanation, 300)
-            : post.user_explanation}
-          {compact && (
-            <Link to={post.get_url()} className="float-end">
+        {compact ? (
+          <>
+            <p className="col-sm-8 ml-5">
+              {truncate(post.user_explanation, 300)}
+            </p>
+            <Link to={post.get_url()} className="col-sm-2 mt-auto text-end">
               Leer más
             </Link>
-          )}
-        </p>
+          </>
+        ) : (
+          <>
+            <p className="col-sm-10 ml-5">{post.user_explanation}</p>
+          </>
+        )}
       </div>
     </div>
   );
