@@ -17,7 +17,10 @@ function Home() {
             de Zaragoza.
           </p>
           <div className="row justify-content-center my-4 mx-auto">
-            <div className="col-md-5 card m-3" style={{ borderColor: "orange" }}>
+            <div
+              className="col-md-5 card m-3"
+              style={{ borderColor: "orange" }}
+            >
               <div className="card-body text-center">
                 <h5 className="card-title" style={{ color: "orange" }}>
                   ¿Estás pensando en adoptar?
@@ -38,7 +41,10 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-md-5 card m-3" style={{ borderColor: "orange" }}>
+            <div
+              className="col-md-5 card m-3"
+              style={{ borderColor: "orange" }}
+            >
               <div className="card-body text-center">
                 <h5 className="card-title" style={{ color: "orange" }}>
                   ¿Tienes dudas sobre los animales?
