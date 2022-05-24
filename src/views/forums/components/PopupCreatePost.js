@@ -4,8 +4,8 @@ import { Row, Col, Button, Form, FloatingLabel } from "react-bootstrap";
 
 import Popup from "../../components/Popup";
 
-export default function PopupCreatePost({ onSubmit }) {
-  const categories = ["gatos", "perros", "canarios", "cocodrilos"];
+export default function PopupCreatePost({ onSubmit, categories }) {
+  // const categories = ["gatos", "perros", "canarios", "cocodrilos"];
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -89,8 +89,10 @@ export default function PopupCreatePost({ onSubmit }) {
   );
 }
 
-export function openPopupCreatePost(onSubmit) {
-  const content = <PopupCreatePost onSubmit={onSubmit} />;
+export function openPopupCreatePost({ onSubmit = null, categories = null }) {
+  const content = (
+    <PopupCreatePost onSubmit={onSubmit} categories={categories} />
+  );
   PopupboxManager.open({
     content,
     config: {

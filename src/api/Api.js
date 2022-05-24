@@ -112,8 +112,16 @@ export async function updateUsername({ newUsername = null }) {
   return putRequest("/users/username", arguments[0]);
 }
 
-export async function postList() {
-  return getRequest("/forum/list");
+export async function postList({ starts = null, rows = null }) {
+  return getRequest("/forum/list", arguments[0]);
+}
+
+export async function postListByCategory({
+  starts = null,
+  rows = null,
+  category = null,
+}) {
+  return getRequest("/forum/category", arguments[0]);
 }
 
 export async function postDetails({ id_forum = null }) {
@@ -141,7 +149,11 @@ export async function getUserDetails({ id = null }) {
 }
 
 export async function getNumberForums() {
-  return getRequest("/forum/admin/numberofforums");
+  return getRequest("/forum/numberofforums");
+}
+
+export async function getNumberForumsByCategory({ category = null }) {
+  return getRequest("/forum/numberofforumscategory", arguments[0]);
 }
 
 export async function getNumberReplies() {
@@ -164,6 +176,10 @@ export async function updateAvatar({ imgFile = null }) {
     body: data,
   };
   return serverRequest(path, requestOptions);
+}
+
+export async function getSpecies() {
+  return getRequest("/species");
 }
 
 // export async function getAvatar({ avatarId = null }) {
