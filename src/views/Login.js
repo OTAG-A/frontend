@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { openQuestionPopup } from "./components/PopupQuestion";
 
 import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
@@ -30,7 +29,6 @@ function Login() {
     }));
   };
 
-  //TODO:funcionalidad
   const loginEmail = async (e) => {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
@@ -60,7 +58,6 @@ function Login() {
         console.log(error);
         setAlertMsg(error.error);
         return;
-        // setAlertMsg(error.error);
       });
   };
 
@@ -74,15 +71,6 @@ function Login() {
     e.preventDefault();
     console.log("Login github");
     window.open(baseUrl + "/users/github", "_self");
-  };
-
-  const handleRecoverPassword = (e) => {
-    e.preventDefault();
-    openQuestionPopup("¿Enviar correo de recuperación de contraseña?", () => {
-      console.log(
-        "Recuperar contraseña al correo " + state.email + " del form"
-      );
-    });
   };
 
   return (
@@ -124,15 +112,7 @@ function Login() {
                 onChange={handleChange}
               />
             </div>
-            <p className="text-center">
-              <button
-                className="btn-unstyled text-warning"
-                onClick={handleRecoverPassword}
-              >
-                ¿Has olvidado la contraseña?
-              </button>
-            </p>
-            <div className="justify-content-center mt-4">
+            <div className="justify-content-center mt-5">
               <button
                 className="btn btn-primary login-button"
                 onClick={loginEmail}
