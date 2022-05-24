@@ -94,8 +94,14 @@ function About() {
                 alt="Ayuntamiento de Zaragoza"
               />
             </div>
-            {/* TODO: añadir logo adoptadiCOs */}
-            <div class="col">Logo adoptadiCOs</div>
+
+            <div class="col text-center">
+              <img
+                class="img-fluid"
+                src="assets/logo_adoptadiCOs.png"
+                alt="Logo adoptadicos"
+              />
+            </div>
           </div>
         </div>
       </div>

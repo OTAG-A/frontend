@@ -12,7 +12,14 @@ function Navigation() {
     <div className="navigation">
       <nav className="navbar navbar-expand-md navbar-light p-3">
         <NavLink className="navbar-brand" to="/">
-          Logo guapo
+          <div class="col text-center">
+            <img
+              class="img-fluid"
+              src="assets/logo_adoptadiCOs.png"
+              alt="Logo adoptadicos"
+              style={{ width: 250 }}
+            />
+          </div>
         </NavLink>
         <button
           className="navbar-toggler"
