@@ -28,7 +28,7 @@ jobs:
       - name: Build static React site
         run: npm run build
         env:
-          REACT_APP_BACKEND_BASEURL: ${{ secrets.BACKEND_BASEURL }}
+          REACT_APP_BACKEND_BASEURL: ${{ secrets.REACT_APP_BACKEND_BASEURL }}
 
       - name: Setup deployment
         run: |
