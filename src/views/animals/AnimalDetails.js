@@ -1,57 +1,66 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
-import { Animal } from "../../models";
+import { Link } from "react-router-dom";
+
 import ComunDetails from "./components/ComunDetails";
-import { UserContext } from "../../environment";
+import { UserContext, TokenContext } from "../../environment";
+
+import { getAnimalPublicDetails, getAnimalPrivateDetails } from "../../api/Api";
 
 function AnimalDetails() {
+  const [animal, setAnimal] = useState(null);
   let { idAnimal } = useParams();
   let { user: currentUser } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
 
   useEffect(() => {
-    // TODO: Obtener detalles de animal de la API dado su ID
-  }, [idAnimal]);
+    if (!token) {
+      // Obtenemos solo detalles publicos
+      getAnimalPublicDetails({
+        id: idAnimal,
+      })
+        .then((result) => {
+          setAnimal(result.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
-  const animal = Animal.preview();
+      return;
+    } else {
+      getAnimalPrivateDetails({
+        id: idAnimal,
+      })
+        .then((result) => {
+          setAnimal(result.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [token, idAnimal]);
+
+  if (!animal) {
+    return <></>;
+  }
 
   return (
     <div className="animalDetails">
       <ComunDetails animal={animal} />
-      <div className="row my-3">
-        {currentUser ? (
-          <div className="row">
-            <h3>Detalles de adopción</h3>
-            <div className="row mx-5">
-              <ul>
-                <li class="my-5">
-                  <b> Descripción: </b> {animal.observaciones}
-                </li>
-                <li class="my-5">
-                  <b> Observaciones: </b> {animal.observacionesVet}
-                </li>
-                <li class="my-5">
-                  <b> Solicitante: </b> {animal.nombreSolicitante}
-                </li>
-                <li class="my-5">
-                  <b> Dirección del solicitante: </b>{" "}
-                  {animal.domicilioSolicitante}
-                </li>
-              </ul>
-            </div>
-          </div>
-        ) : (
-          <div className="row align-items-center px-5">
-            <div className="container px-5">
+      <div className="row py-0 mb-5">
+        {!currentUser && (
+          <div className="row align-items-center px-5 mb-5">
+            <div className="container px-5 my-0">
               <p
-                className="text-center m-5"
+                className="text-center mx-5 my-2 mb-5"
                 style={{ backgroundColor: "orange", color: "black" }}
               >
                 Para más información y detalles de adopción es necesario{" "}
                 <b>
                   estar{" "}
-                  <a href={"/registro"} style={{ color: "black" }}>
+                  <Link to="/registro" style={{ color: "black" }}>
                     registrado
-                  </a>
+                  </Link>
                 </b>
               </p>
             </div>

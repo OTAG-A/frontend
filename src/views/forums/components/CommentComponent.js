@@ -4,10 +4,12 @@ import { openQuestionPopup } from "../../components/PopupQuestion";
 
 import UserComponent from "./UserComponent";
 
-function CommentComponent({ comment, onDelete = null }) {
+import moment from "moment";
+
+function CommentComponent({ comment, onDelete = null, onDeleteUser = null }) {
   const comentDelete = (action) => {
     openQuestionPopup(
-      "¿Quieres eliminar el comentario de `" + comment.user.name + "`?",
+      "¿Quieres eliminar el comentario de `" + comment.user.username + "`?",
       () => {
         action(comment);
       }
@@ -16,10 +18,20 @@ function CommentComponent({ comment, onDelete = null }) {
 
   return (
     <div className="comment p-2 card mb-3">
-      {onDelete && <DeleteCornerButton action={() => comentDelete(onDelete)} />}
+      {(onDelete || onDeleteUser) && (
+        <DeleteCornerButton
+          action={() => comentDelete(onDelete || onDeleteUser)}
+        />
+      )}
       <div className="row">
         <UserComponent user={comment.user} />
-        <p className="col-sm-10 ml-5">{comment.body}</p>
+        <p className="col-sm-10 ml-5">{comment.reply}</p>
+      </div>
+      <div className="row">
+        <div className="col-sm-10"></div>
+        <p className="col-sm-2">
+          Publicada el: {moment(comment.createdAt).format("DD-MM-YYYY")}
+        </p>
       </div>
     </div>
   );

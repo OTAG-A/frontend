@@ -12,7 +12,7 @@ function About() {
         <div class="row justify-content-center mt-4 pt-3">
           <div class="col text-center">
             <img
-              src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"
+              src="/assets/gato_persa.png"
               className="rounded-circle"
               style={{ width: 170, height: 170 }}
               alt="José Marín"
@@ -21,7 +21,7 @@ function About() {
           </div>
           <div class="col text-center">
             <img
-              src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"
+              src="/assets/capibara.png"
               className="rounded-circle"
               style={{ width: 170, height: 170 }}
               alt="Tomás Pelayo"
@@ -30,7 +30,7 @@ function About() {
           </div>
           <div class="col text-center">
             <img
-              src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"
+              src="/assets/ajolote_mexicano.png"
               className="rounded-circle"
               style={{ width: 170, height: 170 }}
               alt="Andoni Salcedo"
@@ -39,7 +39,7 @@ function About() {
           </div>
           <div class="col text-center">
             <img
-              src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"
+              src="/assets/gato_peluche.png"
               className="rounded-circle"
               style={{ width: 170, height: 170 }}
               alt="Leticia Sánchez"
@@ -48,7 +48,7 @@ function About() {
           </div>
           <div class="col text-center">
             <img
-              src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg"
+              src="/assets/gato_enojon.png"
               className="rounded-circle"
               style={{ width: 170, height: 170 }}
               alt="Jorge Romanos"
@@ -86,16 +86,22 @@ function About() {
             comunidad que usa nuestra aplicación web. Por lo que tú mismo puedes
             contribuir a que esta información crezca cada vez más.
           </p>
-          <div class="row align-items-center m-5 pb-5">
-            <div class="col text-center">
+          <div class="row align-items-center m-5 pb-5 ">
+            <div class="col text-center mb-5">
               <img
                 class="img-fluid"
-                src="assets/Ayuntamiento_de_Zaragoza.png"
+                src="/assets/Ayuntamiento_de_Zaragoza.png"
                 alt="Ayuntamiento de Zaragoza"
               />
             </div>
-            {/* TODO: añadir logo adoptadiCOs */}
-            <div class="col">Logo adoptadiCOs</div>
+
+            <div class="col text-center">
+              <img
+                class="img-fluid"
+                src="assets/logo_adoptadiCOs.png"
+                alt="Logo adoptadicos"
+              />
+            </div>
           </div>
         </div>
       </div>

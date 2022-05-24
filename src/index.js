@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { PopupboxContainer } from "react-popupbox";
 import reportWebVitals from "./reportWebVitals";
 import Footer from "./views/Footer";
@@ -21,12 +21,14 @@ import {
   Thread,
   AdminPanel,
   Estadistics,
+  LoginSocial,
 } from "./views";
 
 // Application environment
 import { UserProvider } from "./environment";
 
 import Navigation from "./Navigation.js";
+import TokenProvider from "./environment/TokenProvider";
 
 (async function () {
   await import("bootstrap/dist/css/bootstrap.min.css");
@@ -37,35 +39,39 @@ import Navigation from "./Navigation.js";
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <Router>
-        <PopupboxContainer />
-        <Navigation />
+      <TokenProvider>
+        <Router basename={process.env.PUBLIC_URL}>
+          <PopupboxContainer />
+          <Navigation />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/animales" element={<Animals />}>
-            <Route path="" element={<AnimalList />} />
-            <Route path=":idAnimal" element={<AnimalDetails />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Signup />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/perfil" element={<Profile />} />
-          <Route path="/perfil/:userId" element={<Profile />} />
-          <Route path="/editar-perfil" element={<EditProfile />} />
-          <Route path="/foro" element={<Forums />}>
-            <Route path="" element={<GeneralCategory />} />
-            <Route path=":category">
-              <Route path="" element={<ConcreteCategory />} />
-              <Route path=":idThread" element={<Thread />} />
+          <Routes>
+            <Route path="animales" element={<Animals />}>
+              <Route path="" element={<AnimalList />} />
+              <Route path=":idAnimal" element={<AnimalDetails />} />
             </Route>
-          </Route>
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/estadisticas" element={<Estadistics />} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Signup />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/perfil" element={<Profile />} />
+            <Route path="/perfil/:userId" element={<Profile />} />
+            <Route path="/editar-perfil" element={<EditProfile />} />
+            <Route path="/foro" element={<Forums />}>
+              <Route path="" element={<GeneralCategory />} />
+              <Route path=":category">
+                <Route path="" element={<ConcreteCategory />} />
+                <Route path=":idThread" element={<Thread />} />
+              </Route>
+            </Route>
+            <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/estadisticas" element={<Estadistics />} />
+            <Route path="/success" element={<LoginSocial />} />
 
-        <Footer />
-      </Router>
+            <Route path="/" exact element={<Home />} />
+          </Routes>
+
+          <Footer />
+        </Router>
+      </TokenProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")

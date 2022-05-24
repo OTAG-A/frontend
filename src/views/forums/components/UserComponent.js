@@ -1,9 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { toImageUrl } from "../../../api/Api";
+
 // UserComponent describes the image with the username under it.
 function UserComponent({ user }) {
   const navigate = useNavigate();
+
+  if (!user) {
+    return <></>;
+  }
 
   return (
     <div className="col-sm-2 user text-center">
@@ -12,16 +18,15 @@ function UserComponent({ user }) {
         onClick={() => navigate("/perfil/" + user.id)}
       >
         <img
-          src={user.image}
+          src={
+            user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+          }
           className="rounded-circle"
-          style={{
-            backgroundColor: "lightgray",
-          }}
           width={60}
           height={60}
-          alt={user.name}
+          alt={user.username}
         />
-        <b>{user.name}</b>
+        <b>{user.username}</b>
       </div>
     </div>
   );

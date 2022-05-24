@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./environment";
 
+import { toImageUrl } from "./api/Api";
+
 // Navigation bar of the application
 function Navigation() {
   let { user: currentUser } = useContext(UserContext);
@@ -10,7 +12,14 @@ function Navigation() {
     <div className="navigation">
       <nav className="navbar navbar-expand-md navbar-light p-3">
         <NavLink className="navbar-brand" to="/">
-          Logo guapo
+          <div class="col text-center">
+            <img
+              class="img-fluid"
+              src="assets/logo_adoptadiCOs.png"
+              alt="Logo adoptadicos"
+              style={{ width: 250 }}
+            />
+          </div>
         </NavLink>
         <button
           className="navbar-toggler"
@@ -61,23 +70,16 @@ function Navigation() {
               {/* Si está loggeado, mostrar la foto de perfil. Sino, mostrar el botón de login. */}
               {currentUser ? (
                 <NavLink className="nav-link" to="/perfil">
-                  {currentUser.image ? (
-                    <img
-                      src={currentUser.image}
-                      className="rounded-circle"
-                      style={{ width: 40, height: 40 }}
-                      alt="Profile"
-                    />
-                  ) : (
-                    <div
-                      className="rounded-circle"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: "lightgray",
-                      }}
-                    ></div>
-                  )}
+                  <img
+                    src={
+                      currentUser.avatar
+                        ? toImageUrl(currentUser.avatar)
+                        : "/assets/person-circle.svg"
+                    }
+                    className="rounded-circle"
+                    style={{ width: 40, height: 40 }}
+                    alt="Profile"
+                  />
                 </NavLink>
               ) : (
                 <NavLink className="nav-link" to="/login">

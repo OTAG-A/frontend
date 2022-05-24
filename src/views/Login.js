@@ -1,11 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { openQuestionPopup } from "./components/PopupQuestion";
+import { Form } from "react-bootstrap";
 
 import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
+import { TokenContext } from "../environment/TokenProvider";
+
+import { loginUser, baseUrl } from "../api/Api";
 
 function Login() {
+  const [successMsg, setSuccessMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState("");
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -14,6 +20,7 @@ function Login() {
   const navigate = useNavigate();
 
   const { setUser } = useContext(UserContext);
+  const { setToken } = useContext(TokenContext);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -23,38 +30,48 @@ function Login() {
     }));
   };
 
-  //TODO:funcionalidad
   const loginEmail = async (e) => {
     e.preventDefault();
     console.log("Email:" + state.email + "Contraseña:" + state.password);
 
-    setUser(User.preview());
-    navigate("/");
+    loginUser({
+      email: state.email,
+      password: state.password,
+    })
+      .then((response) => {
+        console.log(response);
+        setSuccessMsg(response.message);
+        // Guardamos el token
+        console.log(response.accessToken);
+        setToken(response.accessToken);
+        // Eliminamos el token para no añadirlo al usuario
+        delete response.accessToken;
+
+        // Parseamos el usuario
+        let user = User.from(response);
+        console.log(user);
+        setUser(user);
+        console.log(user);
+
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        setAlertMsg(error.error);
+        return;
+      });
   };
 
-  //TODO:funcionalidad
   const loginGoogle = async (e) => {
     e.preventDefault();
-    console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
-    );
+    console.log("Login google");
+    window.open(baseUrl + "/users/google", "_self");
   };
 
-  //TODO:funcionalidad
-  const loginTwitter = async (e) => {
+  const loginGitHub = async (e) => {
     e.preventDefault();
-    console.log(
-      "Cuenta-google:" + state.email + "Contraseña:" + state.password
-    );
-  };
-
-  const handleRecoverPassword = (e) => {
-    e.preventDefault();
-    openQuestionPopup("¿Enviar correo de recuperación de contraseña?", () => {
-      console.log(
-        "Recuperar contraseña al correo " + state.email + " del form"
-      );
-    });
+    console.log("Login github");
+    window.open(baseUrl + "/users/github", "_self");
   };
 
   return (
@@ -62,16 +79,22 @@ function Login() {
       <header className="mt-0 px-5 pb-0 pt-3">
         <h1 className="font-weight-light text-center fw-bold">Inicio Sesión</h1>
       </header>
-      <div className="container">
-        <div className="row justify-content-center">
+      <div className="container mb-5">
+        <Form className="row justify-content-center" onSubmit={loginEmail}>
           <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
-                src="assets/person-circle.svg"
+                src="/assets/person-circle.svg"
                 className="img-fluid"
                 alt="Icon Twitter"
               ></img>
             </div>
+            {alertMsg !== "" && (
+              <div className="alert alert-danger">{alertMsg}</div>
+            )}
+            {successMsg !== "" && (
+              <div className="alert alert-success">{successMsg}</div>
+            )}
             <div className="mb-3">
               <input
                 type="email"
@@ -90,23 +113,12 @@ function Login() {
                 onChange={handleChange}
               />
             </div>
-            <p className="text-center">
-              <button
-                className="btn-unstyled text-warning"
-                onClick={handleRecoverPassword}
-              >
-                ¿Has olvidado la contraseña?
-              </button>
-            </p>
             <div className="justify-content-center mt-4">
-              <button
-                className="btn btn-primary login-button"
-                onClick={loginEmail}
-              >
+              <button type="submit" className="btn btn-primary login-button">
                 Iniciar Sesión
               </button>
             </div>
-            <div className="justify-content-center mt-4">
+            <div className="justify-content-center mt-5">
               <button
                 className="btn btn-secondary login-button"
                 onClick={() => navigate("/registro")}
@@ -114,28 +126,28 @@ function Login() {
                 Registrarse
               </button>
             </div>
-            <div className="row justify-content-center mt-4">
+            <div className="row justify-content-center mt-4 mb-5">
               <div className="text-center mb-0 col-4 ">
                 <div className="btn btn-default" onClick={loginGoogle}>
                   <img
-                    src="assets/logo-google.svg"
+                    src="/assets/logo-google.svg"
                     className="img-fluid"
                     alt="Logo Google"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <div className="btn btn-default" onClick={loginTwitter}>
+                <div className="btn btn-default" onClick={loginGitHub}>
                   <img
-                    src="assets/twitter.svg"
+                    src="/assets/github.svg"
                     className="img-fluid"
-                    alt="Icon Twitter"
+                    alt="Icon GitHub"
                   ></img>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </Form>
       </div>
     </div>
   );

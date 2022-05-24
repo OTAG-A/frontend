@@ -1,9 +1,12 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import UserComponent from "./UserComponent";
 
 import DeleteCornerButton from "../../components/DeleteCornerButton";
 import { openQuestionPopup } from "../../components/PopupQuestion";
+import moment from "moment";
 
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
@@ -19,35 +22,51 @@ const postDelete = (post, action) => {
 
 // PostComponent describes either a thread post or the original post inside the
 // thread.
-function PostComponent({ post, compact = true, onDelete = null }) {
+function PostComponent({
+  post,
+  compact = true,
+  onDelete = null,
+  onDeleteUser = null,
+}) {
   return (
     <div className="post p-2 card mb-3">
-      {onDelete && (
-        <DeleteCornerButton action={() => postDelete(post, onDelete)} />
+      {(onDelete || onDeleteUser) && (
+        <DeleteCornerButton
+          action={() => postDelete(post, onDelete || onDeleteUser)}
+        />
       )}
 
-      <div className="row mb-3">
+      <div className="row">
         {compact ? (
           <h2>
-            <a href={post.get_url()} className="link-unstyled">
+            <Link to={post.get_url()} className="link-unstyled">
               {post.title}
-            </a>
+            </Link>
           </h2>
         ) : (
           <h1>{post.title}</h1>
         )}
+        <p className="text-secondary">
+          Publicado el: {moment(post.createdAt).format("DD-MM-YYYY HH:mm")}
+        </p>
       </div>
 
       <div className="row">
         <UserComponent user={post.user} />
-        <p className="col-sm-10 ml-5">
-          {compact ? truncate(post.body, 300) : post.body}
-          {compact && (
-            <a className="float-end" href={post.get_url()}>
+        {compact ? (
+          <>
+            <p className="col-sm-8 ml-5">
+              {truncate(post.user_explanation, 300)}
+            </p>
+            <Link to={post.get_url()} className="col-sm-2 mt-auto text-end">
               Leer más
-            </a>
-          )}
-        </p>
+            </Link>
+          </>
+        ) : (
+          <>
+            <p className="col-sm-10 ml-5">{post.user_explanation}</p>
+          </>
+        )}
       </div>
     </div>
   );

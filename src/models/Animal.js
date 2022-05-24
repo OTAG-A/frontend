@@ -1,54 +1,20 @@
 // TODO: Modelo temporal, sujeto a cambios.
 class Animal {
   id = 0;
-  ficha = "";
-  raza = "";
-  sexo = "";
-  fechaNac = Date();
-  edad = "";
-  tamagno = "";
-  peso = "";
-  observaciones = "";
-  nombre = "";
-  especie = "";
+  date = "";
+  name = "";
+  specie = "";
+  breed = "";
+  sex = "";
+  size = "";
   color = "";
-  chenil = "";
-  peligroso = false;
-  microchip = "";
-  cartilla = "";
-  rabia = false;
-  fechaRabia = Date();
-  esterilizado = false;
-  perdido = false;
-  evaluacion = "";
-  caracter = "";
-  observacionesVet = "";
-  fechaIngreso = Date();
-  formaEntrada = "";
-  entrada = "";
-  urgencias = false;
-  horaUrgencias = "";
-  numPolicia = "";
-  nombreSolicitante = "";
-  apellidosSolicitante = "";
-  dniSolicitante = "";
-  telefonoSolicitante = "";
-  domicilioSolicitante = "";
-  mailSolicitante = "";
-  disponible = "";
-  fechaAdopcion = Date();
-  nombreInteresado = "";
-  apellidosInteresado = "";
-  dniInteresado = "";
-  telefonoInteresado = "";
-  mailInteresado = "";
-  direccionInteresado = "";
-  tasa = "";
-  importe = 0;
-  pago = "";
-  bloquear = false;
-  desbloquear = false;
-  fechaBloqueo = Date();
+  photo = "";
+  description = "";
+  rage = false;
+  danger = false;
+  sterile = false;
+  bornDate = "";
+  adoptionDate = "";
 
   static from(json) {
     return Object.assign(new Animal(), json);
@@ -56,27 +22,22 @@ class Animal {
 
   static preview() {
     return Animal.from({
-      id: 0,
-      sexo: "masculino",
-      fechaNac: Date.now(),
-      tamagno: "chiquito",
-      nombre: "Misifú",
-      imagen: "https://i.imgur.com/qJ4UV1i.png",
-      especie: "gatos",
-      raza: "siames",
-      edad: "1 mes",
-      peso: "300 g",
-      microchip: "si",
-      esterilizado: "no",
-      fechaIngreso: Date.now(),
-      color: "Blanco y negro",
-      peligroso: false,
-      nombreSolicitante: "Policía Local",
-      domicilioSolicitante: "C/ Rioja nº 14",
-      observacionesVet:
-        "Es muy bueno y juguetón con la gente, muy activo. Pero no se lleva bien con otros gatos.",
-      observaciones:
-        "Actualmente no se encuentra en el centro por lo que si quieres adoptarlo debes contactar con nosotros en el 976836554.",
+      date: "2022-05-17T22:00:00.000Z",
+      id: 4709,
+      name: "Terry (G)",
+      specie: "CANINA",
+      breed: "AMERICAN STAFFORDSHIRE TERRIER",
+      sex: "Macho",
+      size: "Grande (26-44 kg)",
+      color: "Blanco y Atigrado",
+      photo: "//www.zaragoza.es/cont/paginas/IMSP/mascotas/terry2.jpg",
+      description:
+        "es necesaria licencia y seguro.   ES muy  bueno y jugueton con la gente, muy activo. Pero no se lleva bien con otros perros y perras.  Ideal para una casa sin perros Está esterilizado SE MERECE UN HOGAR!! Terry actualmente no se encuentra en el centro por lo que si quieres adoptarlo debes contactar con nosotros en el 976836554.",
+      rage: false,
+      danger: true,
+      sterile: true,
+      bornDate: "2010-09-06T22:00:00.000Z",
+      adoptionDate: "2014-09-06T22:00:00.000Z",
     });
   }
 }
