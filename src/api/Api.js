@@ -1,7 +1,6 @@
 // export const baseUrl = "http://localhost:8080/api";
 export const baseUrl =
-  process.env.BACKEND_BASEURL || "http://localhost:8080/api";
-console.log("baseUrl:", process.env.BACKEND_BASEURL, baseUrl);
+  process.env.REACT_APP_BACKEND_BASEURL || "http://localhost:8080/api";
 
 function serverRequest(path, requestOptions, tokenOverride = null) {
   let token = null;
