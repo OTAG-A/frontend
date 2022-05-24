@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer fixed-bottom">
       <div className="container">
         <div className="row mt-1">
           <div className="col col-sm-3 mx-auto mb-2">

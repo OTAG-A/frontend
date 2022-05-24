@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Pagination } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Post, User } from "../../models";
 import PostList from "./components/PostList";
 import { openPopupCreatePost } from "./components/PopupCreatePost";
+import { UserContext } from "../../environment";
 
 import {
   postList,
@@ -18,6 +19,7 @@ import {
 
 function GeneralCategory() {
   const navigate = useNavigate();
+  let { user: currentUser } = useContext(UserContext);
 
   // const posts = [...Array(10)].map(() => Post.preview());
   const [posts, setPosts] = useState([]);
@@ -165,7 +167,7 @@ function GeneralCategory() {
         />
 
         <div className="row">
-          <Pagination className="justify-content-end">
+          <Pagination className="justify-content-end mb-5">
             <Pagination.First onClick={() => gotoPage(1)} />
             {pagina - 3 > 0 && <Pagination.Ellipsis />}
 
@@ -199,19 +201,21 @@ function GeneralCategory() {
       </div>
 
       <div className="col-md-3">
-        <div className="row px-3 mb-4">
-          <button
-            onClick={() =>
-              openPopupCreatePost({
-                onSubmit: handleNewPost,
-                categories: categories,
-              })
-            }
-            className="btn btn-primary py-2"
-          >
-            Crear hilo
-          </button>
-        </div>
+        {currentUser && (
+          <div className="row px-3 mb-4">
+            <button
+              onClick={() =>
+                openPopupCreatePost({
+                  onSubmit: handleNewPost,
+                  categories: categories,
+                })
+              }
+              className="btn btn-primary py-2"
+            >
+              Crear hilo
+            </button>
+          </div>
+        )}
 
         <div className="categories card p-3 mb-4">
           <h2>Categorias</h2>
@@ -238,7 +242,7 @@ function GeneralCategory() {
           </ul>
         </div>
 
-        <div className="most-popular card p-3 mb-5">
+        <div className="most-popular card p-3 ">
           <h2>Más populares</h2>
           <ul>
             {popular_posts.map((post, i) => (
@@ -248,6 +252,25 @@ function GeneralCategory() {
             ))}
           </ul>
         </div>
+
+        {!currentUser && (
+          <div className="row align-items-center mt-3 mb-5">
+            <div className="container">
+              <p
+                className="text-center my-2"
+                style={{ backgroundColor: "orange", color: "black" }}
+              >
+                Para poder publicar un post o una respuesta es necesario{" "}
+                <b>
+                  estar{" "}
+                  <Link to="/registro" style={{ color: "black" }}>
+                    registrado
+                  </Link>
+                </b>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

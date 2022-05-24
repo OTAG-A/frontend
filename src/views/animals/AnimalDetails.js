@@ -47,12 +47,12 @@ function AnimalDetails() {
   return (
     <div className="animalDetails">
       <ComunDetails animal={animal} />
-      <div className="row py-0">
+      <div className="row py-0 mb-5">
         {!currentUser && (
-          <div className="row align-items-center px-5">
+          <div className="row align-items-center px-5 mb-5">
             <div className="container px-5 my-0">
               <p
-                className="text-center mx-5 my-2"
+                className="text-center mx-5 my-2 mb-5"
                 style={{ backgroundColor: "orange", color: "black" }}
               >
                 Para más información y detalles de adopción es necesario{" "}

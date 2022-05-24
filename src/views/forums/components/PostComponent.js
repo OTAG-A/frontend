@@ -6,6 +6,7 @@ import UserComponent from "./UserComponent";
 
 import DeleteCornerButton from "../../components/DeleteCornerButton";
 import { openQuestionPopup } from "../../components/PopupQuestion";
+import moment from "moment";
 
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
@@ -35,7 +36,7 @@ function PostComponent({
         />
       )}
 
-      <div className="row mb-3">
+      <div className="row">
         {compact ? (
           <h2>
             <Link to={post.get_url()} className="link-unstyled">
@@ -45,20 +46,27 @@ function PostComponent({
         ) : (
           <h1>{post.title}</h1>
         )}
+        <p className="text-secondary">
+          Publicado el: {moment(post.createdAt).format("DD-MM-YYYY HH:mm")}
+        </p>
       </div>
 
       <div className="row">
         <UserComponent user={post.user} />
-        <p className="col-sm-10 ml-5">
-          {compact
-            ? truncate(post.user_explanation, 300)
-            : post.user_explanation}
-          {compact && (
-            <Link to={post.get_url()} className="float-end">
+        {compact ? (
+          <>
+            <p className="col-sm-8 ml-5">
+              {truncate(post.user_explanation, 300)}
+            </p>
+            <Link to={post.get_url()} className="col-sm-2 mt-auto text-end">
               Leer más
             </Link>
-          )}
-        </p>
+          </>
+        ) : (
+          <>
+            <p className="col-sm-10 ml-5">{post.user_explanation}</p>
+          </>
+        )}
       </div>
     </div>
   );

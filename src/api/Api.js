@@ -223,6 +223,10 @@ export function toImageUrl(avatarId) {
   return baseUrl + "/users/avatar/" + avatarId;
 }
 
+export async function getNumMessages({ id_user = null }) {
+  return getRequest("/forum/numberofmessages", arguments[0]);
+}
+
 export function getInfoUser(token) {
   return getRequest("/users/info/me", {}, token);
 }
