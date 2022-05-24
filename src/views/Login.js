@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { openQuestionPopup } from "./components/PopupQuestion";
 import { Form } from "react-bootstrap";
 
 import { User } from "../models";
