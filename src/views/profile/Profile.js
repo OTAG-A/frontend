@@ -11,7 +11,7 @@ import User from "../../models/User";
 import { UserContext } from "../../environment/UserProvider";
 import { TokenContext } from "../../environment/TokenProvider";
 
-import { logoutUser, deleteUser, deleteSelfUser, getUserDetails, toImageUrl } from "../../api/Api";
+import { deleteUser, deleteSelfUser, getUserDetails, toImageUrl } from "../../api/Api";
 
 function Profile() {
   let [user, setUser] = useState(null);
