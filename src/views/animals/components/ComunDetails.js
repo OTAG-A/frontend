@@ -28,7 +28,7 @@ function ComunDetails({ animal }) {
         <div className="col-12 col-sm-6 col-md-6 col-lg-6">
           <div className="row mt-4">
             <img
-              src={animal.photo}
+              src={animal.photo ? animal.photo : "/assets/animales.png"}
               class="img-fluid"
               alt="Imagen animal"
               style={{ height: "60vh", width: "60vh", objectFit: "cover" }}
