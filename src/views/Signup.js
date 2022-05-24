@@ -5,7 +5,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
-import { registerUser } from "../api/Api";
+import { registerUser, baseUrl } from "../api/Api";
 
 function Signup() {
   const [successMsg, setSuccessMsg] = useState("");
@@ -31,19 +31,6 @@ function Signup() {
     e.preventDefault();
     //Validar Captcha
     if (validateCaptcha(state.captcha, false)) {
-      console.log(
-        "Nombre:" +
-          state.name +
-          " Email:" +
-          state.email +
-          " Contraseña:" +
-          state.password +
-          " Confirmar-contraseña:" +
-          state.password +
-          " Captcha: " +
-          state.captcha
-      );
-
       registerUser({
         username: state.name,
         email: state.email,
@@ -67,34 +54,16 @@ function Signup() {
     }
   };
 
-  //TODO:funcionalidad
   const signupGoogle = async (e) => {
     e.preventDefault();
-    console.log(
-      "Nombre:" +
-        state.name +
-        " Cuenta-google:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
-    );
+    console.log("Signup google");
+    window.open(baseUrl + "/users/google", "_self");
   };
 
-  //TODO:funcionalidad
-  const signupTwitter = async (e) => {
+  const signupGitHub = async (e) => {
     e.preventDefault();
-    console.log(
-      "Nombre:" +
-        state.name +
-        " Cuenta-twitter:" +
-        state.email +
-        " Contraseña:" +
-        state.password +
-        " Confirmar-contraseña:" +
-        state.password
-    );
+    console.log("Signup github");
+    window.open(baseUrl + "/users/github", "_self");
   };
 
   useEffect(() => {
@@ -103,15 +72,15 @@ function Signup() {
 
   return (
     <div className="login">
-      <header className="mt-0 px-5 pb-0 pt-3">
+      <header className="mt-0 px-5 pb-0 pt-3 ">
         <h1 className="font-weight-light text-center fw-bold">Registro</h1>
       </header>
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="row justify-content-center mb-5">
           <form className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
-                src="assets/person-circle.svg"
+                src="/assets/person-circle.svg"
                 className="img-fluid"
                 alt=""
               ></img>
@@ -183,22 +152,22 @@ function Signup() {
                 Registrarse
               </button>
             </div>
-            <div className="row justify-content-center mt-4">
+            <div className="row justify-content-center mt-4 mb-5">
               <div className="text-center mb-0 col-4 ">
                 <div className="btn btn-default" onClick={signupGoogle}>
                   <img
-                    src="assets/logo-google.svg"
+                    src="/assets/logo-google.svg"
                     className="img-fluid"
                     alt="Logo Google"
                   ></img>
                 </div>
               </div>
               <div className="text-center mb-0 col-4">
-                <div className="btn btn-default" onClick={signupTwitter}>
+                <div className="btn btn-default" onClick={signupGitHub}>
                   <img
-                    src="assets/twitter.svg"
+                    src="/assets/github.svg"
                     className="img-fluid"
-                    alt="Icon Twitter"
+                    alt="Icon GitHub"
                   ></img>
                 </div>
               </div>
