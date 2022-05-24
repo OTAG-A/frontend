@@ -167,7 +167,7 @@ function GeneralCategory() {
         />
 
         <div className="row">
-          <Pagination className="justify-content-end">
+          <Pagination className="justify-content-end mb-5">
             <Pagination.First onClick={() => gotoPage(1)} />
             {pagina - 3 > 0 && <Pagination.Ellipsis />}
 
@@ -242,7 +242,7 @@ function GeneralCategory() {
           </ul>
         </div>
 
-        <div className="most-popular card p-3 mb-5">
+        <div className="most-popular card p-3 ">
           <h2>Más populares</h2>
           <ul>
             {popular_posts.map((post, i) => (
@@ -254,7 +254,7 @@ function GeneralCategory() {
         </div>
 
         {!currentUser && (
-          <div className="row align-items-center mb-5">
+          <div className="row align-items-center mt-3 mb-5">
             <div className="container">
               <p
                 className="text-center my-2"

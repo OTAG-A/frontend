@@ -119,7 +119,7 @@ function ConcreteCategory() {
       />
 
       <div className="row">
-        <Pagination className="justify-content-end">
+        <Pagination className="justify-content-end mb-5 pb-3">
           <Pagination.First onClick={() => gotoPage(1)} />
           {pagina - 3 > 0 && <Pagination.Ellipsis />}
 

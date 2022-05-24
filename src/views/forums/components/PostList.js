@@ -37,7 +37,7 @@ function PostList({ posts, thread = false, onDelete = () => {} }) {
   };
 
   return (
-    <div className="mb-5 pb-5">
+    <div className="mb-5">
       {posts.map((post, i) => (
         <PostComponent
           post={post}
