@@ -48,6 +48,7 @@ function Signup() {
         });
     } else {
       setState((state.captcha = ""));
+      setAlertMsg("Captcha incorrecto");
       console.log(" Captcha: " + state.captcha);
       loadCaptchaEnginge(6, "black", "orange");
     }

@@ -189,8 +189,8 @@ function AnimalList() {
           </div>
         ))}
 
-        <div className="row">
-          <Pagination className="justify-content-end">
+        <div className="row mb-5">
+          <Pagination className="justify-content-end mb-5">
             <Pagination.First onClick={() => gotoPage(1)} />
             {pagina - 3 > 0 && <Pagination.Ellipsis />}
 

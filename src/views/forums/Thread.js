@@ -7,8 +7,15 @@ import { Post, User } from "../../models";
 import PostComponent from "./components/PostComponent";
 import CommentComponent from "./components/CommentComponent";
 import { UserContext } from "../../environment";
+import {
+  deleteComment,
+  deleteCommentUser,
+  deleteForum,
+  deleteForumUser,
+} from "../../api/Api";
 
 import { postDetails, newComment, getUserDetails } from "../../api/Api";
+import { useNavigate } from "react-router-dom";
 
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
@@ -17,6 +24,11 @@ function Thread() {
   const { idThread } = useParams();
 
   const [comment, setComment] = useState("");
+
+  const navigate = useNavigate();
+
+  const [alertMsg, setAlertMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const fetchPostDetails = () => {
     postDetails({
@@ -58,15 +70,95 @@ function Thread() {
   };
 
   useEffect(() => {
+    if (successMsg) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     fetchPostDetails();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [successMsg]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onPostDelete = (post) => {
-    console.log("delete post with id " + post.id);
+    console.log("delete admin thread post with id " + post.id);
+    deleteForum({
+      id_forum: post.id,
+    })
+      .then((response) => {
+        console.log(response);
+        navigate("/foro/" + post.category);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
   };
 
   const onCommentDelete = (comment) => {
-    console.log("delete comment with id " + comment.id);
+    console.log("delete admin thread comment with id " + comment.id);
+    deleteComment({
+      id_comment: comment.id,
+      id_forum: post.id,
+      id_user: comment.user.id,
+    })
+      .then((response) => {
+        console.log(response);
+        setAlertMsg("");
+        setSuccessMsg("Respuesta eliminada con éxito");
+
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000); // 3 seconds
+      })
+      .catch((error) => {
+        console.log(error);
+        setAlertMsg("No se pudo eliminar la respuesta");
+        setSuccessMsg("");
+
+        setTimeout(() => {
+          setAlertMsg("");
+        }, 3000); // 3 seconds
+        return;
+      });
+  };
+
+  const onPostDeleteUser = (post) => {
+    console.log("delete user thread post with id " + post.id);
+    deleteForumUser({
+      id_forum: post.id,
+    })
+      .then((response) => {
+        console.log(response);
+        navigate("/foro/" + post.category);
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
+
+  const onCommentDeleteUser = (comment) => {
+    console.log("delete user thread comment with id " + comment.id);
+    deleteCommentUser({
+      id_comment: comment.id,
+      id_forum: post.id,
+    })
+      .then((response) => {
+        console.log(response);
+        setAlertMsg("");
+        setSuccessMsg("Respuesta eliminada con éxito");
+
+        setTimeout(() => {
+          setSuccessMsg("");
+        }, 3000); // 3 seconds
+      })
+      .catch((error) => {
+        console.log(error);
+        setAlertMsg("No se pudo eliminar la respuesta");
+        setSuccessMsg("");
+
+        setTimeout(() => {
+          setAlertMsg("");
+        }, 3000); // 3 seconds
+        return;
+      });
   };
 
   const handlePostComment = () => {
@@ -86,10 +178,21 @@ function Thread() {
   if (post !== null) {
     return (
       <div>
+        {alertMsg !== "" && (
+          <div className="alert alert-danger">{alertMsg}</div>
+        )}
+        {successMsg !== "" && (
+          <div className="alert alert-success">{successMsg}</div>
+        )}
         <PostComponent
           post={post}
           compact={false}
           onDelete={currentUser && currentUser.isAdmin ? onPostDelete : null}
+          onDeleteUser={
+            currentUser && currentUser.id === post.user_id
+              ? onPostDeleteUser
+              : null
+          }
         />
 
         <h2 className="mt-5 mb-3">Respuestas</h2>
@@ -101,10 +204,15 @@ function Thread() {
               onDelete={
                 currentUser && currentUser.isAdmin ? onCommentDelete : null
               }
+              onDeleteUser={
+                currentUser && currentUser.id === comment.user_id
+                  ? onCommentDeleteUser
+                  : null
+              }
             />
           ))}
 
-          <Form className="comment p-2 card mb-3" onSubmit={handlePostComment}>
+          <Form className="comment p-2 card mb-5" onSubmit={handlePostComment}>
             <div className="row">
               <div className="col">
                 <FloatingLabel
@@ -123,7 +231,7 @@ function Thread() {
               </div>
             </div>
             <div className="row">
-              <div className="col text-end">
+              <div className="col text-end ">
                 <button type="submit" className="btn btn-primary">
                   Enviar
                 </button>

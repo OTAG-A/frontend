@@ -53,6 +53,15 @@ function getRequest(path, body = {}, tokenOverride = null) {
   return serverRequest(path + "?" + params, requestOptions, tokenOverride);
 }
 
+function deleteRequest(path, body) {
+  let requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
+}
+
 export async function registerUser({
   username,
   email,
@@ -162,6 +171,30 @@ export async function getNumberReplies() {
 
 export async function getBestCategory() {
   return getRequest("/forum/admin/bestcategory");
+}
+
+export async function deleteUser(id) {
+  return deleteRequest("/users/" + id, {});
+}
+
+export async function deleteForum({ id_forum }) {
+  return deleteRequest("/forum/admin/delete", arguments[0]);
+}
+
+export async function deleteComment({ id_forum, id_comment, id_user }) {
+  return deleteRequest("/forum/admin/deletereply", arguments[0]);
+}
+
+export async function deleteForumUser({ id_forum }) {
+  return deleteRequest("/forum/delete", arguments[0]);
+}
+
+export async function deleteCommentUser({ id_forum, id_comment }) {
+  return deleteRequest("/forum/deletereply", arguments[0]);
+}
+
+export async function deleteSelfUser() {
+  return deleteRequest("/users", {});
 }
 
 export async function updateAvatar({ imgFile = null }) {

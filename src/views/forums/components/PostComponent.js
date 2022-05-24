@@ -21,11 +21,18 @@ const postDelete = (post, action) => {
 
 // PostComponent describes either a thread post or the original post inside the
 // thread.
-function PostComponent({ post, compact = true, onDelete = null }) {
+function PostComponent({
+  post,
+  compact = true,
+  onDelete = null,
+  onDeleteUser = null,
+}) {
   return (
     <div className="post p-2 card mb-3">
-      {onDelete && (
-        <DeleteCornerButton action={() => postDelete(post, onDelete)} />
+      {(onDelete || onDeleteUser) && (
+        <DeleteCornerButton
+          action={() => postDelete(post, onDelete || onDeleteUser)}
+        />
       )}
 
       <div className="row mb-3">
