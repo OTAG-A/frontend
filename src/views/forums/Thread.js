@@ -17,6 +17,8 @@ import {
 import { postDetails, newComment, getUserDetails } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+
 function Thread() {
   const { user: currentUser } = useContext(UserContext);
 
@@ -212,32 +214,56 @@ function Thread() {
             />
           ))}
 
-          <Form className="comment p-2 card mb-5" onSubmit={handlePostComment}>
-            <div className="row">
-              <div className="col">
-                <FloatingLabel
-                  className="mb-3"
-                  controlId="floatingTextarea2"
-                  label="Escribe aquí tu comentario"
+          {currentUser && (
+            <Form
+              className="comment p-2 card mb-5"
+              onSubmit={handlePostComment}
+            >
+              <div className="row">
+                <div className="col">
+                  <FloatingLabel
+                    className="mb-3"
+                    controlId="floatingTextarea2"
+                    label="Escribe aquí tu comentario"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Escribe aquí tu comentario"
+                      style={{ height: "200px" }}
+                      value={comment}
+                      onInput={(e) => setComment(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col text-end ">
+                  <button type="submit" className="btn btn-primary">
+                    Enviar
+                  </button>
+                </div>
+              </div>
+            </Form>
+          )}
+
+          {!currentUser && (
+            <div className="row align-items-center mb-5">
+              <div className="container">
+                <p
+                  className="text-center my-2"
+                  style={{ backgroundColor: "orange", color: "black" }}
                 >
-                  <Form.Control
-                    as="textarea"
-                    placeholder="Escribe aquí tu comentario"
-                    style={{ height: "200px" }}
-                    value={comment}
-                    onInput={(e) => setComment(e.target.value)}
-                  />
-                </FloatingLabel>
+                  Para poder publicar un post o una respuesta es necesario{" "}
+                  <b>
+                    estar{" "}
+                    <Link to="/registro" style={{ color: "black" }}>
+                      registrado
+                    </Link>
+                  </b>
+                </p>
               </div>
             </div>
-            <div className="row">
-              <div className="col text-end ">
-                <button type="submit" className="btn btn-primary">
-                  Enviar
-                </button>
-              </div>
-            </div>
-          </Form>
+          )}
         </div>
       </div>
     );
