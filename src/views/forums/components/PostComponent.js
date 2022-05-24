@@ -6,6 +6,7 @@ import UserComponent from "./UserComponent";
 
 import DeleteCornerButton from "../../components/DeleteCornerButton";
 import { openQuestionPopup } from "../../components/PopupQuestion";
+import moment from "moment";
 
 // truncate returns the string truncated to a given length. If string would
 // continue after the truncation, hyphens are added at the end.
@@ -59,6 +60,12 @@ function PostComponent({
             </Link>
           )}
         </p>
+        <div className="row">
+          <div className="col-sm-10 ml-3"></div>
+          <p className="col-sm-2 ml-3">
+            Publicado el: {moment(post.createdAt).format("DD-MM-YYYY")}
+          </p>
+        </div>
       </div>
     </div>
   );
