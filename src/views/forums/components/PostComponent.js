@@ -47,7 +47,7 @@ function PostComponent({
           <h1>{post.title}</h1>
         )}
         <p className="text-secondary">
-          Publicado el: {moment(post.createdAt).format("DD-MM-YYYY")}
+          Publicado el: {moment(post.createdAt).format("DD-MM-YYYY HH:mm")}
         </p>
       </div>
 
