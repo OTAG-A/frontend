@@ -86,11 +86,11 @@ function About() {
             comunidad que usa nuestra aplicación web. Por lo que tú mismo puedes
             contribuir a que esta información crezca cada vez más.
           </p>
-          <div class="row align-items-center m-5 pb-5">
-            <div class="col text-center">
+          <div class="row align-items-center m-5 pb-5 ">
+            <div class="col text-center mb-5">
               <img
                 class="img-fluid"
-                src="assets/Ayuntamiento_de_Zaragoza.png"
+                src="/assets/Ayuntamiento_de_Zaragoza.png"
                 alt="Ayuntamiento de Zaragoza"
               />
             </div>

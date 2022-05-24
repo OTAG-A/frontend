@@ -1,10 +1,16 @@
-const baseUrl = "http://localhost:8080/api";
+export const baseUrl = "http://localhost:8080/api";
 
-function serverRequest(path, requestOptions) {
-  let token = localStorage.getItem("token");
+function serverRequest(path, requestOptions, tokenOverride = null) {
+  let token = null;
+  if (tokenOverride) {
+    token = tokenOverride;
+  } else {
+    token = localStorage.getItem("token");
+  }
+
   // Añadimos el token de sesión a la petición si estamos loggeados
   if (token) {
-    token = JSON.parse(token);
+    if (!tokenOverride) token = JSON.parse(token);
     if (token) requestOptions.headers["Authorization"] = "Bearer " + token;
   }
 
@@ -34,7 +40,7 @@ function putRequest(path, body) {
   return serverRequest(path, requestOptions);
 }
 
-function getRequest(path, body = {}) {
+function getRequest(path, body = {}, tokenOverride = null) {
   let params = new URLSearchParams();
   for (let [key, value] of Object.entries(body)) {
     if (value) params.append(key, value);
@@ -44,8 +50,16 @@ function getRequest(path, body = {}) {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
+  return serverRequest(path + "?" + params, requestOptions, tokenOverride);
+}
 
-  return serverRequest(path + "?" + params, requestOptions);
+function deleteRequest(path, body) {
+  let requestOptions = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
+  return serverRequest(path, requestOptions);
 }
 
 export async function registerUser({
@@ -159,6 +173,30 @@ export async function getBestCategory() {
   return getRequest("/forum/admin/bestcategory");
 }
 
+export async function deleteUser(id) {
+  return deleteRequest("/users/" + id, {});
+}
+
+export async function deleteForum({ id_forum }) {
+  return deleteRequest("/forum/admin/delete", arguments[0]);
+}
+
+export async function deleteComment({ id_forum, id_comment, id_user }) {
+  return deleteRequest("/forum/admin/deletereply", arguments[0]);
+}
+
+export async function deleteForumUser({ id_forum }) {
+  return deleteRequest("/forum/delete", arguments[0]);
+}
+
+export async function deleteCommentUser({ id_forum, id_comment }) {
+  return deleteRequest("/forum/deletereply", arguments[0]);
+}
+
+export async function deleteSelfUser() {
+  return deleteRequest("/users", {});
+}
+
 export async function updateAvatar({ imgFile = null }) {
   let path = "/users/avatar";
 
@@ -187,4 +225,8 @@ export function toImageUrl(avatarId) {
 
 export async function getNumMessages({ id_user = null }) {
   return getRequest("/forum/numberofmessages", arguments[0]);
+}
+
+export function getInfoUser(token) {
+  return getRequest("/users/info/me", {}, token);
 }

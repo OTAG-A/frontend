@@ -17,7 +17,7 @@ import {
 function EditProfile() {
   let { user, setUser } = useContext(UserContext);
   let [img, setImg] = useState(
-    user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+    user.avatar ? toImageUrl(user.avatar) : "//assets/person-circle.svg"
   );
   let [imgFile, setImgFile] = useState(null);
 
@@ -35,7 +35,7 @@ function EditProfile() {
 
         setUsername(user.username);
         setImg(
-          user.avatar ? toImageUrl(user.avatar) : "/assets/person-circle.svg"
+          user.avatar ? toImageUrl(user.avatar) : "//assets/person-circle.svg"
         );
         setBio(user.bio);
       })

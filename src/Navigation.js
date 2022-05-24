@@ -74,7 +74,7 @@ function Navigation() {
                     src={
                       currentUser.avatar
                         ? toImageUrl(currentUser.avatar)
-                        : "assets/person-circle.svg"
+                        : "/assets/person-circle.svg"
                     }
                     className="rounded-circle"
                     style={{ width: 40, height: 40 }}

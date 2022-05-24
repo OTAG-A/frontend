@@ -7,3 +7,4 @@ export { default as Signup } from "./Signup";
 export { default as AdminPanel } from "./AdminPanel";
 export { default as About } from "./About";
 export * from "./estadistics";
+export { default as LoginSocial } from "./LoginSocial";

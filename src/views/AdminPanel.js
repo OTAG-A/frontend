@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useEffectOnce } from "usehooks-ts";
+
 import UserBox from "./components/UserBox";
 import { ListUser } from "./../models";
 
@@ -31,7 +33,7 @@ function AdminPanel() {
   let table = splitInGroups(users, 4);
 
   //Analiticas foro
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching total de animales y adopciones");
 
     getStatistics()
@@ -50,7 +52,7 @@ function AdminPanel() {
       });
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching número total posts");
 
     getNumberForums()
@@ -63,7 +65,7 @@ function AdminPanel() {
       });
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching número total respuestas");
 
     getNumberReplies()
@@ -77,7 +79,7 @@ function AdminPanel() {
   });
 
   //TODO: no funciona, esperar a que backend lo arregle
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching mejor categoría del foro");
 
     getBestCategory()
@@ -91,7 +93,7 @@ function AdminPanel() {
   });
 
   // Listado y número de usuarios
-  useEffect(() => {
+  useEffectOnce(() => {
     console.debug("Fetching usuarios");
 
     getUsers()
@@ -99,16 +101,15 @@ function AdminPanel() {
         setTotalUsers(result.users.length);
         let users_list = result.users.map((users) => ListUser.from(users));
         setUsers(users_list);
-        console.log("usersssss" + users_list);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  });
 
   return (
     <div className="home">
-      <header className="px-5 pt-4">
+      <header className="px-5 pt-4 mb-5">
         <h1 className="font-weight-light text-center fw-bold">
           Panel Administración
         </h1>
@@ -162,12 +163,12 @@ function AdminPanel() {
               </div>
             </div>
           </div>
-          <div className="container my-4">
+          <div className="container my-4 mb-5">
             <div className="row align-items-center">
               <p class="h3 pt-4" style={{ color: "orange" }}>
                 Usuarios registrados
               </p>
-              <div class="container px-4 mt-4 vh-50">
+              <div class="container px-4 mt-4 vh-50 mb-5">
                 <div class="border users-box">
                   {table.map((row, i) => (
                     <div className="row" key={i}>
