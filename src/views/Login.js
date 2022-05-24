@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { openQuestionPopup } from "./components/PopupQuestion";
+import { Form } from "react-bootstrap";
 
 import { User } from "../models";
 import { UserContext } from "../environment/UserProvider";
@@ -91,7 +92,10 @@ function Login() {
         <h1 className="font-weight-light text-center fw-bold">Inicio Sesión</h1>
       </header>
       <div className="container mb-5">
-        <div className="row justify-content-center">
+        <Form
+          className="row justify-content-center"
+          onSubmit={loginEmail}
+        >
           <div className="col-8 col-sm-8 col-md-6 col-lg-4 text-center">
             <div className="text-center my-3 ">
               <img
@@ -124,7 +128,15 @@ function Login() {
                 onChange={handleChange}
               />
             </div>
-            <p className="text-center">
+            <div className="justify-content-center mt-4">
+              <button
+                type="submit"
+                className="btn btn-primary login-button"
+              >
+                Iniciar Sesión
+              </button>
+            </div>
+            <p className="text-center mt-2">
               <button
                 className="btn-unstyled text-warning"
                 onClick={handleRecoverPassword}
@@ -132,14 +144,6 @@ function Login() {
                 ¿Has olvidado la contraseña?
               </button>
             </p>
-            <div className="justify-content-center mt-4">
-              <button
-                className="btn btn-primary login-button"
-                onClick={loginEmail}
-              >
-                Iniciar Sesión
-              </button>
-            </div>
             <div className="justify-content-center mt-4">
               <button
                 className="btn btn-secondary login-button"
@@ -169,7 +173,7 @@ function Login() {
               </div>
             </div>
           </div>
-        </div>
+        </Form>
       </div>
     </div>
   );
