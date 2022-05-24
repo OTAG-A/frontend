@@ -48,6 +48,8 @@ function Profile() {
           .then((response) => {
             console.log("Eliminado");
             console.log(response);
+            setToken(null);
+            setContextUser(null);
             navigate("/");
           })
           .catch((error) => {
@@ -112,7 +114,7 @@ function Profile() {
               alt=""
             />
             <h2 className="mb-4">{user.username}</h2>
-            <p className="text-start px-5">{user.bio}</p>
+            <p className="text-start px-5 mb-5">{user.bio}</p>
             {isSelf && (
               <button className="btn btn-danger" onClick={handleLogout}>
                 Cerrar sesión
@@ -138,7 +140,7 @@ function Profile() {
               <div className="row text-center">
                 <div className="col">
                   <button
-                    className="btn btn-danger me-2"
+                    className="btn btn-danger me-2 mb-5"
                     onClick={() => handleDeleteOtherAccount(user)}
                   >
                     Eliminar usuario
