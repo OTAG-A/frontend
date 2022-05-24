@@ -23,6 +23,9 @@ function Thread() {
   const { user: currentUser } = useContext(UserContext);
 
   const [post, setPost] = useState(null);
+  const [replyUsers, setReplyUsers] = useState(null);
+  const [postUser, setPostUser] = useState(null);
+
   const { idThread } = useParams();
 
   const [comment, setComment] = useState("");
@@ -38,12 +41,12 @@ function Thread() {
     })
       .then((result) => {
         let post = Post.from(result.data);
+        setPost(post);
 
         getUserDetails({ id: post.user_id })
           .then((result) => {
-            let postCopy = structuredClone(post);
-            postCopy.user = User.from(result);
-            setPost(postCopy);
+            let user = User.from(result);
+            setPostUser(user);
           })
           .catch((error) => {
             console.error(error);
@@ -54,21 +57,37 @@ function Thread() {
             getUserDetails({ id: reply_data.user_id })
           )
         ).then((all) => {
-          let updatedPost = structuredClone(post);
           let users = all.map(User.from);
 
-          for (let i = 0; i < updatedPost.replies.length; i++) {
-            updatedPost.replies[i].user = users[i];
-          }
-          setPost(updatedPost);
+          setReplyUsers(users);
         });
-
-        setPost(post);
       })
       .catch((error) => {
         console.error(error);
       });
   };
+
+  useEffect(() => {
+    if (!replyUsers) {
+      return;
+    }
+
+    let postCopy = structuredClone(post);
+    for (let i = 0; i < postCopy.replies.length; i++) {
+      postCopy.replies[i].user = replyUsers[i];
+    }
+    setPost(postCopy);
+  }, [replyUsers]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!postUser) {
+      return;
+    }
+
+    let postCopy = structuredClone(post);
+    postCopy.user = postUser;
+    setPost(postCopy);
+  }, [postUser]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (successMsg) {
